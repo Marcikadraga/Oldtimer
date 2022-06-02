@@ -1,0 +1,22 @@
+{
+  "name": "vendor/marci",
+  "description": "marci.test",
+  "authors": [
+    {
+      "name": "Marci",
+      "email": "marci@marci.hu"
+    }
+  ],
+  "require": {
+    "phpmailer/phpmailer": "^6.6",
+    "ext-mbstring": "*",
+    "ext-pdo": "*",
+    "ext-http": "*",
+    "ext-apache": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "./"
+    }
+  }
+}

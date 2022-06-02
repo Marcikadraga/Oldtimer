@@ -1,0 +1,6 @@
+# Ez kizárólag akkor kell és csak akkor jár itt a request ha a domain nem a public mappára van irányítva
+# Ha a laragon jól van beállítva, akkor ez a két sor soha nem is fut le
+# Ha a domain a gyökérbe van irányítva, akkor ez átküldi a kérést a public mappába
+
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]

@@ -1,0 +1,9 @@
+#main-content {
+    margin: 65px 0 100px 0;
+}
+
+.input-required:after {
+    content: ' *';
+    color: red;
+    font-weight: bold;
+}

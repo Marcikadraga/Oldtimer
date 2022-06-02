@@ -1,0 +1,33 @@
+
+Options +FollowSymlinks
+RewriteEngine on
+
+# marci.test/valaki/nev/valami/valami?akarmi=marci&akarmi=marci
+# marci.test/index.php?param1=valami&param2=valami&param3=valami&param4=valami
+# $_GET['param1'] = valami;
+# $_GET['param2'] = valami;
+# $_GET['param3'] = valami;
+# $_GET['param4'] = valami;
+# $_GET['akarmi'] = marci
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/(.+)/(.+)/(.+)/?$ index.php?param1=$1&param2=$2&param3=$3&param4=$4 [L,QSA]
+
+# marci.test/valami/valami/valami
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/(.+)/(.+)/?$ index.php?param1=$1&param2=$2&param3=$3 [L,QSA]
+
+# marci.test/valami/valami
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/(.+)/?$ index.php?param1=$1&param2=$2 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# marci.test/valami
+RewriteRule ^(.+)/?$ index.php?param1=$1 [L,QSA]
+
+# Az index.php-t sajat magara iranyitjuk
+RewriteRule ^index\.php$ - [L,QSA]
