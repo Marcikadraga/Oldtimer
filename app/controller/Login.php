@@ -73,8 +73,8 @@ class Login extends BaseController {
             $auth = new Authenticator();
             $auth->login($user->getId());
 
-            $response = new Response();
-            $response->redirectDashboard();
+            $this->response = new Response();
+            $this->response->redirectDashboard();
 
         } catch (Exception $exception) {
 

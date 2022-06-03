@@ -35,8 +35,8 @@
                     }
                     ?>
                     <th style = "text-align: center">
-                        <button type = "button" data-id = "<?php echo $car['id']; ?>" class = "btn btn-info get-car-modal edit-car" data-toggle = "modal" data-target = "#exampleModal">Edit</button>
-                        <button type = "button" data-id = "<?php echo $id ?>" class = "btn btn-danger delete-car">Delete</button>
+                        <button type = "button" data-id = "<?php echo $car['id']; ?>" class = "btn btn-info get-car-modal edit-car" data-toggle = "modal" data-target = "#exampleModal"><i class='fas fa-edit' style='font-size:20px;color:white'></i></button>
+                        <button type = "button" data-id = "<?php echo $id ?>" class = "btn btn-danger delete-car"><i class='fas fa-trash-alt' style='font-size:20px;color:white'></i></button>
                     </th>
                 </tr>
                 <?php

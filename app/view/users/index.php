@@ -70,10 +70,10 @@ include '../app/view/_header.php';
                         </td>
                         <td class = "text-wrap align-middle">
                             <button type = "button" data-id = "<?= $user->getId() ?>" class = "btn btn-primary edit-user" data-toggle = "modal" data-target = "#exampleModal">
-                                Szerkesztés
+                                <i class='fas fa-edit' style='font-size:20px;color:white'></i>
                             </button>
                             <button type = "button" data-id = "<?= $user->getId() ?>" class = "btn btn-danger delete-user">
-                                Törlés
+                                <i class='fas fa-trash-alt' style='font-size:20px;color:white'></i>
                             </button>
                         </td>
                     </tr>

@@ -139,8 +139,8 @@ class UserController extends BaseController {
             // A rendszerünk kilépési pontja a Response exit függvénye
             // A jsonResponse biztosítja a megfelelő választ a js-nek és lezárja a scriptet
 
-            $response = new Response();
-            $response->jsonResponse('success');
+            $this->response = new Response();
+            $this->response->jsonResponse('success');
 
         } catch (\Throwable $exception) {
             $log = new SystemLog();

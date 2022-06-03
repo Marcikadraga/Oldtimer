@@ -21,7 +21,7 @@
         <div class = "collapse navbar-collapse" id = "navbar-toggler-region">
             <ul class = "navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class = "nav-item active">
-                    <a class = "nav-link" href = "/">Home</a>
+                    <a class = "nav-link" href = "/"><i class="fa fa-home"></i></a>
                 </li>
 
             </ul>

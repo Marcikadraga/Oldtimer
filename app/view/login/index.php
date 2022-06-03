@@ -2,7 +2,7 @@
     body{
         background-repeat: no-repeat;
         background-size: cover;
-        background-image: url("/images/car3.png");
+        background-image: url("/images/car4.png");
         color: black !important;
         background-position: center;
     }
