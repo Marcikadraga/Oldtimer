@@ -35,7 +35,7 @@
                     }
                     ?>
                     <th style = "text-align: center">
-                        <button type = "button" data-id = "<?php echo $car['id']; ?>" class = "btn btn-info get-car-modal edit-car" data-toggle = "modal" data-target = "#exampleModal"><a class = "nav-link" href = "/"><i class="fa fa-edit "style="color:white"></i></a></button>
+                        <button type = "button" data-id = "<?php echo $car['id']; ?>" class = "btn btn-info get-car-modal edit-car" data-toggle = "modal" data-target = "#exampleModal"><a class = "nav-link" ><i class="fa fa-edit "style="color:white"></i></a></button>
                         <button type = "button" data-id = "<?php echo $id ?>" class = "btn btn-danger delete-car"><a class = "nav-link" href = "/"><i class="fa fa-trash " style="color:white"></i></a></button>
                     </th>
                 </tr>
@@ -118,4 +118,3 @@
     <script src = "/assets/js/pages/cars/index.js" type = "module"></script>
 <?php include '../app/view/_footer.php'; ?>
 
-<?php

@@ -163,7 +163,7 @@ class CarModel {
             $statement = $this->pdo->prepare($query);
             $statement->execute([$carId]);
             return $statement->fetch(PDO::FETCH_ASSOC);
-
+            //TODO: tovább van dobva az exception
         } catch (Exception $exception) {
             $log = new SystemLog();
             $log->exceptionLog($exception);
@@ -189,5 +189,4 @@ class CarModel {
 
         return null;
     }
-
 }

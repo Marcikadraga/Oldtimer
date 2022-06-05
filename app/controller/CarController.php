@@ -36,6 +36,7 @@ class CarController extends BaseController {
             'cars'   => $cars,
             'fields' => $fields
         ];
+
         $this->render('cars/index', $data);
     }
 
@@ -56,7 +57,7 @@ class CarController extends BaseController {
 
 
     public function update() {
-
+        $this->checkAjax();
         $this->checkPermission('admin');
 
         try {
@@ -99,11 +100,16 @@ class CarController extends BaseController {
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function getCar() {
-
+        //$this->checkAjax();
         $this->checkPermission('admin');
 
         $carModel = new CarModel();
+
+
         $result = $carModel->getCarById($_POST['carId']);
         if ($result) {
             echo json_encode($result);
