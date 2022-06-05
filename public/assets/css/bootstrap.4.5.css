@@ -1807,8 +1807,10 @@ pre code {
 
 .table td, .table th {
     padding: .75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6
+    /*vertical-align: top;*/
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+
 }
 
 .table thead th {

@@ -417,8 +417,7 @@ class Index extends BaseController {
     // marci.dev/file/lockTest1/chrome
     public function lockTest1() {
 
-        $request = new Request();
-        $param3 = $request->getGet('param3', FILTER_SANITIZE_SPECIAL_CHARS);
+        $param3 = $this->request->getGet('param3', FILTER_SANITIZE_SPECIAL_CHARS);
 
         $filename = './uploads/tmp/lockTest.txt';
         $content = $param3 . PHP_EOL;
@@ -452,9 +451,7 @@ class Index extends BaseController {
 
     // marci.dev/file/lockTest2/edge
     public function lockTest2() {
-
-        $request = new Request();
-        $param3 = $request->getGet('param3', FILTER_SANITIZE_SPECIAL_CHARS);
+        $param3 = $this->request->getGet('param3', FILTER_SANITIZE_SPECIAL_CHARS);
 
         $filename = './uploads/tmp/lockTest.txt';
         $content = $param3 . PHP_EOL;
@@ -477,9 +474,7 @@ class Index extends BaseController {
     // marci.dev/file/lockTest3/firefox
     public function lockTest3() {
 
-        $request = new Request();
-        $param3 = $request->getGet('param3', FILTER_SANITIZE_SPECIAL_CHARS);
-
+        $param3 = $this->request->getGet('param3', FILTER_SANITIZE_SPECIAL_CHARS);
         $filename = './uploads/tmp/lockTest.txt';
         $content = $param3 . PHP_EOL;
 

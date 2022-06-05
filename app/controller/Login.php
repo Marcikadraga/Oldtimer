@@ -39,11 +39,10 @@ class Login extends BaseController {
             $errorMsg = '';
             $successMsg = '';
             $userModel = new UserModel();
-            $request = new Request();
 
             // Post tömb adatainak biztonságos beolvasása
-            $username = $request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS);
-            $password = $request->getPost('password', FILTER_SANITIZE_SPECIAL_CHARS);
+            $username = $this->request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS);
+            $password = $this->request->getPost('password', FILTER_SANITIZE_SPECIAL_CHARS);
 
             $user = $userModel->getByUsername($username);
 
@@ -73,7 +72,7 @@ class Login extends BaseController {
             $auth = new Authenticator();
             $auth->login($user->getId());
 
-            $this->response = new Response();
+
             $this->response->redirectDashboard();
 
         } catch (Exception $exception) {
@@ -96,9 +95,7 @@ class Login extends BaseController {
 
         $auth = new Authenticator();
         $auth->logout();
-
-        $response = new Response();
-        $response->redirectLogin();
+        $this->response->redirectLogin();
     }
 }
 

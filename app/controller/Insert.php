@@ -35,12 +35,12 @@ class Insert extends BaseController {
         $car = new Car();
 
         try {
-            $request = new request();
 
-            $manufacturer = $request->getPost('manufacturer', FILTER_SANITIZE_SPECIAL_CHARS);
-            $type = $request->getPost('type', FILTER_SANITIZE_SPECIAL_CHARS);
-            $startOfProductionTime = $request->getPost('startOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
-            $endOfProductionTime = $request->getPost('endOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $manufacturer = $this->request->getPost('manufacturer', FILTER_SANITIZE_SPECIAL_CHARS);
+            $type = $this->request->getPost('type', FILTER_SANITIZE_SPECIAL_CHARS);
+            $startOfProductionTime = $this->request->getPost('startOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
+            $endOfProductionTime = $this->request->getPost('endOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
 
             $carModel = new CarModel();
 

@@ -41,7 +41,7 @@ class CarController extends BaseController {
 
 
     public function delete() {
-
+        $this->checkAjax();
         $this->checkPermission('admin');
 
         $carModel = new CarModel();
@@ -60,9 +60,9 @@ class CarController extends BaseController {
         $this->checkPermission('admin');
 
         try {
-            //TODO kicseréltem a new Requestet $this->request-re, de így nem megy.
 
-            //          $this->request = $this->request;
+
+            // $this->request = $this->request;
             $id = $this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if (empty($id)) {
                 throw new Exception('Nincs id');

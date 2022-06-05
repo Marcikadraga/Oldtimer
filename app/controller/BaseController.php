@@ -73,8 +73,8 @@ abstract class BaseController {
 
             $_SESSION['invalidAuthenticator'] = $auth->getErrorsAsString();
 
-            $response = new Response();
-            $response->redirectLogin();
+
+            $this->response->redirectLogin();
         }
     }
 
@@ -109,9 +109,7 @@ abstract class BaseController {
 
             sessionStart();
             $_SESSION['invalidAuthenticator'] = $invalidAuthenticator;
-
-            $response = new Response();
-            $response->redirectLogin();
+            $this->response->redirectLogin();
         }
     }
 
@@ -163,8 +161,7 @@ abstract class BaseController {
         $context['userIsAdmin'] = $auth->userIsAdmin();
         $context['greetingsName']=$auth->getUsername();
 
-        $response = new Response();
-        $response->render($viewFile, $context);
+        $this->response->render($viewFile, $context);
     }
 }
 

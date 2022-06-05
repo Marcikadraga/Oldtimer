@@ -30,30 +30,28 @@ class Registration extends BaseController {
     public function insert() {
 
         // A helyi validációs hibák gyűjteménye
+
         $errors = [];
         $errorMsg = '';
         $successMsg = '';
         $user = new User();
 
         try {
-
-            $request = new Request();
-
             // Post tömb adatainak biztonságos beolvasása
-            $username = $request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS);
-            $password1 = $request->getPost('password1', FILTER_SANITIZE_SPECIAL_CHARS);
-            $password2 = $request->getPost('password2', FILTER_SANITIZE_SPECIAL_CHARS);
-            $email = $request->getPost('email', FILTER_SANITIZE_SPECIAL_CHARS);
-            $firstName = $request->getPost('first_name', FILTER_SANITIZE_SPECIAL_CHARS);
-            $middleName = $request->getPost('middle_name', FILTER_SANITIZE_SPECIAL_CHARS);
-            $lastName = $request->getPost('last_name', FILTER_SANITIZE_SPECIAL_CHARS);
-            $birthDate = $request->getPost('birth_date', FILTER_SANITIZE_SPECIAL_CHARS);
-            $phoneNumber=$request->getPost('phoneNumber', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $webpage=$request->getPost('webpage', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $zipCode = $request->getPost('zip_code', FILTER_SANITIZE_SPECIAL_CHARS);
-            $city = $request->getPost('city', FILTER_SANITIZE_SPECIAL_CHARS);
-            $district = $request->getPost('district', FILTER_SANITIZE_SPECIAL_CHARS);
-            $moreAddress = $request->getPost('more_address', FILTER_SANITIZE_SPECIAL_CHARS);
+            $username = $this->request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS);
+            $password1 = $this->request->getPost('password1', FILTER_SANITIZE_SPECIAL_CHARS);
+            $password2 = $this->request->getPost('password2', FILTER_SANITIZE_SPECIAL_CHARS);
+            $email = $this->request->getPost('email', FILTER_SANITIZE_SPECIAL_CHARS);
+            $firstName = $this->request->getPost('first_name', FILTER_SANITIZE_SPECIAL_CHARS);
+            $middleName = $this->request->getPost('middle_name', FILTER_SANITIZE_SPECIAL_CHARS);
+            $lastName = $this->request->getPost('last_name', FILTER_SANITIZE_SPECIAL_CHARS);
+            $birthDate = $this->request->getPost('birth_date', FILTER_SANITIZE_SPECIAL_CHARS);
+            $phoneNumber = $this->request->getPost('phoneNumber', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $webpage = $this->request->getPost('webpage', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $zipCode = $this->request->getPost('zip_code', FILTER_SANITIZE_SPECIAL_CHARS);
+            $city = $this->request->getPost('city', FILTER_SANITIZE_SPECIAL_CHARS);
+            $district = $this->request->getPost('district', FILTER_SANITIZE_SPECIAL_CHARS);
+            $moreAddress = $this->request->getPost('more_address', FILTER_SANITIZE_SPECIAL_CHARS);
 
             $userModel = new UserModel();
 
@@ -118,7 +116,7 @@ class Registration extends BaseController {
 
             // Ha itt vagyunk, akkor azt jelenti hogy nem volt hiba a beérkezett adatokban
             $userId = $userModel->insert($user);
-            if(empty($userId)){
+            if (empty($userId)) {
                 throw new Exception($userModel->getErrorsAsString());
             }
 
@@ -129,7 +127,7 @@ class Registration extends BaseController {
             // nem végleges hibakezelés!!!
             $errorMsg = $exception->getMessage();
 
-            if(!empty($errors)){
+            if (!empty($errors)) {
                 $errorMsg .= '<br>' . implode('<br>', $errors);
             }
         }
@@ -140,7 +138,7 @@ class Registration extends BaseController {
         $data['user'] = $user;
         $data['submitted'] = true;
 
-//        var_dump($data);
+        //        var_dump($data);
 
         $this->render('registration/index', $data);
     }

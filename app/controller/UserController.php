@@ -40,8 +40,7 @@ class UserController extends BaseController {
         // FONTOS BIZTONSÁGI KOCKÁZAT, A $_POST ÉS A $_GET TÖMB NEM HASZNÁLHATÓ!!!
         // KIZÁRÓLAG FILTEREZVE VEHETŐK ÁT AZ ADATOK BELŐLÜK
 
-        $request = new Request();
-        $userId = $request->getPost('userId', FILTER_SANITIZE_SPECIAL_CHARS);
+        $userId = $this->request->getPost('userId', FILTER_SANITIZE_SPECIAL_CHARS);
 
         // CÉLSZERŰ ELLENŐRIZNI HOGY JÖTT-E ADAT
 
@@ -70,6 +69,7 @@ class UserController extends BaseController {
 
     public function getUser() {
 
+
         $this->checkPermission('guest');
 
         $usermodel = new UserModel();
@@ -85,15 +85,14 @@ class UserController extends BaseController {
     public function update() {
 
         try {
-            $request = new Request();
 
-            $this->checkAjax();
+
 
             // 1 vizsgálat: szerkeszteni csak belépett user szerkeszthet
             // Itt még nem vizsgáljuk hogy admin-e a belépett user, mert az user saját adatait szerkesztheti akkor is ha nem admin
             $this->checkPermission('guest');
 
-            $id = $request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
+            $id = $this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
             if (empty($id)) {
                 throw new Exception("Nem adtál meg id-t!");
             }
@@ -112,19 +111,19 @@ class UserController extends BaseController {
                 throw new Exception("Nem létezik ilyen felhasználó!");
             }
 
-            $user->setUsername($request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setEmail($request->getPost('email', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setFirstName($request->getPost('first_name', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setMiddleName($request->getPost('middle_name', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setLastName($request->getPost('last_name', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setBirthDate($request->getPost('birth_date', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setphoneNumber($request->getPost('phoneNumber', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setWebpage($request->getPost('webpage', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setZipCode($request->getPost('zip_code', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setCity($request->getPost('city', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setDistrict($request->getPost('district', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setMoreAddress($request->getPost('more_address', FILTER_SANITIZE_SPECIAL_CHARS));
-            $user->setRole($request->getPost('role', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setUsername($this->request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setEmail($this->request->getPost('email', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setFirstName($this->request->getPost('first_name', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setMiddleName($this->request->getPost('middle_name', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setLastName($this->request->getPost('last_name', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setBirthDate($this->request->getPost('birth_date', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setphoneNumber($this->request->getPost('phoneNumber', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setWebpage($this->request->getPost('webpage', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setZipCode($this->request->getPost('zip_code', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setCity($this->request->getPost('city', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setDistrict($this->request->getPost('district', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setMoreAddress($this->request->getPost('more_address', FILTER_SANITIZE_SPECIAL_CHARS));
+            $user->setRole($this->request->getPost('role', FILTER_SANITIZE_SPECIAL_CHARS));
 
             if (!$user->checkIsValidSave()) {
                 throw new Exception($user->getErrorsAsString());
@@ -139,7 +138,6 @@ class UserController extends BaseController {
             // A rendszerünk kilépési pontja a Response exit függvénye
             // A jsonResponse biztosítja a megfelelő választ a js-nek és lezárja a scriptet
 
-            $this->response = new Response();
             $this->response->jsonResponse('success');
 
         } catch (\Throwable $exception) {
@@ -147,8 +145,7 @@ class UserController extends BaseController {
             $log->exceptionLog($exception);
             //echo json_encode($exception->getMessage());
 
-            $response = new Response();
-            $response->jsonResponse($exception->getMessage());
+            $this->response->jsonResponse($exception->getMessage());
         }
     }
 }
