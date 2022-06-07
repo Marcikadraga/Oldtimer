@@ -56,8 +56,9 @@ class UserController extends BaseController {
             $this->checkPermission('admin');
         }
 
-        $userModel = new UserModel();
-        $result = $userModel->delete($_POST['userId']);
+//        $userModel = new UserModel();
+//        $result = $userModel->delete($_POST['userId']);
+        $result=$this->request->getPost('userId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ($result) {
             echo json_encode("success");
             return;
@@ -68,12 +69,12 @@ class UserController extends BaseController {
 
 
     public function getUser() {
-
-
+        
         $this->checkPermission('guest');
 
         $usermodel = new UserModel();
-        $result = $usermodel->getUserById($_POST['userId']);
+//        $result = $usermodel->getUserById($_POST['userId']);
+        $result=$usermodel->getUserById($this->request->getPost( 'userId',  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($result) {
             echo json_encode($result);
             return;
@@ -85,9 +86,6 @@ class UserController extends BaseController {
     public function update() {
 
         try {
-
-
-
             // 1 vizsgálat: szerkeszteni csak belépett user szerkeszthet
             // Itt még nem vizsgáljuk hogy admin-e a belépett user, mert az user saját adatait szerkesztheti akkor is ha nem admin
             $this->checkPermission('guest');
