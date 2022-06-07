@@ -19,7 +19,7 @@ include '../app/view/_header.php';
                 <th class = "text-wrap align-middle">Telefonszám</th>
                 <th class = "text-wrap align-middle">Weboldal</th>
                 <th class = "text-wrap align-middle">Jogosultság</th>
-                <th class = "text-wrap align-middle">Username</th>
+                <th class = "text-wrap align-middle">Felhasználónév</th>
                 <th class = "text-wrap align-middle">Utolsó belépés ideje</th>
                 <th class = "text-wrap align-middle">Műveletek</th>
             </tr>
@@ -102,7 +102,7 @@ include '../app/view/_header.php';
                                     id = "edit-user-id">
                         </div>
                         <div class = "form-group">
-                            <label for = "recipient-name" class = "col-form-label">Username</label>
+                            <label for = "recipient-name" class = "col-form-label">Felhasználónév</label>
                             <input
                                     type = "text"
                                     class = "form-control"
@@ -116,39 +116,39 @@ include '../app/view/_header.php';
                                     id = "edit-email">
                         </div>
                         <div class = "form-group">
-                            <label for = "recipient-name" class = "col-form-label">First name</label>
+                            <label for = "recipient-name" class = "col-form-label">Keresztnév</label>
                             <input type = "text" class = "form-control" id = "edit-firstName">
                         </div>
                         <div class = "form-group">
-                            <label for = "recipient-name" class = "col-form-label">Middle name</label>
+                            <label for = "recipient-name" class = "col-form-label">Középső név</label>
                             <input type = "text" class = "form-control" id = "edit-middleName">
                         </div>
                         <div class = "form-group">
-                            <label for = "recipient-name" class = "col-form-label">Last name</label>
+                            <label for = "recipient-name" class = "col-form-label">Vezetéknév</label>
                             <input type = "text" class = "form-control" id = "edit-lastName">
                         </div>
                         <div class = "form-group">
-                            <label for = "recipient-name" class = "col-form-label">Birthdate</label>
+                            <label for = "recipient-name" class = "col-form-label">Születési dátum</label>
                             <input type = "text" class = "form-control" id = "edit-birthdate">
                         </div>
                         <div class = "form-group">
-                            <label for = "recipient-name" class = "col-form-label">PhoneNumber</label>
+                            <label for = "recipient-name" class = "col-form-label">Telefonszám</label>
                             <input type = "text" class = "form-control" id = "edit-phoneNumber">
                         </div>
                         <div class = "form-group">
-                            <label for = "message-text" class = "col-form-label">Zip_code</label>
+                            <label for = "message-text" class = "col-form-label">Irányítószám</label>
                             <input type = "text" class = "form-control" id = "edit-zip_code">
                         </div>
                         <div class = "form-group">
-                            <label for = "message-text" class = "col-form-label">City</label>
+                            <label for = "message-text" class = "col-form-label">Város</label>
                             <input type = "text" class = "form-control" id = "edit-city">
                         </div>
                         <div class = "form-group">
-                            <label for = "message-text" class = "col-form-label">District</label>
+                            <label for = "message-text" class = "col-form-label">Kerület</label>
                             <input type = "text" class = "form-control" id = "edit-district">
                         </div>
                         <div class = "form-group">
-                            <label for = "message-text" class = "col-form-label">More Address</label>
+                            <label for = "message-text" class = "col-form-label">Teljes cím</label>
                             <input type = "text" class = "form-control" id = "edit-moreAddress">
                         </div>
 

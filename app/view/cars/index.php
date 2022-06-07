@@ -3,21 +3,15 @@
     <table class = "table">
         <thead class = "thead-dark">
         <tr>
-            <?php
-            //lekérem a key-ket és beállítom őket theadnek
-            if (!empty($fields)) {
-                foreach ($fields as $field) {
-                    ?>
-                    <th><?php echo $field ?></th>
-                    <?php
-                }
-            } else {
-                ?>
-                <th>Nincs adat</th>
-                <?php
-            }
-            ?>
-            <th style = "text-align: center" colspan = "2">műveletek</th>
+            <th>ID</th>
+            <th>Gyártó</th>
+            <th>Típus</th>
+            <th>Gyártás kezdete</th>
+            <th>Gyártás vége</th>
+            <th>Feltöltve</th>
+            <th>Törölve</th>
+            <th>Frissítve</th>
+            <th>Műveletek</th>
         </tr>
         </thead>
         <tbody>
@@ -63,52 +57,52 @@
                     </button>
                 </div>
                 <div class = "modal-body">
-                    <form>
+                    <form method = "POST">
                         <div class = "form-group">
                             <label for = "edit-manufacturer" class = "col-form-label">ID</label><br>
                             <input
                                     type = "text"
-                                    class = "get-car-modal"
+                                    class = "form-control"
                                     id = "edit-car-id"
                             >
                         </div>
                         <div class = "form-group">
-                            <label for = "edit-manufacturer" class = "col-form-label">manufacturer</label><br>
+                            <label for = "edit-manufacturer" class = "col-form-label">Gyártó</label><br>
                             <input
                                     type = "text"
-                                    class = "get-car-modal"
+                                    class = "form-control"
                                     id = "edit-manufacturer"
                             >
                         </div>
                         <div class = "form-group">
-                            <label for = "edit-type" class = "col-form-label">Type</label><br>
+                            <label for = "edit-type" class = "col-form-label">Típus</label><br>
                             <input
                                     type = "text"
-                                    class = "get-car-modal"
+                                    class = "form-control"
                                     id = "edit-type"
                             >
                         </div>
                         <div class = "form-group">
-                            <label for = "edit-startOfProduction" class = "col-form-label">Start of production time</label><br>
+                            <label for = "edit-startOfProduction" class = "col-form-label">Gyártás kezdete</label><br>
                             <input
                                     type = "text"
-                                    class = "get-car-modal"
+                                    class = "form-control"
                                     id = "edit-startOfProduction"
                             >
                         </div>
                         <div class = "form-group">
-                            <label for = "edit-endOfProduction" class = "col-form-label">End of production time</label><br>
+                            <label for = "edit-endOfProduction" class = "col-form-label">Gyártás vége</label><br>
                             <input
                                     type = "text"
-                                    class = "get-car-modal"
+                                    class = "form-control"
                                     id = "edit-endOfProduction"
                             >
                         </div>
                     </form>
                 </div>
                 <div class = "modal-footer">
-                    <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Close</button>
-                    <button type = "button" class = "btn btn-primary" id = "save-edited-data">Save</button>
+                    <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
+                    <button type = "button" class = "btn btn-primary" id = "save-edited-data">Mentés</button>
                 </div>
             </div>
         </div>

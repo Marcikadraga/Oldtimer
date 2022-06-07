@@ -27,7 +27,7 @@
                         </div>
                     <?php endif; ?>
                     <div class = "form-group">
-                        <label for = "manufacturer" class = "input-required">Manufacturer</label>
+                        <label for = "manufacturer" class = "input-required">Gyártó</label>
                         <input type = "text"
                                class = "form-control <?= !empty($errors['manufacturer']) ? 'is-invalid' : 'is-valid'; ?>"
                                id = "manufacturer"
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class = "form-group">
-                        <label for = "type" class = "input-required">type</label>
+                        <label for = "type" class = "input-required">Típus</label>
                         <input type = "text"
                                class = "form-control <?= !empty($errors['type']) ? 'is-invalid' : 'is-valid'; ?>"
                                id = "type"
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class = "form-group">
-                        <label for = "startOfProductionTime" class = "input-required">startOfProductionTime</label>
+                        <label for = "startOfProductionTime" class = "input-required">Gyártás kezdete</label>
                         <input type = "text"
                                class = "form-control <?= !empty($errors['startOfProductionTime']) ? 'is-invalid' : 'is-valid'; ?>"
                                id = "startOfProductionTime"
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class = "form-group">
-                        <label for = "endOfProductionTime" class = "input-required">endOfProductionTime</label>
+                        <label for = "endOfProductionTime" class = "input-required">Gyártás vége</label>
                         <input type = "text"
                                class = "form-control <?= !empty($errors['endOfProductionTime']) ? 'is-invalid' : 'is-valid'; ?>"
                                id = "endOfProductionTime"

@@ -38,10 +38,10 @@ include '../app/view/_header.php';
                 <div class = "form-group">
                     <label for = "username" class = "input-required">Username</label>
                     <input type = "text"
-                           class = "form-control <?= !empty($errors['username']) ? 'is-invalid' : 'is-valid'; ?>"
+                           class = "form-control <?= !isset($errors) ? '' : (!empty($errors['username'])); ?>"
                            id = "username"
                            name = "username"
-                           value = "<?= !empty($user) ? $user->getUsername() : ''; ?>"
+
                            minlength = "3"
                            required>
                     <div class = "invalid-feedback"><?= $errors['username'] ?? ''; ?></div>
@@ -50,7 +50,8 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-sm">
                         <label for = "password" class = "input-required">Jelszó</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['password']) ? 'is-invalid' : 'is-valid'; ?>"
+                               class = "form-control <?= !empty($errors['password']) ? 'is-invalid' : ''; ?>"
+                               id="password"
                                name = "password"
                                required>
                         <div class = "invalid-feedback"><?= $errors['password'] ?? ''; ?></div>
