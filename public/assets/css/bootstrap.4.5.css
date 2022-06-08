@@ -10410,6 +10410,11 @@ a.text-dark:focus, a.text-dark:hover {
         color: inherit;
         border-color: #dee2e6
     }
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */

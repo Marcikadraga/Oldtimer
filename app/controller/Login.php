@@ -73,7 +73,8 @@ class Login extends BaseController {
             $auth->login($user->getId());
 
 
-            $this->response->redirectDashboard();
+           $this->response->redirectDashboard();
+//           $successMsg = 'Sikerült a bejelentkezés, mindjárt átirányítjuk a főoldalra.';
 
         } catch (Exception $exception) {
 
@@ -88,6 +89,7 @@ class Login extends BaseController {
         $data['successMsg'] = $successMsg;
 
         $this->render('login/index', $data);
+
     }
 
 

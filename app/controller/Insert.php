@@ -73,6 +73,7 @@ class Insert extends BaseController {
             if (empty($carID)) {
                 throw new Exception($carModel->getErrorAsString());
             }
+            $successMsg = 'Az autó hozzáadása sikerült.';
         } catch (Exception $exception) {
             // nem végleges hibakezelés!!!
             $errorMsg = $exception->getMessage();

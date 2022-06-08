@@ -10,11 +10,16 @@
 <?php
 include '../app/view/_header.php';
 
+/** @var array $errors A validációs hibák tömbje, kulcsa az inputok name értéke */
+/** @var string $errorMsg A hiba szövege */
+/** @var string $successMsg A sikeres mentés eredménye */
+/** @var User $user A hibás regisztrációs adatokat tartalmazó usert */
+
 /** @var string $invalidAuthenticator */
 ?>
 
 <div class = "container col-sm-3 col-sm">
-    <form action = "/login/signin" method = "post">
+    <form action = "/login/signin" method = "post" id="login-form">
         <div class = "card">
             <div class = "card-header">
                 <h5>Bejelentkezés</h5>
@@ -61,7 +66,7 @@ include '../app/view/_header.php';
             </div>
             <div class = "card-footer">
                 <div class = "row">
-                    <button type = "submit" class = "btn btn-outline-primary ml-auto ">Küldés</button>
+                    <button type = "submit" class = "btn btn-outline-primary ml-auto " id="login-user-button" >Küldés</button>
                 </div>
             </div>
         </div>

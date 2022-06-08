@@ -29,7 +29,7 @@
                     <div class = "form-group">
                         <label for = "manufacturer" class = "input-required">Gyártó</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['manufacturer']) ? 'is-invalid' : 'is-valid'; ?>"
+                               class = "form-control <?= !isset($errors) ? '' :(!empty($errors['manufacturer']) ? 'is-invalid' : 'is-valid'); ?>"
                                id = "manufacturer"
                                name = "manufacturer"
                                value = "<?= !empty($car) ? $car->getManufacturer() : ''; ?>"
@@ -41,7 +41,7 @@
                     <div class = "form-group">
                         <label for = "type" class = "input-required">Típus</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['type']) ? 'is-invalid' : 'is-valid'; ?>"
+                               class = "form-control <?= !isset($errors) ? '' :(!empty($errors['type']) ? 'is-invalid' : 'is-valid'); ?>"
                                id = "type"
                                name = "type"
                                value = "<?= !empty($car) ? $car->getType() : ''; ?>"
@@ -53,7 +53,7 @@
                     <div class = "form-group">
                         <label for = "startOfProductionTime" class = "input-required">Gyártás kezdete</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['startOfProductionTime']) ? 'is-invalid' : 'is-valid'; ?>"
+                               class = "form-control <?= !isset($errors) ? '' :(!empty($errors['startOfProductionTime']) ? 'is-invalid' : 'is-valid'); ?>"
                                id = "startOfProductionTime"
                                name = "startOfProductionTime"
                                value = "<?= !empty($car) ? $car->getStartOfProductionTime() : ''; ?>"
@@ -65,7 +65,7 @@
                     <div class = "form-group">
                         <label for = "endOfProductionTime" class = "input-required">Gyártás vége</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['endOfProductionTime']) ? 'is-invalid' : 'is-valid'; ?>"
+                               class = "form-control <?= !isset($errors) ? '' :(!empty($errors['endOfProductionTime']) ? 'is-invalid' : 'is-valid'); ?>"
                                id = "endOfProductionTime"
                                name = "endOfProductionTime"
                                value = "<?= !empty($car) ? $car->getEndOfProductionTime()() : ''; ?>"

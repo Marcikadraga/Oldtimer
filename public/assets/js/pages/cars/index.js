@@ -18,11 +18,13 @@ deleteCarButtons.forEach(function (button) {
                     button.closest("tr").remove();
                 }
             })
+            .then(alert("sikeres törlés"))
             .catch((error) => {
                 console.error('Error:', error);
             });
 
     });
+
 });
 
 
