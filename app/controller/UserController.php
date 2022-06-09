@@ -26,8 +26,6 @@ class UserController extends BaseController {
             ];
         }
 
-
-
         $this->render('users/index', $data);
     }
 
@@ -58,9 +56,9 @@ class UserController extends BaseController {
             $this->checkPermission('admin');
         }
 
-//        $userModel = new UserModel();
-//        $result = $userModel->delete($_POST['userId']);
-        $result=$this->request->getPost('userId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        //        $userModel = new UserModel();
+        //        $result = $userModel->delete($_POST['userId']);
+        $result = $this->request->getPost('userId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ($result) {
             echo json_encode("success");
             return;
@@ -71,12 +69,12 @@ class UserController extends BaseController {
 
 
     public function getUser() {
-        
+
         $this->checkPermission('guest');
 
         $usermodel = new UserModel();
-//        $result = $usermodel->getUserById($_POST['userId']);
-        $result=$usermodel->getUserById($this->request->getPost( 'userId',  FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        //        $result = $usermodel->getUserById($_POST['userId']);
+        $result = $usermodel->getUserById($this->request->getPost('userId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($result) {
             echo json_encode($result);
             return;
@@ -139,6 +137,38 @@ class UserController extends BaseController {
             // A jsonResponse biztosítja a megfelelő választ a js-nek és lezárja a scriptet
 
             $this->response->jsonResponse('success');
+
+        } catch (\Throwable $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            //echo json_encode($exception->getMessage());
+
+            $this->response->jsonResponse($exception->getMessage());
+        }
+    }
+
+
+    public function updatePassword() {
+
+        try {
+            $password1 = $this->request->getPost('password1', FILTER_SANITIZE_SPECIAL_CHARS);
+            $password2 = $this->request->getPost('password2', FILTER_SANITIZE_SPECIAL_CHARS);
+
+            //lementettem a 2 belső jelszót (id-ket a html-ben át kell még írni)
+            if (empty($password_hash)) {
+                throw new Exception("Nem adtál meg jelszót!");
+            }
+            $id = $this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
+            $userModel = new UserModel();
+            $user = $userModel->getById($id);
+
+
+            $auth = new Authenticator();
+            $user = $auth->getUser();
+
+
+            $user->setUsername($this->request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS));
+
 
         } catch (\Throwable $exception) {
             $log = new SystemLog();
