@@ -154,7 +154,7 @@ class UserController extends BaseController {
             $password1 = $this->request->getPost('password1', FILTER_SANITIZE_SPECIAL_CHARS);
             $password2 = $this->request->getPost('password2', FILTER_SANITIZE_SPECIAL_CHARS);
 
-            //lementettem a 2 belső jelszót (id-ket a html-ben át kell még írni)
+            //lementettem a 2 belső jelszót (id-ket a html-ben át kell még írni :D)
             if (empty($password_hash)) {
                 throw new Exception("Nem adtál meg jelszót!");
             }
