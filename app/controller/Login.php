@@ -72,9 +72,9 @@ class Login extends BaseController {
             $auth = new Authenticator();
             $auth->login($user->getId());
 
+//            $successMsg = 'Sikerült a bejelentkezés, mindjárt átirányítjuk a főoldalra.';
+            $this->response->redirectDashboard();
 
-           $this->response->redirectDashboard();
-//           $successMsg = 'Sikerült a bejelentkezés, mindjárt átirányítjuk a főoldalra.';
 
         } catch (Exception $exception) {
 

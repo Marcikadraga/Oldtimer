@@ -1,5 +1,5 @@
 <style>
-    body{
+    body {
         background-repeat: no-repeat;
         background-size: cover;
         background-image: url("/images/car4.png");
@@ -19,7 +19,7 @@ include '../app/view/_header.php';
 ?>
 
 <div class = "container col-sm-3 col-sm">
-    <form action = "/login/signin" method = "post" id="login-form">
+    <form action = "/login/signin" method = "post" id = "login-form">
         <div class = "card">
             <div class = "card-header">
                 <h5>Bejelentkezés</h5>
@@ -56,7 +56,7 @@ include '../app/view/_header.php';
                         <label for = "password" class = "input-required">Jelszó</label>
                         <input type = "text"
                                class = "form-control <?= !empty($errors['password']) ? 'is-invalid' : ''; ?>"
-                               id="password"
+                               id = "password"
                                name = "password"
                                required>
                         <div class = "invalid-feedback"><?= $errors['password'] ?? ''; ?></div>
@@ -66,11 +66,13 @@ include '../app/view/_header.php';
             </div>
             <div class = "card-footer">
                 <div class = "row">
-                    <button type = "submit" class = "btn btn-outline-primary ml-auto " id="login-user-button" >Küldés</button>
+                    <button type = "submit" class = "btn btn-outline-primary ml-auto " id = "login-user-button">Küldés</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+<script src = "/assets/js/pages/login/index.js" type = "module"></script>
 
 <?php include '../app/view/_footer.php'; ?>

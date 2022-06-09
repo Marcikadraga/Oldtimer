@@ -26,6 +26,8 @@ class UserController extends BaseController {
             ];
         }
 
+
+
         $this->render('users/index', $data);
     }
 

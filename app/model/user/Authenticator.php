@@ -148,6 +148,7 @@ class Authenticator {
     }
 
 
+
     /**
      * Visszaadja a user teljes nevét
      * @return string
