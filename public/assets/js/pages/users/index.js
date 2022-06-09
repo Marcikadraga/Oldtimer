@@ -52,7 +52,7 @@ updateUserButtons.forEach(function (button) {
         })
             .then(response => response.json())
             .then(data => {
-                document.querySelector("#edit-user-id").value = data.id;
+                //document.querySelector("#edit-user-id").value = data.id;
                 document.querySelector("#edit-username").value = data.username;
                 document.querySelector("#edit-email").value = data.email;
                 document.querySelector("#edit-firstName").value = data.first_name;
