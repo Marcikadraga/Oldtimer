@@ -119,19 +119,19 @@ saveEditedDataButton.addEventListener("click", function (event) {
             console.log(error)
         });
 });
+const saveEditedPassword= document.querySelector("#save-edited-data");
 
-const saveNewPassword= document.querySelector("#save-new-password");
-saveNewPassword.addEventListener("click", function (event) {
 
-    const password=document.querySelector("#save-new-password");
 
+saveEditedPassword.addEventListener("click", function (event) {
+
+    const password1 = document.querySelector("#edit-password1").value;
+    const password2 = document.querySelector("#edit-password2").value;
 
     const fd = new FormData();
 
-    fd.append('password_hash',password);
-
-
-    hFetch('https://marci.dev/userController/updatePassword', {
+    fd.append('password_has', password1);
+    hFetch('https://marci.dev/userController/update', {
         method: 'POST', body: fd
     })
         .then(response => response.json())

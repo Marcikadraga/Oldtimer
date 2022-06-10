@@ -282,7 +282,8 @@
                                 <input
                                         type = "text"
                                         class = "form-control"
-                                        id = "edit-user-password"
+                                        id = "password1"
+                                        name="password1"
                                 >
 
                             </div>
@@ -291,14 +292,15 @@
                                 <input
                                         type = "text"
                                         class = "form-control"
-                                        id = "edit-user-password-again"
+                                        id = "password2"
+                                        name="password2"
                                 >
                             </div>
                         </form>
                     </div>
                     <div class = "modal-footer">
                         <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
-                        <button type = "button" id = "save-edited-data" class = "btn btn-primary save-new-password">Mentés</button>
+                        <button type = "button" id = "save-edited-password" class = "btn btn-primary save-new-password">Mentés</button>
                     </div>
                 </div>
             </div>

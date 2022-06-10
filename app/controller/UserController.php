@@ -6,6 +6,7 @@ use app\core\logger\SystemLog;
 use app\core\request\Request;
 use app\core\response\Response;
 use app\model\user\Authenticator;
+use app\model\user\User;
 use app\model\user\UserModel;
 use Exception;
 
@@ -148,34 +149,5 @@ class UserController extends BaseController {
     }
 
 
-    public function updatePassword() {
 
-        try {
-            $password1 = $this->request->getPost('password1', FILTER_SANITIZE_SPECIAL_CHARS);
-            $password2 = $this->request->getPost('password2', FILTER_SANITIZE_SPECIAL_CHARS);
-
-            //lementettem a 2 belső jelszót (id-ket a html-ben át kell még írni :D)
-            if (empty($password_hash)) {
-                throw new Exception("Nem adtál meg jelszót!");
-            }
-            $id = $this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
-            $userModel = new UserModel();
-            $user = $userModel->getById($id);
-
-
-            $auth = new Authenticator();
-            $user = $auth->getUser();
-
-
-            $user->setUsername($this->request->getPost('username', FILTER_SANITIZE_SPECIAL_CHARS));
-
-
-        } catch (\Throwable $exception) {
-            $log = new SystemLog();
-            $log->exceptionLog($exception);
-            //echo json_encode($exception->getMessage());
-
-            $this->response->jsonResponse($exception->getMessage());
-        }
-    }
 }

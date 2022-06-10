@@ -254,6 +254,28 @@ class UserModel extends BaseModel {
     }
 
 
+    public function updatePassword(User $user): bool {
+
+        try {
+            $query = '
+            UPDATE users
+            SET password_hash =:password_hash
+            WHERE id=:id';
+
+            $params = [
+                'password_hash' => $user->getPasswordHash()
+            ];
+            $statement = $this->pdo->prepare($query);
+
+            return $statement->execute($params);
+
+        } catch (Exception $exception) {
+            $this->errorHandling($exception, 'update');
+        }
+        return false;
+    }
+
+
     /**
      * @param $username
      * @return array|false|void
