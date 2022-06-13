@@ -88,7 +88,7 @@ class UserController extends BaseController {
 
         try {
             // 1 vizsgálat: szerkeszteni csak belépett user szerkeszthet
-            // Itt még nem vizsgáljuk hogy admin-e a belépett user, mert az user saját adatait szerkesztheti akkor is ha nem admin
+            // Itt még nem vizsgáljuk hogy admin-e a belépett user, mert a user saját adatait szerkesztheti akkor is ha nem admin
             $this->checkPermission('guest');
 
             $id = $this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -149,5 +149,46 @@ class UserController extends BaseController {
     }
 
 
+    public function updatePassword() {
+
+        try {
+
+
+            $id = $this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
+
+            //            $user=new User();
+            //            $id=$user->getId();
+            //
+            //            var_dump($id);
+
+            if (empty($id)) {
+                throw new Exception("Nem adtál meg id-t!");
+            }
+
+            $userModel = new UserModel();
+            $user = $userModel->getById($id);
+            if (empty($user)) {
+                throw new Exception("Nem létezik ilyen felhasználó!");
+            }
+
+            $user->setPasswordHash($this->request->getPost('password_hash', FILTER_SANITIZE_SPECIAL_CHARS));
+
+            if (!$user->checkIsValidSave()) {
+                throw new Exception($user->getErrorsAsString());
+            }
+
+            if (!$userModel->updatePassword($user)) {
+                throw new Exception("Hiba történt a mentés során!");
+            }
+
+            $this->response->jsonResponse('success');
+
+        } catch (\Throwable $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+
+            $this->response->jsonResponse($exception->getMessage());
+        }
+    }
 
 }

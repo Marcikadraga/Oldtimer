@@ -338,6 +338,7 @@ class User {
     }
 
 
+
     public function checkIsValidUpdate(): bool {
 
         $this->errors = [];
@@ -350,6 +351,7 @@ class User {
 
         return empty($this->errors);
     }
+
 
 
     public function isPasswordMatch($inputPassword, $hashedPassword): bool {

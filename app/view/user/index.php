@@ -276,13 +276,22 @@
                     </div>
                     <div class = "modal-body">
                         <form method = "POST">
+                            <div class = "form-group" style = "display:none">
+                                <label for = "recipient-name" class = "col-form-label">Id</label>
+                                <input
+                                        type = "text"
+                                        class = "form-control"
+                                        id = "edit-user-id"
+                                        value = "<?php echo $user->getId() ?>"
+                                >
+                                </div>
 
                             <div class = "form-group" >
                                 <label for = "recipient-name" class = "col-form-label">Jelszó</label>
                                 <input
                                         type = "text"
                                         class = "form-control"
-                                        id = "password1"
+                                        id = "edit-password1"
                                         name="password1"
                                 >
 
@@ -292,7 +301,7 @@
                                 <input
                                         type = "text"
                                         class = "form-control"
-                                        id = "password2"
+                                        id = "edit-password2"
                                         name="password2"
                                 >
                             </div>

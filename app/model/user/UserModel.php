@@ -263,7 +263,9 @@ class UserModel extends BaseModel {
             WHERE id=:id';
 
             $params = [
-                'password_hash' => $user->getPasswordHash()
+                'id'                   => $user->getId(),
+                'password_hash'        => $user->getPasswordHash(),
+
             ];
             $statement = $this->pdo->prepare($query);
 
