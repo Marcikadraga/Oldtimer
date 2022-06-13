@@ -24,7 +24,7 @@
 <div class = "container">
     <div class = "row">
         <div class = "col-12 col-md-4 border">
-            <img src = "https://p.kindpng.com/picc/s/24-248253_user-profile-default-image-png-clipart-png-download.png" alt = "">
+            <img src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt = "">
             <hr>
             <button type = "button" data-id = "<?= $user->getId() ?>" class = "btn btn-primary edit-user" data-toggle = "modal" data-target = "#exampleModal4Password">
                 <i class = 'fas fa-edit' style = 'font-size:20px;color:white'>Get new password</i>

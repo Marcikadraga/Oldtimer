@@ -25,9 +25,8 @@
                     <a style = "margin-right: 20px" class = "nav-link" href = "/"><i class = "fa fa-home fa-lg"></i>Főoldal</a>
                 </li>
                 <li class = "nav-item">
-                    <a  style = "margin-right: 20px" class = "nav-link" href = "/UserProfileController"> <i  class="fas fa-user-cog fa-lg" ></i>Profil</a>
+                    <a style = "margin-right: 20px" class = "nav-link" href = "/UserProfileController"> <i class = "fas fa-user-cog fa-lg"></i>Profil</a>
                 </li>
-
 
 
             </ul>
@@ -59,11 +58,11 @@
 
 
                     <?php if (!$userIsAdmin): ?>
-                        <li class = "nav-item"><a href = "/UserProfileController" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?></a></li>
+                        <li class = "nav-item"><a href = "/UserProfileController" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
                     <?php endif; ?>
 
                     <?php if ($userIsAdmin): ?>
-                        <li class = "nav-item"><a href = "/UserProfileController" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?></a></li>
+                        <li class = "nav-item"><a href = "/UserProfileController" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
                     <?php endif; ?>
 
 

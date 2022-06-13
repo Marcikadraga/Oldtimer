@@ -73,7 +73,6 @@ abstract class BaseController {
 
             $_SESSION['invalidAuthenticator'] = $auth->getErrorsAsString();
 
-
             $this->response->redirectLogin();
         }
     }
@@ -159,7 +158,8 @@ abstract class BaseController {
         $auth = new Authenticator();
         $context['isLoggedInUser'] = $auth->isLoggedInUser();
         $context['userIsAdmin'] = $auth->userIsAdmin();
-        $context['greetingsName']=$auth->getUsername();
+        $context['greetingsName'] = $auth->getUsername();
+        $context['loginTime'] = $auth->ShowLoginTime();
 
         $this->response->render($viewFile, $context);
     }

@@ -3,6 +3,7 @@
 namespace app\model\user;
 
 use app\core\request\Request;
+use Cassandra\Date;
 
 /**
  * A bejelentkezett user validátora
@@ -132,6 +133,11 @@ class Authenticator {
     public function isLoggedInUser(): bool {
 
         return !empty($this->getUserId()) && !empty($this->getLoginTime());
+    }
+
+    public function ShowLoginTime(){
+        //TODO A Márk azt mondta, hogy szerinte nem a feladatot csináltam meg (jogos).
+        return date('Y/m/d H:i:s', strtotime( SESSION_VALIDITY_TIME." seconds"));
     }
 
 
