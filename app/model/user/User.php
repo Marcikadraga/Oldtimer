@@ -7,27 +7,31 @@ use Exception;
 
 class User {
 
-    private $id                   = 0;
-    private $username             = '';
-    private $password_hash        = '';
-    private $email                = '';
-    private $first_name           = '';
-    private $middle_name          = '';
-    private $last_name            = '';
-    private $birth_date           = '';
-    private $phoneNumber          = '';
-    private $webpage              = '';
-    private $zip_code             = '';
-    private $city                 = '';
-    private $district             = '';
-    private $more_address         = '';
-    private $role                 = '';
-    private $created_at           = '';
-    private $updated_at           = '';
-    private $deleted_at           = '';
-    private $last_login_at        = '';
-    private $failed_login_counter = '';
-    private $is_banned            = '';
+    private $id                    = 0;
+    private $username              = '';
+    private $password_hash         = '';
+    private $email                 = '';
+    private $first_name            = '';
+    private $middle_name           = '';
+    private $last_name             = '';
+    private $birth_date            = '';
+    private $phoneNumber           = '';
+    private $webpage               = '';
+    private $zip_code              = '';
+    private $city                  = '';
+    private $district              = '';
+    private $more_address          = '';
+    private $role                  = '';
+    private $created_at            = '';
+    private $updated_at            = '';
+    private $deleted_at            = '';
+    private $last_login_at         = '';
+    private $failed_login_counter  = '';
+    private $is_banned             = '';
+    private $lastPasswordChange_at = '';
+
+
+
 
     /** @var string Y-m-d H:i:s string */
     private         $banned_at = '';
@@ -338,7 +342,6 @@ class User {
     }
 
 
-
     public function checkIsValidUpdate(): bool {
 
         $this->errors = [];
@@ -351,7 +354,6 @@ class User {
 
         return empty($this->errors);
     }
-
 
 
     public function isPasswordMatch($inputPassword, $hashedPassword): bool {
@@ -752,6 +754,23 @@ class User {
     public function setIsBanned(string $is_banned): void {
 
         $this->is_banned = $is_banned;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastPasswordChangeAt(): string {
+
+        return $this->lastPasswordChange_at;
+    }
+
+
+    /**
+     * @param string $lastPasswordChange_at
+     */
+    public function setLastPasswordChangeAt(string $lastPasswordChange_at): void {
+
+        $this->lastPasswordChange_at = $lastPasswordChange_at;
     }
 
 }

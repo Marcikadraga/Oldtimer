@@ -8,6 +8,7 @@ use app\core\response\Response;
 use app\model\user\Authenticator;
 use app\model\user\User;
 use app\model\user\UserModel;
+use DateTime;
 use Exception;
 
 class UserController extends BaseController {
@@ -57,8 +58,6 @@ class UserController extends BaseController {
             $this->checkPermission('admin');
         }
 
-        //        $userModel = new UserModel();
-        //        $result = $userModel->delete($_POST['userId']);
         $result = $this->request->getPost('userId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ($result) {
             echo json_encode("success");
@@ -153,22 +152,15 @@ class UserController extends BaseController {
 
         try {
 
-
-            $id = $this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
-
-            //            $user=new User();
-            //            $id=$user->getId();
-            //
-            //            var_dump($id);
-
-            if (empty($id)) {
-                throw new Exception("Nem adtál meg id-t!");
-            }
-
+            $auth=new Authenticator();
             $userModel = new UserModel();
+
+
+            $id = $auth->getUserId();
+
             $user = $userModel->getById($id);
             if (empty($user)) {
-                throw new Exception("Nem létezik ilyen felhasználó!");
+                throw new Exception("Nem létezik ilyen felhasználó! sad");
             }
 
             $user->setPasswordHash($this->request->getPost('password_hash', FILTER_SANITIZE_SPECIAL_CHARS));
@@ -180,7 +172,7 @@ class UserController extends BaseController {
             if (!$userModel->updatePassword($user)) {
                 throw new Exception("Hiba történt a mentés során!");
             }
-
+            $this->updateChangedPassword();
             $this->response->jsonResponse('success');
 
         } catch (\Throwable $exception) {
@@ -191,4 +183,25 @@ class UserController extends BaseController {
         }
     }
 
+
+    public function updateChangedPassword() {
+
+        try {
+            $auth=new Authenticator();
+            $user=$auth->getUser();
+
+            $userModel = new UserModel();
+
+            $user->setLastPasswordChangeAt((new DateTime('now'))->format("Y-m-d H:i:s"));
+
+
+            $userModel->updateChangedPasswordAt($user);
+
+        } catch (\Throwable $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+
+            $this->response->jsonResponse($exception->getMessage());
+        }
+    }
 }

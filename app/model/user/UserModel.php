@@ -263,9 +263,8 @@ class UserModel extends BaseModel {
             WHERE id=:id';
 
             $params = [
-                'id'                   => $user->getId(),
-                'password_hash'        => $user->getPasswordHash(),
-
+                'id'            => $user->getId(),
+                'password_hash' => $user->getPasswordHash(),
             ];
             $statement = $this->pdo->prepare($query);
 
@@ -325,6 +324,7 @@ class UserModel extends BaseModel {
         try {
 
             if ($softDelete === true) {
+                //TODO ,soft micsoda?
                 $query = 'UPDATE users SET deleted_at=:deleted_at WHERE id=:id';
                 $params = [
                     'id'         => $user_id,
@@ -340,6 +340,29 @@ class UserModel extends BaseModel {
 
         } catch (Exception $exception) {
             $this->errorHandling($exception, 'delete');
+        }
+
+        return false;
+    }
+
+
+    public function updateChangedPasswordAt(User $user) {
+
+        try {
+            $query = '
+            UPDATE users
+            SET changed_password_at=:changed_password_at 
+            WHERE id=:id';
+            $params = [
+                'id'                  => $user->getId(),
+                'changed_password_at' => date('Y-m-d H:i:s'),
+            ];
+
+            $statement = $this->pdo->prepare($query);
+            return $statement->execute($params);
+
+        } catch (Exception $exception) {
+            $this->errorHandling($exception, 'updateChangedPasswordAt');
         }
 
         return false;
