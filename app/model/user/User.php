@@ -28,7 +28,11 @@ class User {
     private $last_login_at         = '';
     private $failed_login_counter  = '';
     private $is_banned             = '';
-    private $lastPasswordChange_at = '';
+    private $changed_password_at = '';
+
+
+
+
 
 
 
@@ -759,18 +763,18 @@ class User {
     /**
      * @return string
      */
-    public function getLastPasswordChangeAt(): string {
+    public function getChangedPasswordAt(): string {
 
-        return $this->lastPasswordChange_at;
+        return $this->changed_password_at;
     }
 
 
     /**
-     * @param string $lastPasswordChange_at
+     * @param string $changed_password_at
      */
-    public function setLastPasswordChangeAt(string $lastPasswordChange_at): void {
+    public function setChangedPasswordAt(string $changed_password_at): void {
 
-        $this->lastPasswordChange_at = $lastPasswordChange_at;
+        $this->changed_password_at = $changed_password_at;
     }
 
 }

@@ -148,8 +148,8 @@ class UserModel extends BaseModel {
 
         try {
             $query = '
-            INSERT INTO users (username, password_hash, email, first_name, middle_name, last_name, birth_date, phoneNumber, webpage, zip_code, city, district, more_address, role, created_at, failed_login_counter, is_banned) 
-            VALUES (:username, :password_hash, :email, :first_name, :middle_name, :last_name, :birth_date, :phoneNumber, :webpage, :zip_code, :city, :district, :more_address, :role, :created_at, :failed_login_counter, :is_banned)';
+            INSERT INTO users (username, password_hash, email, first_name, middle_name, last_name, birth_date, phoneNumber, webpage, zip_code, city, district, more_address, role, created_at, failed_login_counter, is_banned, changed_password_at ) 
+            VALUES (:username, :password_hash, :email, :first_name, :middle_name, :last_name, :birth_date, :phoneNumber, :webpage, :zip_code, :city, :district, :more_address, :role, :created_at, :failed_login_counter, :is_banned, :changed_password_at)';
 
             $params = [
                 'username'             => $user->getUsername(),
@@ -169,6 +169,7 @@ class UserModel extends BaseModel {
                 'created_at'           => $user->getCreatedAt(),
                 'failed_login_counter' => $user->getFailedLoginCounter(),
                 'is_banned'            => $user->getIsBanned(),
+                'changed_password_at'  => $user->getChangedPasswordAt()()
             ];
 
             $statement = $this->pdo->prepare($query);
@@ -213,7 +214,9 @@ class UserModel extends BaseModel {
                 last_login_at=:last_login_at,
                 failed_login_counter=:failed_login_counter,
                 is_banned=:is_banned,
-                banned_at=:banned_at
+                banned_at=:banned_at,
+                changed_password_at=:changed_password_at
+            
                 
             WHERE id =:id';
 
@@ -239,7 +242,8 @@ class UserModel extends BaseModel {
                 'last_login_at'        => $user->getLastLoginAt(),
                 'failed_login_counter' => $user->getFailedLoginCounter(),
                 'is_banned'            => $user->getIsBanned(),
-                'banned_at'            => $user->getBannedAt()
+                'banned_at'            => $user->getBannedAt(),
+                'changed_password_at'  => $user->getChangedPasswordAt()()
             ];
 
             $statement = $this->pdo->prepare($query);
