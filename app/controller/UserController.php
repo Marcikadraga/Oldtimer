@@ -54,7 +54,7 @@ class UserController extends BaseController {
         // Ha nem magunkat töröljük, hanem valaki mást, akkor vizsgáljuk hogy admin-e a belépett user
         // Csak az adminok törölhetnek más usereket
 
-        if ($_SESSION['user_id'] != $userId) {
+        if ($_SESSION['userid'] != $userId) {
             $this->checkPermission('admin');
         }
 
@@ -192,9 +192,7 @@ class UserController extends BaseController {
 
             $userModel = new UserModel();
 
-            $user->setLastPasswordChangeAt((new DateTime('now'))->format("Y-m-d H:i:s"));
-
-
+            $user->setChangedPasswordAt((new DateTime('now'))->format("Y-m-d H:i:s"));
             $userModel->updateChangedPasswordAt($user);
 
         } catch (\Throwable $exception) {

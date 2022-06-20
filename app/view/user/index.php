@@ -37,16 +37,6 @@
         <div class = "col-12 col-md-8">
             <div class = "card">
                 <div class = "card-body">
-
-<!--                    <div class = "row" style = "display:none">-->
-<!--                        <div class = "col-sm-6">-->
-<!--                            <p class = "mb-0">ID</p>-->
-<!--                        </div>-->
-<!--                        <div class = "col-sm-6">-->
-<!--                            <p class = "text-muted mb-0">--><?php //echo $user->getId() ?><!--</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
                     <div class = "row">
                         <div class = "col-sm-6">
                             <p class = "mb-0">Név</p>
@@ -61,7 +51,15 @@
                             <p class = "mb-0">Legutóbbi jelszómodosítás</p>
                         </div>
                         <div class = "col-sm-6">
-                            <p class = "text-muted mb-0"><?php echo $user->getChangedPasswordAt() ?> </p>
+                            <p class = "text-muted mb-0"><?php
+
+                                if(!is_null($user->getChangedPasswordAt())){
+                                    echo  $user->getChangedPasswordAt();
+                                }
+                                else{
+                                    echo "-";
+                                }
+                                ?> </p>
                         </div>
                     </div>
                     <hr>

@@ -7,35 +7,28 @@ use Exception;
 
 class User {
 
-    private $id                    = 0;
-    private $username              = '';
-    private $password_hash         = '';
-    private $email                 = '';
-    private $first_name            = '';
-    private $middle_name           = '';
-    private $last_name             = '';
-    private $birth_date            = '';
-    private $phoneNumber           = '';
-    private $webpage               = '';
-    private $zip_code              = '';
-    private $city                  = '';
-    private $district              = '';
-    private $more_address          = '';
-    private $role                  = '';
-    private $created_at            = '';
-    private $updated_at            = '';
-    private $deleted_at            = '';
-    private $last_login_at         = '';
-    private $failed_login_counter  = '';
-    private $is_banned             = '';
-    private $changed_password_at = '';
-
-
-
-
-
-
-
+    private $id                   = 0;
+    private $username             = '';
+    private $password_hash        = '';
+    private $email                = '';
+    private $first_name           = '';
+    private $middle_name          = '';
+    private $last_name            = '';
+    private $birth_date           = '';
+    private $phoneNumber          = '';
+    private $webpage              = '';
+    private $zip_code             = '';
+    private $city                 = '';
+    private $district             = '';
+    private $more_address         = '';
+    private $role                 = '';
+    private $created_at           = '';
+    private $updated_at           = '';
+    private $deleted_at           = '';
+    private $last_login_at        = '';
+    private $failed_login_counter = '';
+    private $is_banned            = '';
+    private $changed_password_at  = '';
 
     /** @var string Y-m-d H:i:s string */
     private         $banned_at = '';
@@ -760,10 +753,11 @@ class User {
         $this->is_banned = $is_banned;
     }
 
+
     /**
-     * @return string
+     * @return string|null
      */
-    public function getChangedPasswordAt(): string {
+    public function getChangedPasswordAt(): ?string {
 
         return $this->changed_password_at;
     }

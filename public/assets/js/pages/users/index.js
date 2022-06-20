@@ -1,10 +1,10 @@
 import {hFetch} from "../../functions.js";
 
-const deleteUserButtons=document.querySelectorAll(".delete-user");
-deleteUserButtons.forEach(function(button){
-    button.addEventListener("click",function(event){
+const deleteUserButtons = document.querySelectorAll(".delete-user");
+deleteUserButtons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
         event.preventDefault(); // prevent the default action of the button
-        const userId=button.dataset.id;
+        const userId = button.dataset.id;
 
         const fd = new FormData();
         fd.append('userId', userId);
@@ -16,7 +16,7 @@ deleteUserButtons.forEach(function(button){
             .then(response => response.json())
             .then(data => {
                 if (data === "success") {
-                   button.closest("tr").remove();
+                    button.closest("tr").remove();
                 }
             })
             .catch((error) => {
@@ -26,69 +26,57 @@ deleteUserButtons.forEach(function(button){
     });
 });
 
-// const updateUserButtons = document.querySelectorAll(".edit-user");
-// updateUserButtons.forEach(function (button) {
-//     button.addEventListener("click", function (event) {
-//         const userId = button.dataset.id;
-//
-//         const fd = new FormData();
-//         const username= document.querySelector("#edit-username").value;
-//         const email= document.querySelector("#edit-email").value;
-//         const firstName= document.querySelector("#edit-firstName").value;
-//         const middleName= document.querySelector("#edit-middleName").value;
-//         const lastName= document.querySelector("#edit-lastName").value;
-//         const birthDate= document.querySelector("#edit-birthdate").value;
-//         const phoneNumber= document.querySelector("#edit-phoneNumber").value;
-//         const zipCode= document.querySelector("#edit-zip_code").value;
-//         const city= document.querySelector("#edit-city").value;
-//         const district= document.querySelector("#edit-district").value;
-//         const moreaddress= document.querySelector("#edit-moreAddress").value;
-//         const role=document.querySelector("#edit-role").value;
-//
-//         fd.append('userId', userId);
-//
-//         hFetch('https://marci.dev/userController/getUser', {
-//             method: 'POST', body: fd
-//         })
-//             .then(response => response.json())
-//             .then(data => {
-//                 //document.querySelector("#edit-user-id").value = data.id;
-//                 document.querySelector("#edit-username").value = data.username;
-//                 document.querySelector("#edit-email").value = data.email;
-//                 document.querySelector("#edit-firstName").value = data.first_name;
-//                 document.querySelector("#edit-middleName").value = data.middle_name;
-//                 document.querySelector("#edit-lastName").value = data.last_name;
-//                 document.querySelector("#edit-birthdate").value = data.birth_date;
-//                 document.querySelector("#edit-phoneNumber").value = data.phoneNumber;
-//                 document.querySelector("#edit-zip_code").value = data.zip_code;
-//                 document.querySelector("#edit-city").value = data.city;
-//                 document.querySelector("#edit-district").value = data.district;
-//                 document.querySelector("#edit-moreAddress").value = data.more_address;
-//                 document.querySelector("#edit-role").value = data.role;
-//             })
-//             .catch((error) => {
-//                 console.error('Error:', error);
-//             });
-//     });
-// });
+const updateUserButtons = document.querySelectorAll(".edit-user");
+updateUserButtons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+        const userId = button.dataset.id;
 
-const saveEditedDataButton= document.querySelector("#save-edited-data");
+        const fd = new FormData();
+
+        fd.append('userId', userId);
+
+        hFetch('https://marci.dev/userController/getUser', {
+            method: 'POST', body: fd
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector("#edit-user-id").value = data.id;
+                document.querySelector("#edit-username").value = data.username;
+                document.querySelector("#edit-email").value = data.email;
+                document.querySelector("#edit-firstName").value = data.first_name;
+                document.querySelector("#edit-middleName").value = data.middle_name;
+                document.querySelector("#edit-lastName").value = data.last_name;
+                document.querySelector("#edit-birthdate").value = data.birth_date;
+                document.querySelector("#edit-phoneNumber").value = data.phoneNumber;
+                document.querySelector("#edit-zip_code").value = data.zip_code;
+                document.querySelector("#edit-city").value = data.city;
+                document.querySelector("#edit-district").value = data.district;
+                document.querySelector("#edit-moreAddress").value = data.more_address;
+                document.querySelector("#edit-role").value = data.role;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+});
+
+const saveEditedDataButton = document.querySelector("#save-edited-data");
 saveEditedDataButton.addEventListener("click", function (event) {
 
 
-    const id= document.querySelector("#edit-user-id").value;
-    const username= document.querySelector("#edit-username").value;
-    const email= document.querySelector("#edit-email").value;
-    const first_name= document.querySelector("#edit-firstName").value;
-    const middle_name= document.querySelector("#edit-middleName").value;
-    const last_name= document.querySelector("#edit-lastName").value;
-    const birthdate= document.querySelector("#edit-birthdate").value;
-    const phoneNumber= document.querySelector("#edit-phoneNumber").value;
-    const zip_code= document.querySelector("#edit-zip_code").value;
-    const city= document.querySelector("#edit-city").value;
-    const district= document.querySelector("#edit-district").value;
-    const more_address= document.querySelector("#edit-moreAddress").value;
-    const role=document.querySelector("#edit-role").value;
+    const id = document.querySelector("#edit-user-id").value;
+    const username = document.querySelector("#edit-username").value;
+    const email = document.querySelector("#edit-email").value;
+    const first_name = document.querySelector("#edit-firstName").value;
+    const middle_name = document.querySelector("#edit-middleName").value;
+    const last_name = document.querySelector("#edit-lastName").value;
+    const birthdate = document.querySelector("#edit-birthdate").value;
+    const phoneNumber = document.querySelector("#edit-phoneNumber").value;
+    const zip_code = document.querySelector("#edit-zip_code").value;
+    const city = document.querySelector("#edit-city").value;
+    const district = document.querySelector("#edit-district").value;
+    const more_address = document.querySelector("#edit-moreAddress").value;
+    const role = document.querySelector("#edit-role").value;
 
     const fd = new FormData();
 
@@ -104,7 +92,7 @@ saveEditedDataButton.addEventListener("click", function (event) {
     fd.append('city', city);
     fd.append('district', district);
     fd.append('more_address', more_address);
-    fd.append('role',role);
+    fd.append('role', role);
 
     hFetch('https://marci.dev/userController/update', {
         method: 'POST', body: fd
@@ -119,11 +107,10 @@ saveEditedDataButton.addEventListener("click", function (event) {
             console.log(error)
         });
 });
-const saveEditedPassword= document.querySelector("#save-edited-password");
+const saveEditedPassword = document.querySelector("#save-edited-password");
 saveEditedPassword.addEventListener("click", function (event) {
-    const id= document.querySelector("#edit-user-id").value;
+    const id = document.querySelector("#edit-user-id").value;
     const password1 = document.querySelector("#edit-password1").value;
-    //const password2 = document.querySelector("#edit-password2").value;
 
     const fd = new FormData();
 

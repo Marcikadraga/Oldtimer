@@ -3,7 +3,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-image: url("/images/car5.png");
-        color: black !important;
+        color: orange !important;
         background-position: center;
     }
 </style>

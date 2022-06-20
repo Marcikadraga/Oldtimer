@@ -69,6 +69,13 @@ class Login extends BaseController {
             $user->setLastLoginAt(date('Y-m-d H:i:s'));
             $userModel->save($user);
 
+
+
+
+
+
+
+
             $auth = new Authenticator();
             $auth->login($user->getId());
 
