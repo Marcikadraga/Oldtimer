@@ -25,7 +25,6 @@ class CarController extends BaseController {
 
     }
 
-
     public function index() {
 
         $this->checkPermission('admin');
@@ -41,7 +40,6 @@ class CarController extends BaseController {
         $this->render('cars/index', $data);
     }
 
-
     public function delete() {
         $this->checkAjax();
         $this->checkPermission('admin');
@@ -56,7 +54,6 @@ class CarController extends BaseController {
 
         echo json_encode("error");
     }
-
 
     public function update() {
         $this->checkAjax();
@@ -101,10 +98,6 @@ class CarController extends BaseController {
         return true;
     }
 
-
-    /**
-     * @throws Exception
-     */
     public function getCar() {
         //$this->checkAjax();
         $this->checkPermission('admin');
@@ -119,6 +112,7 @@ class CarController extends BaseController {
 
         echo json_encode("error");
     }
+
     public function insert() {
 
         $this->checkPermission('admin');
@@ -128,54 +122,58 @@ class CarController extends BaseController {
         $successMsg = '';
         $car = new Car();
 
-        try {
+
+        if($this->request->isPostRequest()){
+            try {
 
 
-            $manufacturer = $this->request->getPost('manufacturer', FILTER_SANITIZE_SPECIAL_CHARS);
-            $type = $this->request->getPost('type', FILTER_SANITIZE_SPECIAL_CHARS);
-            $startOfProductionTime = $this->request->getPost('startOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
-            $endOfProductionTime = $this->request->getPost('endOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
+                $manufacturer = $this->request->getPost('manufacturer', FILTER_SANITIZE_SPECIAL_CHARS);
+                $type = $this->request->getPost('type', FILTER_SANITIZE_SPECIAL_CHARS);
+                $startOfProductionTime = $this->request->getPost('startOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
+                $endOfProductionTime = $this->request->getPost('endOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
 
-            $carModel = new CarModel();
+                $carModel = new CarModel();
 
-            //            if (empty($manufacturer)) {
-            //                $errors['manufacturer'] = 'A gyártó megadása kötelező!';
-            //            }
-            //            if (empty($type)) {
-            //                $errors['type'] = 'A típus megadása kötelező!';
-            //            }
-            //            if (empty($startOfProductionTime)) {
-            //                $errors['startOfProductionTime'] = 'A kezdő év megadása kötelező!';
-            //            }
-            //            if (empty($endOfProductionTime)) {
-            //                $errors['endOfProductionTime'] = 'A végév megadása kötelező!';
-            //            }
+                //            if (empty($manufacturer)) {
+                //                $errors['manufacturer'] = 'A gyártó megadása kötelező!';
+                //            }
+                //            if (empty($type)) {
+                //                $errors['type'] = 'A típus megadása kötelező!';
+                //            }
+                //            if (empty($startOfProductionTime)) {
+                //                $errors['startOfProductionTime'] = 'A kezdő év megadása kötelező!';
+                //            }
+                //            if (empty($endOfProductionTime)) {
+                //                $errors['endOfProductionTime'] = 'A végév megadása kötelező!';
+                //            }
 
-            $car->setManufacturer($manufacturer);
-            $car->setType($type);
-            $car->setStartOfProductionTime($startOfProductionTime);
-            $car->setEndOfProductionTime($endOfProductionTime);
-            $car->setCreatedAt((new DateTime('now'))->format("Y-m-d H:i:s"));
+                $car->setManufacturer($manufacturer);
+                $car->setType($type);
+                $car->setStartOfProductionTime($startOfProductionTime);
+                $car->setEndOfProductionTime($endOfProductionTime);
+                $car->setCreatedAt((new DateTime('now'))->format("Y-m-d H:i:s"));
 
-            if (!$car->checkIsValidInsert() || !empty($errors)) {
-                $errors = array_merge($car->getErrors(), $errors);
-            }
-            if (!empty($errors)) {
-                throw new Exception('Kérjük ellenőrizze az űrlapot!');
-            }
-            $carID = $carModel->insert($car);
-            if (empty($carID)) {
-                throw new Exception($carModel->getErrorAsString());
-            }
-            $successMsg = 'Az autó hozzáadása sikerült.';
-        } catch (Exception $exception) {
-            // nem végleges hibakezelés!!!
-            $errorMsg = $exception->getMessage();
+                if (!$car->checkIsValidInsert() || !empty($errors)) {
+                    $errors = array_merge($car->getErrors(), $errors);
+                }
+                if (!empty($errors)) {
+                    throw new Exception('Kérjük ellenőrizze az űrlapot!');
+                }
+                $carID = $carModel->insert($car);
+                if (empty($carID)) {
+                    throw new Exception($carModel->getErrorAsString());
+                }
+                $successMsg = 'Az autó hozzáadása sikerült.';
+            } catch (Exception $exception) {
+                // nem végleges hibakezelés!!!
+                $errorMsg = $exception->getMessage();
 
-            if (!empty($errors)) {
-                $errorMsg .= '<br>' . implode('<br>', $errors);
+                if (!empty($errors)) {
+                    $errorMsg .= '<br>' . implode('<br>', $errors);
+                }
             }
         }
+
         $data['errors'] = $errors;
         $data['errorMsg'] = $errorMsg;
         $data['successMsg'] = $successMsg;
@@ -186,5 +184,6 @@ class CarController extends BaseController {
 
         $this->render('insert/index', $data);
     }
+
 }
 

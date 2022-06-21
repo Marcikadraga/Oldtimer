@@ -10,7 +10,7 @@
 <?php include '../app/view/_header.php' ?>
 
     <div class = "container container col-sm-3 col-sm">
-        <form action = "CarController/insert" method = "post">
+        <form action = "/CarController/insert" method = "post">
             <div class = "card">
                 <div class = "card-header">
                     <h5>Új autó felvétele</h5>

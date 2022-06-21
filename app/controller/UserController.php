@@ -157,9 +157,8 @@ class UserController extends BaseController {
 
         try {
 
-            $auth=new Authenticator();
+            $auth = new Authenticator();
             $userModel = new UserModel();
-
 
             $id = $auth->getUserId();
 
@@ -168,8 +167,8 @@ class UserController extends BaseController {
                 throw new Exception("Nem létezik ilyen felhasználó!");
             }
 
-            $password1=$this->request->getPost('password_hash', FILTER_SANITIZE_SPECIAL_CHARS);
-            $password2=$this->request->getPost('password_hash_again', FILTER_SANITIZE_SPECIAL_CHARS);
+            $password1 = $this->request->getPost('password_hash', FILTER_SANITIZE_SPECIAL_CHARS);
+            $password2 = $this->request->getPost('password_hash_again', FILTER_SANITIZE_SPECIAL_CHARS);
 
             // Jelszó vizsgálata
             if (empty($password1)) {
@@ -182,7 +181,7 @@ class UserController extends BaseController {
                 $errors['$password1'] = $user->getErrorsAsString();
             }
 
-            if($password1==$password2){
+            if ($password1 == $password2) {
                 $user->setPasswordHash($password1);
             }
 
@@ -196,10 +195,8 @@ class UserController extends BaseController {
                 throw new Exception("Hiba történt a mentés során!");
             }
 
-
             $this->updateChangedPassword();
             $this->response->jsonResponse('success');
-
 
         } catch (\Throwable $exception) {
             $log = new SystemLog();
@@ -229,6 +226,7 @@ class UserController extends BaseController {
             $this->response->jsonResponse($exception->getMessage());
         }
     }
+
 
     public function insert() {
 
@@ -344,6 +342,23 @@ class UserController extends BaseController {
         //        var_dump($data);
 
         $this->render('registration/index', $data);
+    }
+
+
+    public function showUserProfile(){
+        $auth = new Authenticator();
+
+        $user = $auth->getUser();
+        $data = ['user' => $user]; //lekérem az adott user adatait
+
+        $this->render('user/index', $data);
+    }
+
+
+    public function loadAdminPage(){
+        $this->checkPermission('guest');
+
+        $this->render('admin/index');
     }
 
 }

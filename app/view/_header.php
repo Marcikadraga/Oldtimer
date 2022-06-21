@@ -25,12 +25,10 @@
                     <a style = "margin-right: 20px" class = "nav-link" href = "/"><i class = "fa fa-home fa-lg"></i>Főoldal</a>
                 </li>
                 <li class = "nav-item">
-                    <a style = "margin-right: 20px" class = "nav-link" href = "/UserProfileController"> <i class = "fas fa-user-cog fa-lg"></i>Profil</a>
+                    <a style = "margin-right: 20px" class = "nav-link" href = "/UserController/showUserProfile"> <i class = "fas fa-user-cog fa-lg"></i>Profil</a>
                 </li>
 
-
             </ul>
-
             <?php if ($isLoggedInUser): ?>
                 <ul class = "navbar-nav">
                     <li class = "nav-item dropdown">
@@ -40,7 +38,7 @@
                             </a>
 
                             <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
-                                <a class = "nav-link" href = "/insert">Autók beszúrása</a>
+                                <a class = "nav-link" href = "/carController/insert">Autók beszúrása</a>
                                 <a class = "nav-link" href = "/userController">Felhasználók</a>
                                 <a class = "nav-link" href = "/carController">Autók</a>
                             </div>
@@ -58,11 +56,11 @@
 
 
                     <?php if (!$userIsAdmin): ?>
-                        <li class = "nav-item"><a href = "/UserProfileController" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
+                        <li class = "nav-item"><a href = "/UserController/showUserProfile" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
                     <?php endif; ?>
 
                     <?php if ($userIsAdmin): ?>
-                        <li class = "nav-item"><a href = "/UserProfileController" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
+                        <li class = "nav-item"><a href = "/UserController/showUserProfile" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
                     <?php endif; ?>
 
 
