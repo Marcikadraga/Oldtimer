@@ -109,13 +109,14 @@ saveEditedDataButton.addEventListener("click", function (event) {
 });
 const saveEditedPassword = document.querySelector("#save-edited-password");
 saveEditedPassword.addEventListener("click", function (event) {
-    const id = document.querySelector("#edit-user-id").value;
+
     const password1 = document.querySelector("#edit-password1").value;
+    const password2 = document.querySelector("#edit-password2").value;
 
     const fd = new FormData();
 
-    fd.append('id', id);
     fd.append('password_hash', password1);
+    fd.append('password_hash_again', password2);
 
     hFetch('https://marci.dev/userController/updatePassword', {
         method: 'POST', body: fd

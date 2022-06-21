@@ -169,7 +169,7 @@ class UserModel extends BaseModel {
                 'created_at'           => $user->getCreatedAt(),
                 'failed_login_counter' => $user->getFailedLoginCounter(),
                 'is_banned'            => $user->getIsBanned(),
-                'changed_password_at'  => $user->getChangedPasswordAt()()
+                'changed_password_at'  => $user->getChangedPasswordAt()
             ];
 
             $statement = $this->pdo->prepare($query);

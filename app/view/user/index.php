@@ -23,20 +23,26 @@
 
 <div class = "container">
     <div class = "row">
-        <div class = "col-12 col-md-4 border">
+        <div class = "col-12 col-md-4 border text-center">
             <img src = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt = "">
             <hr>
             <button type = "button" data-id = "<?= $user->getId() ?>" class = "btn btn-primary edit-user" data-toggle = "modal" data-target = "#exampleModal4Password">
                 <i class = 'fas fa-edit' style = 'font-size:20px;color:white'>Get new password</i>
             </button>
-
-        </div>
-        <div>
-
         </div>
         <div class = "col-12 col-md-8">
             <div class = "card">
                 <div class = "card-body">
+                    <?php if (!empty($errorMsg)): ?>
+                        <div class = "alert alert-danger">
+                            <p class = "m-0"><?= $errorMsg ?></p>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty($successMsg)): ?>
+                        <div class = "alert alert-success">
+                            <p class = "m-0"><?= $successMsg; ?></p>
+                        </div>
+                    <?php endif; ?>
                     <div class = "row">
                         <div class = "col-sm-6">
                             <p class = "mb-0">Név</p>

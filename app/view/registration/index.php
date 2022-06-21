@@ -21,7 +21,7 @@ include '../app/view/_header.php';
 ?>
 
 <div class = "container">
-    <form action = "/registration/insert" method = "post">
+    <form action = "/Login/insert" method = "post">
         <div class = "card">
             <div class = "card-header">
                 <h5>Regisztráció</h5>

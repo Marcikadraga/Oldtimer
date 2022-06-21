@@ -78,7 +78,7 @@ class Authenticator {
                 $this->errors[] = 'Hiba! Az IP cím nem azonos a bejelentkezéskor rögzített IP címmel.';
             }
             if ($_SESSION['user_agent'] != $request->getUserAgent()) {
-                $this->errors[] = 'Hiba! A böngésző nem azonos a bejelentkezéskor rögzített böngészővel.';
+//                $this->errors[] = 'Hiba! A böngésző nem azonos a bejelentkezéskor rögzített böngészővel.';
             }
         }
 
