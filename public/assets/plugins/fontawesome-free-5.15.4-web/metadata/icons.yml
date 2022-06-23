@@ -2855,7 +2855,7 @@ car:
     - '4.1'
     - 5.0.0
     - 5.2.0
-  label: Car
+  label: CarType
   search:
     terms:
       - auto
@@ -2873,7 +2873,7 @@ car-alt:
     - 5.2.0
     - 5.11.0
     - 5.11.1
-  label: Alternate Car
+  label: Alternate CarType
   search:
     terms:
       - auto
@@ -2889,7 +2889,7 @@ car-alt:
 car-battery:
   changes:
     - 5.2.0
-  label: Car Battery
+  label: CarType Battery
   search:
     terms:
       - auto
@@ -2903,7 +2903,7 @@ car-battery:
 car-crash:
   changes:
     - 5.2.0
-  label: Car Crash
+  label: CarType Crash
   search:
     terms:
       - accident
@@ -2921,7 +2921,7 @@ car-crash:
 car-side:
   changes:
     - 5.2.0
-  label: Car Side
+  label: CarType Side
   search:
     terms:
       - auto

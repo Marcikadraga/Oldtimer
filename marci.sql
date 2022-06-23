@@ -18,7 +18,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for cars
 -- ----------------------------
-DROP TABLE IF EXISTS `cars`;
+DROP TABLE IF EXISTS carTypes;
 CREATE TABLE `cars` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `manufacturer` varchar(255) DEFAULT NULL,
@@ -34,36 +34,36 @@ CREATE TABLE `cars` (
 -- ----------------------------
 -- Records of cars
 -- ----------------------------
-INSERT INTO `cars` VALUES ('8', 'Accusamus ea et quam', 'Nulla ipsa facilis ', '1234', '5678', '2022-05-20 14:42:27', null, '2022-05-20 16:44:27');
-INSERT INTO `cars` VALUES ('9', 'Mercedes-Benz', 'TTQP', '1999', '2011', '2022-05-20 21:15:33', null, '2022-05-22 13:20:21');
-INSERT INTO `cars` VALUES ('10', 'Mercedes-Benz', 'TTQP', '1999', '2011', '2022-05-20 21:15:48', null, '2022-05-22 13:40:37');
-INSERT INTO `cars` VALUES ('11', 'Mercedes-Benz', 'TTQP', '1999', '2010', '2022-05-21 20:28:00', null, '2022-05-22 13:40:38');
-INSERT INTO `cars` VALUES ('12', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-22 11:41:14', null, '2022-05-22 13:42:35');
-INSERT INTO `cars` VALUES ('13', 'Béla', '1234', '1324', '1234', '2022-05-22 11:45:32', null, '2022-05-22 20:35:28');
-INSERT INTO `cars` VALUES ('14', 'Audi', '1234', '1324', '1234', '2022-05-22 11:45:38', null, '2022-05-22 20:35:29');
-INSERT INTO `cars` VALUES ('15', 'Béla', '1234', '1324', '1234', '2022-05-22 11:45:44', null, '2022-05-22 20:35:28');
-INSERT INTO `cars` VALUES ('16', 'Béla', '1234', '1324', '1234', '2022-05-22 19:40:13', null, '2022-05-22 21:57:58');
-INSERT INTO `cars` VALUES ('17', 'Béla', '1234', '1324', '1234', '2022-05-23 11:16:17', null, '2022-05-23 13:16:22');
-INSERT INTO `cars` VALUES ('18', 'Béla', '1234', '1324', '1234', '2022-05-23 11:27:24', null, '2022-05-23 13:28:44');
-INSERT INTO `cars` VALUES ('19', 'Béla', '1234', '1324', '1234', '2022-05-23 12:58:19', null, '2022-05-23 15:05:09');
-INSERT INTO `cars` VALUES ('20', 'Béla', '1234', '1324', '1234', '2022-05-23 13:05:35', null, '2022-05-23 15:24:30');
-INSERT INTO `cars` VALUES ('21', 'Béla', '1234', '1324', '1234', '2022-05-23 13:26:15', null, '2022-05-23 15:26:21');
-INSERT INTO `cars` VALUES ('22', 'Béla', '1234', '1324', '1234', '2022-05-23 13:26:35', null, '2022-05-23 15:27:28');
-INSERT INTO `cars` VALUES ('23', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-23 13:26:42', null, '2022-05-23 15:27:35');
-INSERT INTO `cars` VALUES ('24', 'Mercedes-Benz', '1234', '1222', '1234', '2022-05-23 13:26:51', null, '2022-05-23 15:27:30');
-INSERT INTO `cars` VALUES ('25', 'Béla', '1234', '1324', '1234', '2022-05-23 13:28:29', null, '2022-05-23 15:28:35');
-INSERT INTO `cars` VALUES ('26', 'Béla', '1234', '1324', '1234', '2022-05-23 13:29:10', null, '2022-05-23 15:37:45');
-INSERT INTO `cars` VALUES ('27', 'Béla', '1234', '1324', '1234', '2022-05-23 13:32:36', null, '2022-05-23 15:37:58');
-INSERT INTO `cars` VALUES ('28', 'Mercedes-Benz', '450 SL Lorinser', '1999', '5000', '2022-05-23 13:38:25', '2022-05-30 11:32:15', null);
-INSERT INTO `cars` VALUES ('29', 'Béla', '1234', '1324', '1234', '2022-05-23 13:38:52', null, '2022-05-24 10:58:37');
-INSERT INTO `cars` VALUES ('30', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-23 13:39:25', null, '2022-05-23 15:41:01');
-INSERT INTO `cars` VALUES ('31', 'Béla', '1234', '1324', '1234', '2022-05-23 13:40:48', null, '2022-05-23 15:40:54');
-INSERT INTO `cars` VALUES ('32', 'Audi', 'TTQPMiki', '0', '0', '2022-05-24 08:58:59', '2022-05-26 14:51:21', null);
-INSERT INTO `cars` VALUES ('33', 'M&aacute;rk', 'X66', '2018', '2024', '2022-05-24 08:59:05', '2022-05-26 14:42:39', null);
-INSERT INTO `cars` VALUES ('34', 'Béla', '1234', '1324', '1234', '2022-05-24 08:59:10', null, '2022-05-24 12:56:53');
-INSERT INTO `cars` VALUES ('35', 'Miki', '1234', '1324', '1234', '2022-05-24 11:01:19', null, '2022-05-24 16:09:12');
-INSERT INTO `cars` VALUES ('36', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-24 11:27:09', null, '2022-05-24 14:32:59');
-INSERT INTO `cars` VALUES ('37', 'BMW1', 'NY-69', '0', '0', '2022-05-26 10:23:46', '2022-05-26 14:51:10', null);
+INSERT INTO carTypes VALUES ('8', 'Accusamus ea et quam', 'Nulla ipsa facilis ', '1234', '5678', '2022-05-20 14:42:27', null, '2022-05-20 16:44:27');
+INSERT INTO carTypes VALUES ('9', 'Mercedes-Benz', 'TTQP', '1999', '2011', '2022-05-20 21:15:33', null, '2022-05-22 13:20:21');
+INSERT INTO carTypes VALUES ('10', 'Mercedes-Benz', 'TTQP', '1999', '2011', '2022-05-20 21:15:48', null, '2022-05-22 13:40:37');
+INSERT INTO carTypes VALUES ('11', 'Mercedes-Benz', 'TTQP', '1999', '2010', '2022-05-21 20:28:00', null, '2022-05-22 13:40:38');
+INSERT INTO carTypes VALUES ('12', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-22 11:41:14', null, '2022-05-22 13:42:35');
+INSERT INTO carTypes VALUES ('13', 'Béla', '1234', '1324', '1234', '2022-05-22 11:45:32', null, '2022-05-22 20:35:28');
+INSERT INTO carTypes VALUES ('14', 'Audi', '1234', '1324', '1234', '2022-05-22 11:45:38', null, '2022-05-22 20:35:29');
+INSERT INTO carTypes VALUES ('15', 'Béla', '1234', '1324', '1234', '2022-05-22 11:45:44', null, '2022-05-22 20:35:28');
+INSERT INTO carTypes VALUES ('16', 'Béla', '1234', '1324', '1234', '2022-05-22 19:40:13', null, '2022-05-22 21:57:58');
+INSERT INTO carTypes VALUES ('17', 'Béla', '1234', '1324', '1234', '2022-05-23 11:16:17', null, '2022-05-23 13:16:22');
+INSERT INTO carTypes VALUES ('18', 'Béla', '1234', '1324', '1234', '2022-05-23 11:27:24', null, '2022-05-23 13:28:44');
+INSERT INTO carTypes VALUES ('19', 'Béla', '1234', '1324', '1234', '2022-05-23 12:58:19', null, '2022-05-23 15:05:09');
+INSERT INTO carTypes VALUES ('20', 'Béla', '1234', '1324', '1234', '2022-05-23 13:05:35', null, '2022-05-23 15:24:30');
+INSERT INTO carTypes VALUES ('21', 'Béla', '1234', '1324', '1234', '2022-05-23 13:26:15', null, '2022-05-23 15:26:21');
+INSERT INTO carTypes VALUES ('22', 'Béla', '1234', '1324', '1234', '2022-05-23 13:26:35', null, '2022-05-23 15:27:28');
+INSERT INTO carTypes VALUES ('23', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-23 13:26:42', null, '2022-05-23 15:27:35');
+INSERT INTO carTypes VALUES ('24', 'Mercedes-Benz', '1234', '1222', '1234', '2022-05-23 13:26:51', null, '2022-05-23 15:27:30');
+INSERT INTO carTypes VALUES ('25', 'Béla', '1234', '1324', '1234', '2022-05-23 13:28:29', null, '2022-05-23 15:28:35');
+INSERT INTO carTypes VALUES ('26', 'Béla', '1234', '1324', '1234', '2022-05-23 13:29:10', null, '2022-05-23 15:37:45');
+INSERT INTO carTypes VALUES ('27', 'Béla', '1234', '1324', '1234', '2022-05-23 13:32:36', null, '2022-05-23 15:37:58');
+INSERT INTO carTypes VALUES ('28', 'Mercedes-Benz', '450 SL Lorinser', '1999', '5000', '2022-05-23 13:38:25', '2022-05-30 11:32:15', null);
+INSERT INTO carTypes VALUES ('29', 'Béla', '1234', '1324', '1234', '2022-05-23 13:38:52', null, '2022-05-24 10:58:37');
+INSERT INTO carTypes VALUES ('30', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-23 13:39:25', null, '2022-05-23 15:41:01');
+INSERT INTO carTypes VALUES ('31', 'Béla', '1234', '1324', '1234', '2022-05-23 13:40:48', null, '2022-05-23 15:40:54');
+INSERT INTO carTypes VALUES ('32', 'Audi', 'TTQPMiki', '0', '0', '2022-05-24 08:58:59', '2022-05-26 14:51:21', null);
+INSERT INTO carTypes VALUES ('33', 'M&aacute;rk', 'X66', '2018', '2024', '2022-05-24 08:59:05', '2022-05-26 14:42:39', null);
+INSERT INTO carTypes VALUES ('34', 'Béla', '1234', '1324', '1234', '2022-05-24 08:59:10', null, '2022-05-24 12:56:53');
+INSERT INTO carTypes VALUES ('35', 'Miki', '1234', '1324', '1234', '2022-05-24 11:01:19', null, '2022-05-24 16:09:12');
+INSERT INTO carTypes VALUES ('36', 'Mercedes-Benz', '1234', '1324', '1234', '2022-05-24 11:27:09', null, '2022-05-24 14:32:59');
+INSERT INTO carTypes VALUES ('37', 'BMW1', 'NY-69', '0', '0', '2022-05-26 10:23:46', '2022-05-26 14:51:10', null);
 
 -- ----------------------------
 -- Table structure for users

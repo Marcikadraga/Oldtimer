@@ -4,23 +4,23 @@ namespace app\controller;
 
 use app\core\logger\SystemLog;
 use app\core\request\Request;
-use app\model\car\Car;
-use app\model\car\CarModel;
+use app\model\carType\CarType;
+use app\model\carType\CarTypeModel;
 use Exception;
 use DateTime;
 
 class CarController extends BaseController {
 
-    private Car      $car;
-    private CarModel $carModel;
+    private CarType      $car;
+    private CarTypeModel $carModel;
 
 
     public function __construct() {
 
         parent::__construct();
 
-        $this->car = new Car();
-        $this->carModel = new CarModel(); //hogy ne kelljen minden függvényben példányosítani a model-t
+        $this->car = new CarType();
+        $this->carModel = new CarTypeModel(); //hogy ne kelljen minden függvényben példányosítani a model-t
 //        tunk mindent, mert előbb utóbb nagyon sok lesz belőle.
 
     }
@@ -44,7 +44,7 @@ class CarController extends BaseController {
         $this->checkAjax();
         $this->checkPermission('admin');
 
-        //$carModel = new CarModel();
+        //$carModel = new CarTypeModel();
         //$result = $carModel->delete($_POST['carId']);
         $result=$this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ($result) {
@@ -68,7 +68,7 @@ class CarController extends BaseController {
                 throw new Exception('Nincs id');
             }
 
-            $carmodel = new CarModel();
+            $carmodel = new CarTypeModel();
             $car = $carmodel->getById($id);
             if (empty($car)) {
                 throw new Exception('Nem létezik ilyen autó');
@@ -102,7 +102,7 @@ class CarController extends BaseController {
         //$this->checkAjax();
         $this->checkPermission('admin');
 
-       $carModel = new CarModel();
+       $carModel = new CarTypeModel();
 //        $result = $carModel->getCarById($_POST['carId']);
         $result=$carModel->getCarById($this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($result) {
@@ -120,7 +120,7 @@ class CarController extends BaseController {
         $errors = [];
         $errorMsg = '';
         $successMsg = '';
-        $car = new Car();
+        $car = new CarType();
 
 
         if($this->request->isPostRequest()){
@@ -132,7 +132,7 @@ class CarController extends BaseController {
                 $startOfProductionTime = $this->request->getPost('startOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
                 $endOfProductionTime = $this->request->getPost('endOfProductionTime', FILTER_SANITIZE_SPECIAL_CHARS);
 
-                $carModel = new CarModel();
+                $carModel = new CarTypeModel();
 
                 //            if (empty($manufacturer)) {
                 //                $errors['manufacturer'] = 'A gyártó megadása kötelező!';
