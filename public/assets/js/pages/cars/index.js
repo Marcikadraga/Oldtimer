@@ -9,7 +9,7 @@ deleteCarButtons.forEach(function (button) {
         const fd = new FormData();
         fd.append('carId', carId);
 
-        hFetch('https://marci.dev/carController/delete', {
+        hFetch('https://marci.dev/CarTypeController/delete', {
             method: 'POST', body: fd
         })
             .then(response => response.json())
@@ -36,7 +36,7 @@ updateCarButtons.forEach(function (button) {
         const fd = new FormData();
         fd.append('carId', carId);
 
-        hFetch('https://marci.dev/carController/getCar', {
+        hFetch('https://marci.dev/CarTypeController/getCar', {
             method: 'POST', body: fd
         })
             .then(response => response.json())
@@ -70,7 +70,7 @@ saveEditedDataButton.addEventListener("click", function (event) {
         fd.append('startOfProduction', startOfProduction);
         fd.append('endOfProduction', endOfProduction);
 
-    hFetch('https://marci.dev/carController/update', {
+    hFetch('https://marci.dev/CarTypeController/update', {
         method: 'POST', body: fd
     })
         .then(response => response.json())

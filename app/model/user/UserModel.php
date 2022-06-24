@@ -166,7 +166,7 @@ class UserModel extends BaseModel {
                 'district'             => $user->getDistrict(),
                 'more_address'         => $user->getMoreAddress(),
                 'role'                 => $user->getRole(),
-                'created_at'           => $user->getCreatedAt(),
+                'created_at'           => $user->cgetCreatedAt(),
                 'failed_login_counter' => $user->getFailedLoginCounter(),
                 'is_banned'            => $user->getIsBanned(),
                 'changed_password_at'  => $user->getChangedPasswordAt()

@@ -8,8 +8,11 @@ class Car {
     private $color               = '';
     private $kilometers_traveled = '';
     private $year_of_manufacture = '';
-    private $condition           = '';
+    private $car_condition       = '';
     private $type_of_fuel        = '';
+    private $created_at          = null;
+    private $updated_at          = null;
+    private $deleted_at          = null;
 
 
     /**
@@ -143,4 +146,75 @@ class Car {
         $this->year_of_manufacture = $year_of_manufacture;
     }
 
+
+    /**
+     * @return null
+     */
+    public function getCreatedAt() {
+
+        return $this->created_at;
+    }
+
+
+    /**
+     * @param null $created_at
+     */
+    public function setCreatedAt($created_at): void {
+
+        $this->created_at = $created_at;
+    }
+
+
+    /**
+     * @return null
+     */
+    public function getUpdatedAt() {
+
+        return $this->updated_at;
+    }
+
+
+    /**
+     * @param null $updated_at
+     */
+    public function setUpdatedAt($updated_at): void {
+
+        $this->updated_at = $updated_at;
+    }
+
+
+    /**
+     * @return null
+     */
+    public function getDeletedAt() {
+
+        return $this->deleted_at;
+    }
+
+
+    /**
+     * @param null $deleted_at
+     */
+    public function setDeletedAt($deleted_at): void {
+
+        $this->deleted_at = $deleted_at;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getCarCondition(): string {
+
+        return $this->car_condition;
+    }
+
+
+    /**
+     * @param string $car_condition
+     */
+    public function setCarCondition(string $car_condition): void {
+
+        $this->car_condition = $car_condition;
+    }
 }
