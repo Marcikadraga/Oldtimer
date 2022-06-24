@@ -30,13 +30,13 @@ class CarTypeController extends BaseController {
         $this->checkPermission('admin');
 
         $cars = $this->carModel->getAllCars();
-        
+
         $data = [
-            'cars'   => $cars,
+            'carType'   => $cars,
 
         ];
 
-        $this->render('cars/index', $data);
+        $this->render('carType/index', $data);
     }
 
     public function delete() {

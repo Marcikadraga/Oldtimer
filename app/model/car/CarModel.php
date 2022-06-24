@@ -45,7 +45,7 @@ class CarModel extends BaseModel {
     public function getAllCars(): array {
 
         try {
-            $query = 'SELECT * FROM cars WHERE deleted_at IS NULL';
+            $query = 'SELECT * FROM carType WHERE deleted_at IS NULL';
 
             $statement = $this->pdo->prepare($query);
             $statement->execute();

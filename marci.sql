@@ -16,7 +16,7 @@ Date: 2022-06-01 12:57:12
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for cars
+-- Table structure for carType
 -- ----------------------------
 DROP TABLE IF EXISTS carTypes;
 CREATE TABLE `cars` (
@@ -32,7 +32,7 @@ CREATE TABLE `cars` (
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of cars
+-- Records of carType
 -- ----------------------------
 INSERT INTO carTypes VALUES ('8', 'Accusamus ea et quam', 'Nulla ipsa facilis ', '1234', '5678', '2022-05-20 14:42:27', null, '2022-05-20 16:44:27');
 INSERT INTO carTypes VALUES ('9', 'Mercedes-Benz', 'TTQP', '1999', '2011', '2022-05-20 21:15:33', null, '2022-05-22 13:20:21');

@@ -92,25 +92,6 @@ class CarType {
     }
 
 
-    /**
-     * @return string[]
-     * @deprecated ez nem jó megoldás a view táblázathoz
-     */
-    public function getFields(): array {
-
-        return [
-            'id',
-            'manufacturer',
-            'type',
-            'startOfProductionTime',
-            'endOfProductionTime',
-            'created_at',
-            'updated_at',
-            'deleted_at'
-        ];
-    }
-
-
     public function checkIsValidInsert(): bool {
 
         $this->errors = [];
