@@ -14,7 +14,7 @@ class Car {
     private $created_at          = null;
     private $updated_at          = null;
     private $deleted_at          = null;
-    
+
     private const TYPEOFFUEL = [
         0 => 'benzin',
         1 => 'dízel'

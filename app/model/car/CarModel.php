@@ -18,7 +18,7 @@ class CarModel extends BaseModel {
         try {
             $query = '
         
-        INSERT INTO cars(color, kilometers_traveled, year_of_manufacture, type_of_fuel, car_condition, deleted_at, updated_at, created_at)
+        INSERT INTO carTypes(color, kilometers_traveled, year_of_manufacture, type_of_fuel, car_condition, deleted_at, updated_at, created_at)
         VALUES(:color, :kilometers_traveled, :year_of_manufacture, :type_of_fuel, :car_condition, :deleted_at, :updated_at, :created_at)
         ';
 
@@ -48,7 +48,7 @@ class CarModel extends BaseModel {
         $result = [];
 
         try {
-            $query = 'SELECT * FROM cars WHERE deleted_at IS NULL';
+            $query = 'SELECT * FROM carTypes WHERE deleted_at IS NULL';
 
             $statement = $this->pdo->prepare($query);
             $statement->execute();

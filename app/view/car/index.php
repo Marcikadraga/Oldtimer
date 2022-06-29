@@ -18,9 +18,10 @@ include '../app/view/_header.php';
                 <th class = "text-wrap align-middle">Gyártás éve</th>
                 <th class = "text-wrap align-middle">Üzemanyag típusa</th>
                 <th class = "text-wrap align-middle">Állapota</th>
-                <th class = "text-wrap align-middle">Létrehozva</th>
-                <th class = "text-wrap align-middle">Frissítve</th>
-                <th class = "text-wrap align-middle">Törölve</th>
+
+<!--                <th class = "text-wrap align-middle">Létrehozva</th>-->
+<!--                <th class = "text-wrap align-middle">Frissítve</th>-->
+<!--                <th class = "text-wrap align-middle">Törölve</th>-->
 
 
             </tr>
@@ -50,15 +51,6 @@ include '../app/view/_header.php';
                         </td>
                         <td class = "text-wrap align-middle">
                             <?= $car->getIndexOfCondition() ?>
-                        </td>
-                        <td class = "text-wrap align-middle">
-                            <?= $car->getCreatedAt() ?>
-                        </td>
-                        <td class = "text-wrap align-middle">
-                            <?= $car->getUpdatedAt() ?>
-                        </td>
-                        <td class = "text-wrap align-middle">
-                            <?= $car->getDeletedAt() ?>
                         </td>
                     </tr>
                 <?php endforeach ?>

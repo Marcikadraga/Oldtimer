@@ -16,8 +16,8 @@
         </thead>
         <tbody>
         <?php
-        if (!empty($cars)) {
-            foreach ($cars as $car) {
+        if (!empty($carType)) {
+            foreach ($carType as $car) {
                 ?>
                 <tr class = "trValues">
                     <?php
@@ -109,6 +109,6 @@
     </div>
 
 
-    <script src = "/assets/js/pages/cars/index.js" type = "module"></script>
+    <script src = "/public/assets/js/pages/carTypes/index.js" type = "module"></script>
 <?php include '../app/view/_footer.php'; ?>
 

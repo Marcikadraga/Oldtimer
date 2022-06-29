@@ -117,9 +117,9 @@ class CarController extends BaseController {
 
         $cars = $carModel->getAllCars();
         $data = [
-            'cars' => $cars
+            'carTypes' => $cars
         ]; //lekérem az adott user adatait
 
-        $this->render('car/index', $data);
+        $this->render('carType/index', $data);
     }
 }

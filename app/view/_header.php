@@ -42,9 +42,9 @@
                             </a>
 
                             <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
-                                <a class = "nav-link" href = "/carController/insert">Autók beszúrása</a>
+                                <a class = "nav-link" href = "/carTypeController/insert">Autók beszúrása</a>
                                 <a class = "nav-link" href = "/userController">Felhasználók</a>
-                                <a class = "nav-link" href = "/carController">Autók</a>
+                                <a class = "nav-link" href = "/carTypeController">Autók</a>
                             </div>
                         <?php endif; ?>
                 </ul>

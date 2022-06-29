@@ -33,7 +33,6 @@ class CarTypeController extends BaseController {
 
         $data = [
             'carType'   => $cars,
-
         ];
 
         $this->render('carType/index', $data);
