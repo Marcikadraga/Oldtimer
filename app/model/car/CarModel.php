@@ -23,14 +23,14 @@ class CarModel extends BaseModel {
         ';
 
             $params = [
-                'color' => $car->getColor(),
-                'kilometers_traveled'=> $car->getKilometersTraveled(),
+                'color'               => $car->getColor(),
+                'kilometers_traveled' => $car->getKilometersTraveled(),
                 'year_of_manufacture' => $car->getYearOfManufacture(),
-                'type_of_fuel'=> $car->getTypeOfFuel(),
-                'car_condition'=>$car->getCondition(),
-                'deleted_at'=>$car->getDeletedAt(),
-                'updated_at'=>$car->getUpdatedAt(),
-                'created_at'=>$car->getCreatedAt()
+                'type_of_fuel'        => $car->getTypeOfFuel(),
+                'car_condition'       => $car->getCondition(),
+                'deleted_at'          => $car->getDeletedAt(),
+                'updated_at'          => $car->getUpdatedAt(),
+                'created_at'          => $car->getCreatedAt()
             ];
             $statement = $this->pdo->prepare($query);
             $statement->execute($params);
@@ -42,19 +42,29 @@ class CarModel extends BaseModel {
 
         return false;
     }
+
+
     public function getAllCars(): array {
+        $result = [];
 
         try {
-            $query = 'SELECT * FROM carType WHERE deleted_at IS NULL';
+            $query = 'SELECT * FROM cars WHERE deleted_at IS NULL';
 
             $statement = $this->pdo->prepare($query);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
+            $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($res)) {
+                foreach ($res as $row) {
+                    $result[] = new Car($row);
+                }
+            }
+
 
         } catch (Exception $exception) {
             die($exception->getMessage());
         }
+        return $result;
     }
 
 }

@@ -111,4 +111,15 @@ class CarController extends BaseController {
         }
 
     }
+
+    public function getAllCar(){
+        $carModel=new CarModel();
+
+        $cars = $carModel->getAllCars();
+        $data = [
+            'cars' => $cars
+        ]; //lekérem az adott user adatait
+
+        $this->render('car/index', $data);
+    }
 }

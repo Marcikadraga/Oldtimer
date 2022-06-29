@@ -27,6 +27,10 @@
                 <li class = "nav-item">
                     <a style = "margin-right: 20px" class = "nav-link" href = "/UserController/showUserProfile"> <i class = "fas fa-user-cog fa-lg"></i>Profil</a>
                 </li>
+                <li class = "nav-item">
+                    <a style = "margin-right: 20px" class = "nav-link" href = "/CarController/getAllCar"> <i class = "fas fa-car fa-lg"></i>Kocsik</a>
+                </li>
+
 
             </ul>
             <?php if ($isLoggedInUser): ?>
@@ -34,7 +38,7 @@
                     <li class = "nav-item dropdown">
                         <?php if ($userIsAdmin): ?>
                             <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
-                                Admin
+                                   <i class = "fas fa-cog fa-lg"></i>Admin
                             </a>
 
                             <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
@@ -45,6 +49,7 @@
                         <?php endif; ?>
                 </ul>
             <?php endif; ?>
+
 
 
             <ul class = "navbar-nav ml-auto mt-2 mt-lg-0">

@@ -4,6 +4,7 @@ namespace app\model\car;
 
 class Car {
 
+    private $id                  = '';
     private $type                = '';
     private $color               = '';
     private $kilometers_traveled = '';
@@ -13,46 +14,16 @@ class Car {
     private $created_at          = null;
     private $updated_at          = null;
     private $deleted_at          = null;
-
-
-    /**
-     * @return string
-     */
-    public function getCondition(): string {
-
-        return $this->condition;
-    }
-
-
-    /**
-     * @param string $condition
-     */
-    public function setCondition(string $condition): void {
-
-        $this->condition = $condition;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getTypeOfFuel(): string {
-
-        return $this->type_of_fuel;
-    }
-
-
-    /**
-     * @param string $type_of_fuel
-     */
-    public function setTypeOfFuel(string $type_of_fuel): void {
-
-        $this->type_of_fuel = $type_of_fuel;
-    }
-
-
-    private const TYPEOFFUEL = ['benzin', 'dízel'];
-    private const CONDITION  = ['leharcolt', 'megkímélt, megkímélt'];
+    
+    private const TYPEOFFUEL = [
+        0 => 'benzin',
+        1 => 'dízel'
+    ];
+    private const CONDITION  = [
+        0 => 'leharcolt',
+        1 => 'megkímélt',
+        2 => 'felújított'
+    ];
 
     protected $errors = [];
 
@@ -72,6 +43,40 @@ class Car {
                 }
             }
         }
+    }
+
+
+    public function getTypeOfFuelValueOfIndex(): string {
+
+        $typeOfFuel = $this->getTypeOfFuel();
+
+        return self::TYPEOFFUEL[$typeOfFuel];
+    }
+
+
+    public function getIndexOfCondition(): string {
+
+        $condition = $this->getCarCondition();
+
+        return self::CONDITION[$condition];
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getTypeOfFuel(): string {
+
+        return $this->type_of_fuel;
+    }
+
+
+    /**
+     * @param string $type_of_fuel
+     */
+    public function setTypeOfFuel(string $type_of_fuel): void {
+
+        $this->type_of_fuel = $type_of_fuel;
     }
 
 
@@ -216,5 +221,23 @@ class Car {
     public function setCarCondition(string $car_condition): void {
 
         $this->car_condition = $car_condition;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getId(): string {
+
+        return $this->id;
+    }
+
+
+    /**
+     * @param string $id
+     */
+    public function setId(string $id): void {
+
+        $this->id = $id;
     }
 }
