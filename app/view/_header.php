@@ -28,7 +28,7 @@
                     <a style = "margin-right: 20px" class = "nav-link" href = "/UserController/showUserProfile"> <i class = "fas fa-user-cog fa-lg"></i>Profil</a>
                 </li>
                 <li class = "nav-item">
-                    <a style = "margin-right: 20px" class = "nav-link" href = "/CarController/getAllCar"> <i class = "fas fa-car fa-lg"></i>Kocsik</a>
+                    <a style = "margin-right: 20px" class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Kocsik</a>
                 </li>
 
 

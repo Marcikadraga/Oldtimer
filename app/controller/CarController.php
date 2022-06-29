@@ -23,11 +23,11 @@ class CarController extends BaseController {
 
         if($auth->userIsAdmin()){
             $data=[
-                'users' =>$carModel->getAllCars()
+                'cars' =>$carModel->getAllCars()
             ];
         }
 
-        $this->render('carType/index', $data);
+        $this->render('car/index', $data ?? []);
     }
 
     public function insert(){
@@ -112,14 +112,14 @@ class CarController extends BaseController {
 
     }
 
-    public function getAllCar(){
-        $carModel=new CarModel();
-
-        $cars = $carModel->getAllCars();
-        $data = [
-            'carTypes' => $cars
-        ]; //lekérem az adott user adatait
-
-        $this->render('carType/index', $data);
-    }
+//    public function getAllCar(){
+//        $carModel=new CarModel();
+//
+//        $cars = $carModel->getAllCars();
+//        $data = [
+//            'cars' => $cars
+//        ]; //lekérem az adott user adatait
+//
+//        $this->render('car/index', $data);
+//    }
 }
