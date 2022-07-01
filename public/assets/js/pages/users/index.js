@@ -1,5 +1,7 @@
 import {hFetch} from "../../functions.js";
 
+
+
 const deleteUserButtons = document.querySelectorAll(".delete-user");
 deleteUserButtons.forEach(function (button) {
     button.addEventListener("click", function (event) {

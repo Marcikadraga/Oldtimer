@@ -97,10 +97,10 @@ class UserModel extends BaseModel {
 
             $statement = $this->pdo->prepare($query);
             $statement->execute($params);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (!empty($result)) {
-                return new User($result[0]);
+                return new User($result);
             }
         } catch (Exception $exception) {
             $this->errorHandling($exception, 'select');

@@ -42,9 +42,9 @@ class CarTypeController extends BaseController {
         $this->checkAjax();
         $this->checkPermission('admin');
 
-        //$carModel = new CarTypeModel();
-        //$result = $carModel->delete($_POST['carId']);
-        $result=$this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $carModel = new CarTypeModel();
+        $result = $carModel->delete($_POST['carId']);
+        //$result=$this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ($result) {
             echo json_encode("success");
             return;
@@ -97,11 +97,10 @@ class CarTypeController extends BaseController {
     }
 
     public function getCar() {
-        //$this->checkAjax();
         $this->checkPermission('admin');
 
        $carModel = new CarTypeModel();
-//        $result = $carModel->getCarById($_POST['carId']);
+
         $result=$carModel->getCarById($this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($result) {
             echo json_encode($result);

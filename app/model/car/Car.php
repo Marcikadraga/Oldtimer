@@ -2,6 +2,9 @@
 
 namespace app\model\car;
 
+use app\model\user\User;
+use app\model\user\UserModel;
+
 class Car {
 
     private $id                  = '';
@@ -11,6 +14,7 @@ class Car {
     private $year_of_manufacture = '';
     private $car_condition       = '';
     private $type_of_fuel        = '';
+    private $id_of_owner         = '';
     private $created_at          = null;
     private $updated_at          = null;
     private $deleted_at          = null;
@@ -43,6 +47,24 @@ class Car {
                 }
             }
         }
+    }
+
+
+    public function getNameOfOwnerById() {
+
+        $userModel=new UserModel();
+
+        return $userModel->getById($this->getIdOfOwner())?->getUsername();
+
+//        $userModel = new UserModel();
+//
+//        $user = $userModel->getById($this->getIdOfOwner());
+//
+//        if (empty($user)) {
+//            return '';
+//        }
+//        return $user->getUsername();
+
     }
 
 
@@ -239,5 +261,23 @@ class Car {
     public function setId(string $id): void {
 
         $this->id = $id;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIdOfOwner(): string {
+
+        return $this->id_of_owner;
+    }
+
+
+    /**
+     * @param string $id_of_owner
+     */
+    public function setIdOfOwner(string $id_of_owner): void {
+
+        $this->id_of_owner = $id_of_owner;
     }
 }
