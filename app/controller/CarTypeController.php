@@ -75,7 +75,7 @@ class CarTypeController extends BaseController {
             $car->setManufacturer($this->request->getPost('manufacturer', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setType($this->request->getPost('type', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setStartOfProductionTime($this->request->getPost('startOfProduction', FILTER_SANITIZE_SPECIAL_CHARS));
-            $car->setStartOfProductionTime($this->request->getPost('endOfProduction', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $car->setEndOfProductionTime($this->request->getPost('endOfProduction', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
 
 

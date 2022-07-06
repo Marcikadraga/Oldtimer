@@ -120,8 +120,9 @@ class CarController extends BaseController {
             throw new Exception('Hiba! A car azonosítója nem elérhető.');
         }
 
-        $usermodel = new UserModel();
-        $result = $usermodel->delete($carId);
+
+        $carmodel= new CarModel();
+        $result = $carmodel->delete($carId);
 
         if ($result) {
             echo json_encode("success");
@@ -129,5 +130,63 @@ class CarController extends BaseController {
         }
 
         echo json_encode("error");
+    }
+
+    public function getCar() {
+        $this->checkPermission('admin');
+
+        $carModel = new CarModel();
+
+        $result=$carModel->getCarById($this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        if ($result) {
+            echo json_encode($result);
+            return;
+        }
+
+        echo json_encode("error");
+    }
+    public function update() {
+        $this->checkAjax();
+        $this->checkPermission('admin');
+
+        try {
+
+
+            // $this->request = $this->request;
+            $id = $this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if (empty($id)) {
+                throw new Exception('Nincs id');
+            }
+
+            $carmodel = new CarModel();
+            $car = $carmodel->getById($id);
+            if (empty($car)) {
+                throw new Exception('Nem létezik ilyen autó');
+            }
+
+            $car->setType($this->request->getPost('type', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $car->setColor($this->request->getPost('color', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $car->setKilometersTraveled($this->request->getPost('kilometers-traveled', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $car->setYearOfManufacture($this->request->getPost('year-of-manufacture', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $car->setTypeOfFuel($this->request->getPost('type-of-fuel', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $car->setCarCondition($this->request->getPost('car-condition', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
+
+
+
+//            if (!$car->checkIsValidSave()) {
+//                throw new Exception($car->getErrorsAsString());
+//            }
+            if (!$carmodel->update($car)) {
+                throw new Exception('Hiba a mentés során');
+            }
+            echo json_encode('success');
+
+        } catch (\Throwable $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            echo json_encode($exception->getMessage(), JSON_UNESCAPED_UNICODE);
+        }
+        return true;
     }
 }

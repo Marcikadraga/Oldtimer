@@ -18,7 +18,8 @@ include '../app/view/_header.php';
     <thead class = "thead-dark">
 <tr>
     <th class = "text-wrap align-middle">ID</th>
-    <th class = "text-wrap align-middle">Color</th>
+    <th class = "text-wrap align-middle">Típus</th>
+    <th class = "text-wrap align-middle">Szín</th>
     <th class = "text-wrap align-middle">Megtett KM</th>
     <th class = "text-wrap align-middle">Gyártás éve</th>
     <th class = "text-wrap align-middle">Üzemanyag típusa</th>
@@ -48,6 +49,9 @@ include '../app/view/_header.php';
             <tr>
                 <td class = "text-wrap align-middle" data-id = "<?= $car->getId() ?>">
                     <?= $car->getId() ?>
+                </td>
+                <td class = "text-wrap align-middle" data-id = "<?= $car->getType()?>">
+                    <?= $car->getType()?>
                 </td>
                 <td class = "text-wrap align-middle">
                     <?= $car->getColor() ?>
@@ -99,6 +103,77 @@ include '../app/view/_header.php';
             </tr>
         <?php endforeach ?>
     <?php endif ?>
+
+    <div class = "modal fade" id = "exampleModal" tabindex = "-1" aria-labelledby = "exampleModalLabel" aria-hidden = "true">
+        <div class = "modal-dialog">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                    <h5 class = "modal-title" id = "exampleModalLabel">New message</h5>
+                    <button type = "button" class = "close" data-dismiss = "modal" aria-label = "Close">
+                        <span aria-hidden = "true">&times;</span>
+                    </button>
+                </div>
+                <div class = "modal-body">
+                    <form method = "POST">
+                        <div class = "form-group">
+                            <label for = "edit-color" class = "col-form-label">ID</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-car-id"
+                            >
+                            <label for = "edit-color" class = "col-form-label">Típus</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-type"
+                            >
+                            <label for = "edit-color" class = "col-form-label">Szín</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-color"
+                            >
+                            <label for = "edit-color" class = "col-form-label">Megtett KM</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-kilometers-traveled"
+                            >
+                            <label for = "edit-color" class = "col-form-label">Gyártás éve</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-year-of-manufacture"
+                            >
+                            <label for = "edit-color" class = "col-form-label">Üzemanyag típusa</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-type-of-fuel"
+                            >
+                            <label for = "edit-color" class = "col-form-label">Állapota</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-car-condition"
+                            >
+
+
+
+
+                    </form>
+                </div>
+                <div class = "modal-footer">
+                    <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
+                    <button type = "button" class = "btn btn-primary" id = "save-edited-data">Mentés</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     </tbody>
     </table>
     </div>

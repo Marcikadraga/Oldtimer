@@ -31,6 +31,15 @@ class Car {
 
     protected $errors = [];
 
+//    public function checkIsValidSave(): bool {
+//
+//        if (empty($this->id)) {
+//            return $this->checkIsValidInsert();
+//        } else {
+//            return $this->checkIsValidUpdate();
+//        }
+//    }
+
 
     public function __construct(?array $data = null) {
 
