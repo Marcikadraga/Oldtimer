@@ -23,6 +23,7 @@ class CarController extends BaseController {
         $car = new Car();
 
         $data = [
+            'conditions'     => $carModel->getAllCondition(),
             'cars'           => $carModel->getAllCars(),
             'userIsAdmin'    => $auth->userIsAdmin(),
             'isLoggedInUser' => $auth->isLoggedInUser(),
@@ -31,7 +32,7 @@ class CarController extends BaseController {
             'carId'          => $car->getId(),
         ];
 
-        $this->render('car/index', $data ?? []);
+        $this->render('Car/index', $data ?? []);
     }
 
 
@@ -120,8 +121,7 @@ class CarController extends BaseController {
             throw new Exception('Hiba! A car azonosítója nem elérhető.');
         }
 
-
-        $carmodel= new CarModel();
+        $carmodel = new CarModel();
         $result = $carmodel->delete($carId);
 
         if ($result) {
@@ -132,12 +132,14 @@ class CarController extends BaseController {
         echo json_encode("error");
     }
 
+
     public function getCar() {
+
         $this->checkPermission('admin');
 
         $carModel = new CarModel();
 
-        $result=$carModel->getCarById($this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $result = $carModel->getCarById($this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         if ($result) {
             echo json_encode($result);
             return;
@@ -145,7 +147,10 @@ class CarController extends BaseController {
 
         echo json_encode("error");
     }
+
+
     public function update() {
+
         $this->checkAjax();
         $this->checkPermission('admin');
 
@@ -171,12 +176,9 @@ class CarController extends BaseController {
             $car->setTypeOfFuel($this->request->getPost('type-of-fuel', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setCarCondition($this->request->getPost('car-condition', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
-
-
-
-//            if (!$car->checkIsValidSave()) {
-//                throw new Exception($car->getErrorsAsString());
-//            }
+            //            if (!$car->checkIsValidSave()) {
+            //                throw new Exception($car->getErrorsAsString());
+            //            }
             if (!$carmodel->update($car)) {
                 throw new Exception('Hiba a mentés során');
             }

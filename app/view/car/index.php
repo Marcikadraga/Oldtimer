@@ -9,6 +9,7 @@ include '../app/view/_header.php';
 /** @var bool $userIsAdmin True, ha a belépett tag admin */
 /** @var bool $isLoggedInUser True, ha van belépett user */
 /** @var Authenticator $userId  */
+/** @var array $conditions */
 
 
 ?>
@@ -152,12 +153,7 @@ include '../app/view/_header.php';
                                     class = "form-control"
                                     id = "edit-type-of-fuel"
                             >
-                            <label for = "edit-color" class = "col-form-label">Állapota</label><br>
-                            <input
-                                    type = "text"
-                                    class = "form-control"
-                                    id = "edit-car-condition"
-                            >
+
 
 
 

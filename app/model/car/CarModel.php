@@ -96,6 +96,7 @@ class CarModel extends BaseModel {
         return false;
     }
 
+
     public function getCarById($carId) {
 
         try {
@@ -164,6 +165,20 @@ class CarModel extends BaseModel {
         } catch (Exception $exception) {
             die($exception->getMessage());
         }
+    }
+
+
+    public function getAllCondition(): array {
+
+        try {
+            $query = 'SELECT car_condition FROM cars';
+            $statement = $this->pdo->prepare($query);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $exception) {
+            die($exception->getMessage());
+        }
+
     }
 
 }
