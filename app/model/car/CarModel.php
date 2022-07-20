@@ -168,17 +168,17 @@ class CarModel extends BaseModel {
     }
 
 
-    public function getAllCondition(): array {
-
-        try {
-            $query = 'SELECT car_condition FROM cars';
-            $statement = $this->pdo->prepare($query);
-            $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $exception) {
-            die($exception->getMessage());
-        }
-
-    }
+//    public function getAllCondition(): array {
+//
+//        try {
+//            $query = 'SELECT car_condition FROM cars';
+//            $statement = $this->pdo->prepare($query);
+//            $statement->execute();
+//            return $statement->fetchAll(PDO::FETCH_ASSOC);
+//        } catch (Exception $exception) {
+//            die($exception->getMessage());
+//        }
+//
+//    }
 
 }

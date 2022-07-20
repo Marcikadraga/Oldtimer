@@ -27,9 +27,19 @@
                 <li class = "nav-item">
                     <a style = "margin-right: 20px" class = "nav-link" href = "/UserController/showUserProfile"> <i class = "fas fa-user-cog fa-lg"></i>Profil</a>
                 </li>
-                <li class = "nav-item">
-                    <a style = "margin-right: 20px" class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Kocsik</a>
-                </li>
+
+                <ul class = "navbar-nav">
+                    <li class = "nav-item dropdown">
+                        <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
+                            <i class = "fas fa-cog fa-lg"></i>Autók
+                        </a>
+                        <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
+                            <a  class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Autóim</a>
+                            <a  class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Autó hozzáadása</a>
+                            <a  class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Összes Autó</a>
+                        </div>
+                    </li>
+                </ul>
 
 
             </ul>
@@ -38,7 +48,7 @@
                     <li class = "nav-item dropdown">
                         <?php if ($userIsAdmin): ?>
                             <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
-                                   <i class = "fas fa-cog fa-lg"></i>Admin
+                                <i class = "fas fa-cog fa-lg"></i>Admin
                             </a>
 
                             <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
@@ -51,7 +61,6 @@
             <?php endif; ?>
 
 
-
             <ul class = "navbar-nav ml-auto mt-2 mt-lg-0">
                 <?php if (!$isLoggedInUser): ?>
                     <li class = "nav-item">
@@ -61,11 +70,13 @@
 
 
                     <?php if (!$userIsAdmin): ?>
-                        <li class = "nav-item"><a href = "/UserController/showUserProfile" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
+                        <li class = "nav-item"><a href = "/UserController/showUserProfile" class = "nav-link" = "">
+                            Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
                     <?php endif; ?>
 
                     <?php if ($userIsAdmin): ?>
-                        <li class = "nav-item"><a href = "/UserController/showUserProfile" class = "nav-link" = "">Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
+                        <li class = "nav-item"><a href = "/UserController/showUserProfile" class = "nav-link" = "">
+                            Szervusz <?= !empty($greetingsName) ? $greetingsName . "! " : ''; ?><?= !empty($loginTime) ? $loginTime . "! " : 'sry'; ?></a></li>
                     <?php endif; ?>
 
 

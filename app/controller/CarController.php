@@ -23,13 +23,13 @@ class CarController extends BaseController {
         $car = new Car();
 
         $data = [
-            'conditions'     => $carModel->getAllCondition(),
             'cars'           => $carModel->getAllCars(),
             'userIsAdmin'    => $auth->userIsAdmin(),
             'isLoggedInUser' => $auth->isLoggedInUser(),
             'getIdOfOwner'   => $car->getIdOfOwner(),
             'userId'         => $auth->getUserId(),
             'carId'          => $car->getId(),
+            'cardCondition'  => $car->getCarCondition()
         ];
 
         $this->render('Car/index', $data ?? []);
@@ -99,7 +99,7 @@ class CarController extends BaseController {
 
             //        var_dump($data);
 
-            $this->render('carcontroller/index', $data);
+            $this->render('carTypeController/index', $data);
 
         } catch (Exception $exception) {
             // nem végleges hibakezelés!!!
@@ -179,6 +179,7 @@ class CarController extends BaseController {
             //            if (!$car->checkIsValidSave()) {
             //                throw new Exception($car->getErrorsAsString());
             //            }
+
             if (!$carmodel->update($car)) {
                 throw new Exception('Hiba a mentés során');
             }

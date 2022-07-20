@@ -146,23 +146,25 @@ include '../app/view/_header.php';
                                     type = "text"
                                     class = "form-control"
                                     id = "edit-year-of-manufacture"
+
                             >
                             <label for = "edit-color" class = "col-form-label">Üzemanyag típusa</label><br>
-                            <input
-                                    type = "text"
-                                    class = "form-control"
-                                    id = "edit-type-of-fuel"
-                            >
+                            <select class="form-control" name="cars" id="edit-type-of-fuel">
+                                <option value="0">benzin</option>
+                                <option value="1">dízel</option>
+                            </select>
 
-
-
-
-
+                            <label for = "edit-color" class = "col-form-label">Állapot</label><br>
+                            <select class="form-control" name="cars" id="edit-car-condition">
+                                <option value="0" >leharcolt</option>
+                                <option value="1">megkímélt</option>
+                                <option value="2">felújított</option>
+                            </select>
                     </form>
                 </div>
                 <div class = "modal-footer">
                     <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
-                    <button type = "button" class = "btn btn-primary" id = "save-edited-data">Mentés</button>
+                    <button type = "button" class = "btn btn-primary" id = "save-edited-data2">Mentés</button>
                 </div>
             </div>
         </div>

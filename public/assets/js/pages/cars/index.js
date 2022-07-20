@@ -53,7 +53,7 @@ updateCarButtons.forEach(function (button) {
     });
 });
 
-const saveEditDataButton = document.querySelector("#save-edited-data");
+const saveEditDataButton = document.querySelector("#save-edited-data2");
 saveEditDataButton.addEventListener("click", function (event) {
 
     const carId = document.querySelector("#edit-car-id").value;
@@ -86,6 +86,7 @@ saveEditDataButton.addEventListener("click", function (event) {
             console.error('Error:', error);
         });
 });
+
 
 
 
