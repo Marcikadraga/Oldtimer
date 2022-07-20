@@ -22,21 +22,21 @@
         <div class = "collapse navbar-collapse" id = "navbar-toggler-region">
             <ul class = "navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class = "nav-item">
-                    <a style = "margin-right: 20px" class = "nav-link" href = "/"><i class = "fa fa-home fa-lg"></i>Főoldal</a>
+                    <a style = "margin-right: 20px" class = "nav-link" href = "/"><i style="margin-right: 5px" class = "fa fa-home fa-lg"></i>Főoldal</a>
                 </li>
                 <li class = "nav-item">
-                    <a style = "margin-right: 20px" class = "nav-link" href = "/UserController/showUserProfile"> <i class = "fas fa-user-cog fa-lg"></i>Profil</a>
+                    <a style = "margin-right: 20px" class = "nav-link" href = "/UserController/showUserProfile"> <i style="margin-right: 5px" class = "fas fa-user-cog fa-lg"></i>Profil</a>
                 </li>
 
                 <ul class = "navbar-nav">
                     <li class = "nav-item dropdown">
                         <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
-                            <i class = "fas fa-cog fa-lg"></i>Autók
+                            <i style="margin-right: 5px" class = "fas fa-car fa-lg"></i>Autók
                         </a>
                         <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">
-                            <a  class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Autóim</a>
-                            <a  class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Autó hozzáadása</a>
-                            <a  class = "nav-link" href = "/CarController"> <i class = "fas fa-car fa-lg"></i>Összes Autó</a>
+                            <a class = "nav-link" href = "/CarController"> <i style="margin-right: 5px" class = "fas fa-car-side fa-lg"></i>Autóim</a>
+                            <a style = "width:200px " class = "nav-link" href = "/carController/insert"> <i style="margin-right: 5px" class = "fas fa-ambulance fa-lg"></i>Autó hozzáadása</a>
+                            <a class = "nav-link" href = "/CarController"> <i  style="margin-right: 5px" class = "fas fa-car fa-lg"></i>Összes Autó</a>
                         </div>
                     </li>
                 </ul>
@@ -48,7 +48,7 @@
                     <li class = "nav-item dropdown">
                         <?php if ($userIsAdmin): ?>
                             <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdownMenuLink" role = "button" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
-                                <i class = "fas fa-cog fa-lg"></i>Admin
+                                <i style="margin-right: 5px" class = "fas fa-cog fa-lg"></i>Admin
                             </a>
 
                             <div class = "dropdown-menu" aria-labelledby = "navbarDropdownMenuLink">

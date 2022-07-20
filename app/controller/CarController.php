@@ -99,7 +99,7 @@ class CarController extends BaseController {
 
             //        var_dump($data);
 
-            $this->render('carTypeController/index', $data);
+            $this->render('newCarInsert/index', $data);
 
         } catch (Exception $exception) {
             // nem végleges hibakezelés!!!

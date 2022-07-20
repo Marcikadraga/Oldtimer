@@ -14,36 +14,6 @@ use app\model\BaseModel;
 
 class CarModel extends BaseModel {
 
-    public function insert(Car $car): ?int {
-
-        try {
-            $query = '
-        
-        INSERT INTO cars(color, kilometers_traveled, year_of_manufacture, type_of_fuel, car_condition,id_of_owner, deleted_at, updated_at, created_at)
-        VALUES(:color, :kilometers_traveled, :year_of_manufacture, :type_of_fuel, :car_condition,:id_of_owner, :deleted_at, :updated_at, :created_at)
-        ';
-
-            $params = [
-                'color'               => $car->getColor(),
-                'kilometers_traveled' => $car->getKilometersTraveled(),
-                'year_of_manufacture' => $car->getYearOfManufacture(),
-                'type_of_fuel'        => $car->getTypeOfFuel(),
-                'car_condition'       => $car->getCarCondition(),
-                'deleted_at'          => $car->getDeletedAt(),
-                'updated_at'          => $car->getUpdatedAt(),
-                'created_at'          => $car->getCreatedAt(),
-                'id_of_owner'         => $car->getIdOfOwner(),
-            ];
-            $statement = $this->pdo->prepare($query);
-            $statement->execute($params);
-            return $this->pdo->lastInsertId();
-
-        } catch (Exception $exception) {
-            $this->errorHandling($exception, 'select');
-        }
-
-        return false;
-    }
 
 
     public function getAllCars(): array {
@@ -68,7 +38,6 @@ class CarModel extends BaseModel {
         }
         return $result;
     }
-
 
     public function delete($car_id, $softDelete = true): bool {
 
@@ -96,7 +65,6 @@ class CarModel extends BaseModel {
         return false;
     }
 
-
     public function getCarById($carId) {
 
         try {
@@ -112,7 +80,6 @@ class CarModel extends BaseModel {
             throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
     }
-
 
     public function getById($id): ?Car {
 
@@ -133,7 +100,6 @@ class CarModel extends BaseModel {
 
         return null;
     }
-
 
     public function update(Car $car): bool {
 
@@ -167,18 +133,35 @@ class CarModel extends BaseModel {
         }
     }
 
+    public function insert(Car $car): bool {
 
-//    public function getAllCondition(): array {
-//
-//        try {
-//            $query = 'SELECT car_condition FROM cars';
-//            $statement = $this->pdo->prepare($query);
-//            $statement->execute();
-//            return $statement->fetchAll(PDO::FETCH_ASSOC);
-//        } catch (Exception $exception) {
-//            die($exception->getMessage());
-//        }
-//
-//    }
+        try {
+            $query = '
+            INSERT INTO cars( type, color, kilometers_traveled, year_of_manufacture, type_of_fuel, car_condition, deleted_at, updated_at, created_at, id_of_owner) 
+            VALUES( :type, :color, :kilometers_traveled, :year_of_manufacture, :type_of_fuel, :car_condition, :deleted_at, :updated_at, :created_at, :id_of_owner)
+            ';
+            $params = [
+                'type'                => $car->getType(),
+                'color'               => $car->getColor(),
+                'kilometers_traveled' => $car->getKilometersTraveled(),
+                'year_of_manufacture' => $car->getYearOfManufacture(),
+                'type_of_fuel'        => $car->getTypeOfFuel(),
+                'car_condition'       => $car->getCarCondition(),
+                'created_at'          => $car->getCreatedAt(),
+                'updated_at'          => $car->getUpdatedAt(),
+                'deleted_at'          => $car->getDeletedAt(),
+                'id_of_owner'         => $car->getIdOfOwner()
+            ];
+            $statement = $this->pdo->prepare($query);
+            $statement->execute($params);
+            return $this->pdo->lastInsertId();
+
+        } catch (Exception $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
+        }
+
+    }
 
 }
