@@ -1,3 +1,12 @@
+<style>
+    body{
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("/images/car4.png");
+        color: orange !important;
+        background-position: center;
+    }
+</style>
 <?php include '../app/view/_header.php' ?>
 
 <div class = "container container col-sm-3 col-sm">
@@ -18,88 +27,71 @@
                     </div>
                 <?php endif; ?>
                 <div class = "form-group">
-                    <label for = "type" class = "input-required">Type</label>
+                    <label for = "type" class = "input-required">Típus</label>
                     <input type = "text"
                            class = "form-control <?= !isset($errors) ? '' : (!empty($errors['manufacturer']) ? 'is-invalid' : 'is-valid'); ?>"
                            id = "type"
                            name = "type"
-                           value = "<?= !empty($car) ? $car->getType : ''; ?>"
+                           value = "<?= !empty($car) ? $car->getType() : ''; ?>"
                            minlength = "3"
                     >
                     <div class = "invalid-feedback"><?= $errors['type'] ?? ''; ?></div>
                 </div>
 
                 <div class = "form-group">
-                    <label for = "color" class = "input-required">Color</label>
+                    <label for = "color" class = "input-required">Szín</label>
                     <input type = "text"
                            class = "form-control <?= !isset($errors) ? '' : (!empty($errors['manufacturer']) ? 'is-invalid' : 'is-valid'); ?>"
                            id = "color"
                            name = "color"
-                           value = "<?= !empty($car) ? $car->getColor : ''; ?>"
+                           value = "<?= (!empty($car) ? $car->getColor() : ''); ?>"
                            minlength = "3"
                     >
                     <div class = "invalid-feedback"><?= $errors['color'] ?? ''; ?></div>
                 </div>
 
                 <div class = "form-group">
-                    <label for = "kilometers_traveled" class = "input-required">kilometers_traveled</label>
+                    <label for = "kilometers_traveled" class = "input-required">Megtett KM</label>
                     <input type = "text"
                            class = "form-control <?= !isset($errors) ? '' : (!empty($errors['kilometers_traveled']) ? 'is-invalid' : 'is-valid'); ?>"
                            id = "kilometers_traveled"
                            name = "kilometers_traveled"
-                           value = "<?= !empty($car) ? $car->getKilometersTraveled : ''; ?>"
+                           value = "<?= !empty($car) ? $car->getKilometersTraveled() : ''; ?>"
                            minlength = "3"
                     >
                     <div class = "invalid-feedback"><?= $errors['kilometers_traveled'] ?? ''; ?></div>
                 </div>
 
                 <div class = "form-group">
-                    <label for = "year_of_manufacture" class = "input-required">year_of_manufacture</label>
+                    <label for = "year_of_manufacture" class = "input-required">Gyártás éve</label>
                     <input type = "text"
                            class = "form-control <?= !isset($errors) ? '' : (!empty($errors['year_of_manufacture']) ? 'is-invalid' : 'is-valid'); ?>"
                            id = "year_of_manufacture"
                            name = "year_of_manufacture"
-                           value = "<?= !empty($car) ? $car->getYearOfManufacture : ''; ?>"
+                           value = "<?= !empty($car) ? $car->getYearOfManufacture() : ''; ?>"
                            minlength = "3"
                     >
                     <div class = "invalid-feedback"><?= $errors['year_of_manufacture'] ?? ''; ?></div>
                 </div>
 
-                <div class = "form-group">
-                    <label for = "type_of_fuel" class = "input-required">type_of_fuel</label>
-                    <input type = "text"
-                           class = "form-control <?= !isset($errors) ? '' : (!empty($errors['type_of_fuel']) ? 'is-invalid' : 'is-valid'); ?>"
-                           id = "type_of_fuel"
-                           name = "type_of_fuel"
-                           value = "<?= !empty($car) ? $car->getTypeOfFuel : ''; ?>"
-                           minlength = "3"
-                    >
-                    <div class = "invalid-feedback"><?= $errors['type_of_fuel'] ?? ''; ?></div>
+                <label for = "edit-color" class = "col-form-label input-required"   >Üzemanyag típusa</label><br>
+                <select class="form-control" name="type_of_fuel" id="type-of-fuel" >
+                    <option name="type_of_fuel" value="null">válasszon</option>
+                    <option name="type_of_fuel" value="0">benzin</option>
+                    <option name="type_of_fuel" value="1">dízel</option>
+                </select>
+                <br>
+
+                <div class = "form-group" >
+                    <label for = "car_condition" class = "input-required">Autó állapota</label>
+                    <select class="form-control" name="car_condition" id = "car_condition">
+                        <option value="null">Válasszon</option>
+                        <option value="0">leharcolt</option>
+                        <option value="1">megkímélt</option>
+                        <option value="2">felújított</option>
+                    </select>
                 </div>
 
-                <div class = "form-group">
-                    <label for = "car_condition" class = "input-required">car_condition</label>
-                    <input type = "text"
-                           class = "form-control <?= !isset($errors) ? '' : (!empty($errors['car_condition']) ? 'is-invalid' : 'is-valid'); ?>"
-                           id = "car_condition"
-                           name = "car_condition"
-                           value = "<?= !empty($car) ? $car->getCarCondition : ''; ?>"
-                           minlength = "3"
-                    >
-                    <div class = "invalid-feedback"><?= $errors['car_condition'] ?? ''; ?></div>
-                </div>
-
-                <div class = "form-group">
-                    <label for = "id_of_owner" class = "input-required">id_of_owner</label>
-                    <input type = "text"
-                           class = "form-control <?= !isset($errors) ? '' : (!empty($errors['car_condition']) ? 'is-invalid' : 'is-valid'); ?>"
-                           id = "id_of_owner"
-                           name = "id_of_ownervvv"
-                           value = "<?= !empty($car) ? $car->getIdOfOwner : ''; ?>"
-                           minlength = "3"
-                    >
-                    <div class = "invalid-feedback"><?= $errors['id_of_owner'] ?? ''; ?></div>
-                </div>
 
                 <div class = "card-footer ">
                     <div class = "row ">

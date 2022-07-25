@@ -193,11 +193,14 @@ class Car {
 
 
     /**
-     * @param null $created_at
+     * @param \DateTime|null $created_at
      */
     public function setCreatedAt($created_at): void {
-
-        $this->created_at = $created_at;
+        if ($created_at instanceof \DateTime) {
+            $this->created_at = $created_at->format('Y-m-d H:i:s');
+        } else {
+            $this->created_at = null;
+        }
     }
 
 
@@ -211,7 +214,7 @@ class Car {
 
 
     /**
-     * @param null $updated_at
+     * @param string $updated_at
      */
     public function setUpdatedAt($updated_at): void {
 
@@ -229,7 +232,7 @@ class Car {
 
 
     /**
-     * @param null $deleted_at
+     * @param string $deleted_at
      */
     public function setDeletedAt($deleted_at): void {
 
