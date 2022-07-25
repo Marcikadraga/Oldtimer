@@ -2,11 +2,21 @@
 
 namespace app\model\car;
 
-use app\model\user\User;
 use app\model\user\UserModel;
+use DateTime;
 
 class Car {
 
+    private const TYPEOFFUEL = [
+        0 => 'benzin',
+        1 => 'dízel'
+    ];
+    private const CONDITION  = [
+        0 => 'leharcolt',
+        1 => 'megkímélt',
+        2 => 'felújított'
+    ];
+    protected $errors = [];
     private $id                  = '';
     private $type                = '';
     private $color               = '';
@@ -19,26 +29,14 @@ class Car {
     private $updated_at          = null;
     private $deleted_at          = null;
 
-    private const TYPEOFFUEL = [
-        0 => 'benzin',
-        1 => 'dízel'
-    ];
-    private const CONDITION  = [
-        0 => 'leharcolt',
-        1 => 'megkímélt',
-        2 => 'felújított'
-    ];
-
-    protected $errors = [];
-
-//    public function checkIsValidSave(): bool {
-//
-//        if (empty($this->id)) {
-//            return $this->checkIsValidInsert();
-//        } else {
-//            return $this->checkIsValidUpdate();
-//        }
-//    }
+    //    public function checkIsValidSave(): bool {
+    //
+    //        if (empty($this->id)) {
+    //            return $this->checkIsValidInsert();
+    //        } else {
+    //            return $this->checkIsValidUpdate();
+    //        }
+    //    }
 
 
     public function __construct(?array $data = null) {
@@ -61,19 +59,37 @@ class Car {
 
     public function getNameOfOwnerById() {
 
-        $userModel=new UserModel();
+        $userModel = new UserModel();
 
         return $userModel->getById($this->getIdOfOwner())?->getUsername();
 
-//        $userModel = new UserModel();
-//
-//        $user = $userModel->getById($this->getIdOfOwner());
-//
-//        if (empty($user)) {
-//            return '';
-//        }
-//        return $user->getUsername();
+        //        $userModel = new UserModel();
+        //
+        //        $user = $userModel->getById($this->getIdOfOwner());
+        //
+        //        if (empty($user)) {
+        //            return '';
+        //        }
+        //        return $user->getUsername();
 
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIdOfOwner(): string {
+
+        return $this->id_of_owner;
+    }
+
+
+    /**
+     * @param string $id_of_owner
+     */
+    public function setIdOfOwner(string $id_of_owner): void {
+
+        $this->id_of_owner = $id_of_owner;
     }
 
 
@@ -82,6 +98,24 @@ class Car {
         $typeOfFuel = $this->getTypeOfFuel();
 
         return self::TYPEOFFUEL[$typeOfFuel];
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getTypeOfFuel(): int {
+
+        return (int)$this->type_of_fuel;
+    }
+
+
+    /**
+     * @param string $type_of_fuel
+     */
+    public function setTypeOfFuel(string $type_of_fuel): void {
+
+        $this->type_of_fuel = $type_of_fuel;
     }
 
 
@@ -96,18 +130,18 @@ class Car {
     /**
      * @return string
      */
-    public function getTypeOfFuel(): string {
+    public function getCarCondition(): string {
 
-        return $this->type_of_fuel;
+        return $this->car_condition;
     }
 
 
     /**
-     * @param string $type_of_fuel
+     * @param string $car_condition
      */
-    public function setTypeOfFuel(string $type_of_fuel): void {
+    public function setCarCondition(string $car_condition): void {
 
-        $this->type_of_fuel = $type_of_fuel;
+        $this->car_condition = $car_condition;
     }
 
 
@@ -193,10 +227,11 @@ class Car {
 
 
     /**
-     * @param \DateTime|null $created_at
+     * @param DateTime|null $created_at
      */
     public function setCreatedAt($created_at): void {
-        if ($created_at instanceof \DateTime) {
+
+        if ($created_at instanceof DateTime) {
             $this->created_at = $created_at->format('Y-m-d H:i:s');
         } else {
             $this->created_at = null;
@@ -243,24 +278,6 @@ class Car {
     /**
      * @return string
      */
-    public function getCarCondition(): string {
-
-        return $this->car_condition;
-    }
-
-
-    /**
-     * @param string $car_condition
-     */
-    public function setCarCondition(string $car_condition): void {
-
-        $this->car_condition = $car_condition;
-    }
-
-
-    /**
-     * @return string
-     */
     public function getId(): string {
 
         return $this->id;
@@ -273,23 +290,5 @@ class Car {
     public function setId(string $id): void {
 
         $this->id = $id;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getIdOfOwner(): string {
-
-        return $this->id_of_owner;
-    }
-
-
-    /**
-     * @param string $id_of_owner
-     */
-    public function setIdOfOwner(string $id_of_owner): void {
-
-        $this->id_of_owner = $id_of_owner;
     }
 }

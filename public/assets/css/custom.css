@@ -1,9 +1,33 @@
-#main-content {
-    margin: 65px 0 100px 0;
-}
-
 .input-required:after {
     content: ' *';
     color: red;
     font-weight: bold;
 }
+#main-content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+
+}
+
+.car-container{
+    color:green
+}
+.green{
+    display: flex;
+    height: 100% !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(/images/car8.png);
+    color: green !important;
+    background-position: center;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+}
+.navbar{
+    height: 60px;
+}
+backgound
+

@@ -3,16 +3,12 @@
 namespace app\controller;
 
 use app\core\logger\SystemLog;
-use app\core\request\Request;
 use app\model\car\Car;
 use app\model\car\CarModel;
-use app\model\carType\CarType;
-use app\model\carType\CarTypeModel;
 use app\model\user\Authenticator;
-use app\model\user\User;
-use app\model\user\UserModel;
-use Exception;
 use DateTime;
+use Exception;
+use Throwable;
 
 class CarController extends BaseController {
 
@@ -45,18 +41,16 @@ class CarController extends BaseController {
         $errorMsg = '';
         $successMsg = '';
         $car = new Car();
-        $user= new Authenticator();
+        $user = new Authenticator();
 
         if ($this->request->isPostRequest()) {
             try {
+                $typeOfFuelValue = $this->request->getPost('type_of_fuel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $type = $this->request->getPost('type', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $color = $this->request->getPost('color', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $kilometers_traveled = $this->request->getPost('kilometers_traveled', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $year_of_manufacture = $this->request->getPost('year_of_manufacture', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $car_condition = $this->request->getPost('car_condition', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $type_of_fuel = $this->request->getPost('type_of_fuel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-
 
                 $carModel = new CarModel();
 
@@ -68,11 +62,9 @@ class CarController extends BaseController {
                     $errors['kilometers_traveled'] = 'a megtett KM megadása kötelező!';
                 } elseif (empty($year_of_manufacture)) {
                     $errors['year_of_manufacture'] = 'a gyártás éve megadása kötelező!';
-                }
-                elseif ($car_condition=="null") {
+                } elseif ($car_condition == "null") {
                     $errors['car_condition'] = 'Az autó állapotának megadása kötelező!';
-                }
-                elseif ($type_of_fuel=="null") {
+                } elseif ($typeOfFuelValue == "null") {
                     $errors['type_of_fuel'] = 'Az üzemanyag típusának megadása kötelező!';
                 }
 
@@ -81,10 +73,9 @@ class CarController extends BaseController {
                 $car->setKilometersTraveled($kilometers_traveled);
                 $car->setYearOfManufacture($year_of_manufacture);
                 $car->setCarCondition($car_condition);
-                $car->setTypeOfFuel($type_of_fuel);
+                $car->setTypeOfFuel($typeOfFuelValue);
                 $car->setCreatedAt(new DateTime());
                 $car->setIdOfOwner($user->getUserId());
-
 
                 //TODO validálást meg kell csinálni majd még.
                 //            if (!$car->checkIsValidInsert() || !empty($errors)) {
@@ -160,7 +151,7 @@ class CarController extends BaseController {
 
 
     public function update() {
-
+// TODO ezt meg kéne csinálni később
         $this->checkAjax();
         $this->checkPermission('admin');
 
@@ -195,7 +186,7 @@ class CarController extends BaseController {
             }
             echo json_encode('success');
 
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $log = new SystemLog();
             $log->exceptionLog($exception);
             echo json_encode($exception->getMessage(), JSON_UNESCAPED_UNICODE);
