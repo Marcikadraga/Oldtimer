@@ -111,15 +111,6 @@ class CarTypeModel {
     }
 
 
-    /**
-     * @param $id
-     * @param $manufacturer
-     * @param $type
-     * @param $start
-     * @param $end
-     * @return bool
-     * @throws Exception
-     */
     public function update(CarType $carType): bool {
 
         try {
@@ -154,6 +145,7 @@ class CarTypeModel {
         }
     }
 
+
     public function getCarById($carId) {
 
         try {
@@ -169,6 +161,7 @@ class CarTypeModel {
             throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
     }
+
 
     public function getById($id): ?CarType {
 
@@ -189,4 +182,19 @@ class CarTypeModel {
 
         return null;
     }
+
+
+    public function getAllCarTypes(){
+        try {
+            $query = 'SELECT type FROM cartypes WHERE deleted_at IS NULL';
+
+            $statement = $this->pdo->prepare($query);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $exception) {
+            die($exception->getMessage());
+        }
+    }
 }
+

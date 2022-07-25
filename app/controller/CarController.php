@@ -5,6 +5,7 @@ namespace app\controller;
 use app\core\logger\SystemLog;
 use app\model\car\Car;
 use app\model\car\CarModel;
+use app\model\carType\CarTypeModel;
 use app\model\user\Authenticator;
 use DateTime;
 use Exception;
@@ -16,6 +17,7 @@ class CarController extends BaseController {
 
         $auth = new Authenticator();
         $carModel = new CarModel();
+        $carTypeModel = new CarTypeModel();
         $car = new Car();
 
         $data = [
@@ -25,7 +27,7 @@ class CarController extends BaseController {
             'getIdOfOwner'   => $car->getIdOfOwner(),
             'userId'         => $auth->getUserId(),
             'carId'          => $car->getId(),
-            'cardCondition'  => $car->getCarCondition()
+            'cardCondition'  => $car->getCarCondition(),
 
         ];
 
@@ -109,6 +111,11 @@ class CarController extends BaseController {
 
         //        var_dump($data);
 
+        $carTypeModel = new CarTypeModel();
+        $data = [
+            'allCarType' => $carTypeModel->getAllCarTypes()
+        ];
+
         $this->render('newCarInsert/index', $data);
 
     }
@@ -151,7 +158,8 @@ class CarController extends BaseController {
 
 
     public function update() {
-// TODO ezt meg kéne csinálni később
+
+        // TODO ezt meg kéne csinálni később
         $this->checkAjax();
         $this->checkPermission('admin');
 

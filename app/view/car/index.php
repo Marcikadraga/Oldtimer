@@ -1,7 +1,6 @@
 <?php
 
-use app\model\car\Car;
-use app\model\user\Authenticator;
+use app\model\car\Car;use app\model\user\Authenticator;
 
 include '../app/view/_header.php';
 
@@ -9,7 +8,8 @@ include '../app/view/_header.php';
 /** @var bool $userIsAdmin True, ha a belépett tag admin */
 /** @var bool $isLoggedInUser True, ha van belépett user */
 /** @var Authenticator $userId  */
-/** @var array $conditions */
+
+
 
 
 ?>
@@ -160,6 +160,15 @@ include '../app/view/_header.php';
                                 <option value="1">megkímélt</option>
                                 <option value="2">felújított</option>
                             </select>
+
+
+
+
+
+
+
+
+
                     </form>
                 </div>
                 <div class = "modal-footer">
@@ -177,4 +186,4 @@ include '../app/view/_header.php';
     </div>
 
     <script src = "/public/assets/js/pages/cars/index.js" type = "module"></script>
-    <?php include '../app/view/_footer.php';
+    <?php include '../app/view/_footer.php';?>

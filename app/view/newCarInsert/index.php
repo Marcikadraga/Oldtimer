@@ -1,6 +1,11 @@
-<?php include '../app/view/_header.php' ?>
+<?php
 
-<section class="green">
+include '../app/view/_header.php';
+
+/** @var array[] $allCarType */
+
+?>
+<section class = "green">
     <div class = "container container col-sm-3 col-sm">
         <form action = "/CarController/insert" method = "post">
             <div class = "card">
@@ -66,23 +71,29 @@
                         <div class = "invalid-feedback"><?= $errors['year_of_manufacture'] ?? ''; ?></div>
                     </div>
 
-                    <label for = "edit-color" class = "col-form-label input-required"   >Üzemanyag típusa</label><br>
-                    <select class="form-control" name="type_of_fuel" id="type-of-fuel" >
-                        <option name="type_of_fuel" value="null">válasszon</option>
-                        <option name="type_of_fuel" value="0">benzin</option>
-                        <option name="type_of_fuel" value="1">dízel</option>
+                    <label for = "edit-color" class = "col-form-label input-required">Üzemanyag típusa</label><br>
+                    <select class = "form-control" name = "type_of_fuel" id = "type-of-fuel">
+                        <?php if (!empty($allCarType)): ?>
+                            <?php for ($i = 0; $i < count($allCarType); $i++): ?>
+                                <option value = "<?php echo $allCarType[$i]['type'] ?>"><?= $allCarType[$i]['type'] ?></option>
+                            <?php endfor; ?>
+                        <?php endif ?>
                     </select>
-                    <br>
 
-                    <div class = "form-group" >
+
+
+                    <div class = "form-group">
                         <label for = "car_condition" class = "input-required">Autó állapota</label>
-                        <select class="form-control" name="car_condition" id = "car_condition">
-                            <option value="null">Válasszon</option>
-                            <option value="0">leharcolt</option>
-                            <option value="1">megkímélt</option>
-                            <option value="2">felújított</option>
+                        <select class = "form-control" name = "car_condition" id = "car_condition">
+                            <option value = "null">Válasszon</option>
+                            <option value = "0">leharcolt</option>
+                            <option value = "1">megkímélt</option>
+                            <option value = "2">felújított</option>
                         </select>
                     </div>
+
+
+
 
 
                     <div class = "card-footer ">

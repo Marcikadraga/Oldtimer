@@ -108,7 +108,7 @@
                     <table class = "table table-bordered table-hover m-0">
                         <tr class = "bg-light">
                             <td class = "w-25"><strong>A betöltött view fájl</strong></td>
-                            <td>
+                            <td class="text-left">
                                 <?php if (!isset($path)): ?>
                                     <span class = "text-danger">Hiba! A Response osztály render függvényében nem létezik a $path változó (átnevezted a render függvényben?)</span>
                                 <?php else: ?>
@@ -119,7 +119,7 @@
                         <?php foreach ($context as $key => $value): ?>
                             <tr>
                                 <td class = "w-25"><strong><?= $key ?></strong></td>
-                                <td>
+                                <td class="text-left">
                                     <pre class = "mb-0"><?= var_export($value) ?></pre>
                                 </td>
                             </tr>
