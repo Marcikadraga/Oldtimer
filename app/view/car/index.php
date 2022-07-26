@@ -8,6 +8,7 @@ include '../app/view/_header.php';
 /** @var bool $userIsAdmin True, ha a belépett tag admin */
 /** @var bool $isLoggedInUser True, ha van belépett user */
 /** @var Authenticator $userId  */
+/** @var array[] $allCarType */
 
 
 
@@ -72,8 +73,6 @@ include '../app/view/_header.php';
                 <td class = "text-wrap align-middle">
                     <?= $car->getNameOfOwnerById() ?>
                 </td>
-
-
                 <?php if ($userIsAdmin): ?>
                     <td class = "text-wrap align-middle">
                         <?= $car->getCreatedAt() ?>
@@ -123,12 +122,20 @@ include '../app/view/_header.php';
                                     class = "form-control"
                                     id = "edit-car-id"
                             >
-                            <label for = "edit-color" class = "col-form-label">Típus</label><br>
-                            <input
-                                    type = "text"
-                                    class = "form-control"
-                                    id = "edit-type"
-                            >
+
+                            <div class = "form-group">
+                                <label for = "edit-color" class = "col-form-label input-required">Típus</label>
+                                <select class = "form-control"  id = "edit-type">
+                                    <option value = "null">Válasszon</option>
+                                    <?php if (!empty($allCarType)): ?>
+                                        <?php for ($i = 0; $i < count($allCarType); $i++): ?>
+                                            <option value = "<?php echo $allCarType[$i]['type'] ?>"><?= $allCarType[$i]['type'] ?></option>
+                                        <?php endfor; ?>
+                                    <?php endif ?>
+                                </select>
+                            </div>
+
+
                             <label for = "edit-color" class = "col-form-label">Szín</label><br>
                             <input
                                     type = "text"
@@ -160,14 +167,6 @@ include '../app/view/_header.php';
                                 <option value="1">megkímélt</option>
                                 <option value="2">felújított</option>
                             </select>
-
-
-
-
-
-
-
-
 
                     </form>
                 </div>

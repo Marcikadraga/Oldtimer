@@ -16,18 +16,18 @@ class Car {
         1 => 'megkímélt',
         2 => 'felújított'
     ];
-    protected $errors = [];
-    private $id                  = '';
-    private $type                = '';
-    private $color               = '';
-    private $kilometers_traveled = '';
-    private $year_of_manufacture = '';
-    private $car_condition       = '';
-    private $type_of_fuel        = '';
-    private $id_of_owner         = '';
-    private $created_at          = null;
-    private $updated_at          = null;
-    private $deleted_at          = null;
+    protected $errors              = [];
+    private   $id                  = '';
+    private   $type                = '';
+    private   $color               = '';
+    private   $kilometers_traveled = '';
+    private   $year_of_manufacture = '';
+    private   $car_condition       = '';
+    private   $type_of_fuel        = '';
+    private   $id_of_owner         = '';
+    private   $created_at          = null;
+    private   $updated_at          = null;
+    private   $deleted_at          = null;
 
     //    public function checkIsValidSave(): bool {
     //
@@ -37,7 +37,6 @@ class Car {
     //            return $this->checkIsValidUpdate();
     //        }
     //    }
-
 
     public function __construct(?array $data = null) {
 

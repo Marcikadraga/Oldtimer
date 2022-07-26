@@ -17,8 +17,8 @@ class CarController extends BaseController {
 
         $auth = new Authenticator();
         $carModel = new CarModel();
-        $carTypeModel = new CarTypeModel();
         $car = new Car();
+        $carTypeModel = new CarTypeModel();
 
         $data = [
             'cars'           => $carModel->getAllCars(),
@@ -28,6 +28,7 @@ class CarController extends BaseController {
             'userId'         => $auth->getUserId(),
             'carId'          => $car->getId(),
             'cardCondition'  => $car->getCarCondition(),
+            'allCarType' => $carTypeModel->getAllCarTypes()
 
         ];
 

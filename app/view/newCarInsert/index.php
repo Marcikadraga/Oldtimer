@@ -24,15 +24,15 @@ include '../app/view/_header.php';
                         </div>
                     <?php endif; ?>
                     <div class = "form-group">
-                        <label for = "type" class = "input-required">Típus</label>
-                        <input type = "text"
-                               class = "form-control <?= !isset($errors) ? '' : (!empty($errors['manufacturer']) ? 'is-invalid' : 'is-valid'); ?>"
-                               id = "type"
-                               name = "type"
-                               value = "<?= !empty($car) ? $car->getType() : ''; ?>"
-                               minlength = "3"
-                        >
-                        <div class = "invalid-feedback"><?= $errors['type'] ?? ''; ?></div>
+                        <label for = "edit-color" class = "col-form-label input-required">Típus</label>
+                        <select class = "form-control" name = "type" id = "type">
+                            <option value = "null">Válasszon</option>
+                            <?php if (!empty($allCarType)): ?>
+                                <?php for ($i = 0; $i < count($allCarType); $i++): ?>
+                                    <option value = "<?php echo $allCarType[$i]['type'] ?>"><?= $allCarType[$i]['type'] ?></option>
+                                <?php endfor; ?>
+                            <?php endif ?>
+                        </select>
                     </div>
 
                     <div class = "form-group">
@@ -71,30 +71,27 @@ include '../app/view/_header.php';
                         <div class = "invalid-feedback"><?= $errors['year_of_manufacture'] ?? ''; ?></div>
                     </div>
 
-                    <label for = "edit-color" class = "col-form-label input-required">Üzemanyag típusa</label><br>
-                    <select class = "form-control" name = "type_of_fuel" id = "type-of-fuel">
-                        <?php if (!empty($allCarType)): ?>
-                            <?php for ($i = 0; $i < count($allCarType); $i++): ?>
-                                <option value = "<?php echo $allCarType[$i]['type'] ?>"><?= $allCarType[$i]['type'] ?></option>
-                            <?php endfor; ?>
-                        <?php endif ?>
-                    </select>
-
-
 
                     <div class = "form-group">
-                        <label for = "car_condition" class = "input-required">Autó állapota</label>
-                        <select class = "form-control" name = "car_condition" id = "car_condition">
-                            <option value = "null">Válasszon</option>
-                            <option value = "0">leharcolt</option>
-                            <option value = "1">megkímélt</option>
-                            <option value = "2">felújított</option>
+                        <label for = "edit-color" class = "col-form-label input-required">Üzemanyag típusa</label>
+                        <select class = "form-control" name = "type_of_fuel" id = "type-of-fuel">
+                            <option name = "type_of_fuel" value = "null">válasszon</option>
+                            <option name = "type_of_fuel" value = "0">benzin</option>
+                            <option name = "type_of_fuel" value = "1">dízel</option>
                         </select>
                     </div>
 
-
-
-
+                    <div class = "form-group">
+                        <div class = "form-group">
+                            <label for = "car_condition" class = "input-required">Autó állapota</label>
+                            <select class = "form-control" name = "car_condition" id = "car_condition">
+                                <option value = "null">Válasszon</option>
+                                <option value = "0">leharcolt</option>
+                                <option value = "1">megkímélt</option>
+                                <option value = "2">felújított</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class = "card-footer ">
                         <div class = "row ">
