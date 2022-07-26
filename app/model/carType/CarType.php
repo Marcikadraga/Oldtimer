@@ -2,6 +2,8 @@
 
 namespace app\model\carType;
 
+use DateTime;
+
 class CarType {
 
     private $id                    = '';
@@ -258,11 +260,15 @@ class CarType {
 
 
     /**
-     * @param string $updated_at
+     * @param DateTime|null $updated_at
      */
-    public function setUpdatedAt(string $updated_at): void {
+    public function setUpdatedAt($updated_at): void {
 
-        $this->updated_at = $updated_at;
+        if ($updated_at instanceof DateTime) {
+            $this->updated_at = $updated_at->format('Y-m-d H:i:s');
+        } else {
+            $this->updated_at = null;
+        }
     }
 
 

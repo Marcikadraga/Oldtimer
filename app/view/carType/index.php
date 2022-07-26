@@ -9,7 +9,6 @@
             <th>Gyártás kezdete</th>
             <th>Gyártás vége</th>
             <th>Feltöltve</th>
-            <th>Törölve</th>
             <th>Frissítve</th>
             <th>Műveletek</th>
         </tr>
@@ -23,6 +22,7 @@
                     <?php
                     $id = $car['id'];
                     foreach ($car as $key => $value) {
+                        if ($key == "deleted_at") continue;
                         ?>
                         <td><?php echo $value; ?></td>
                         <?php

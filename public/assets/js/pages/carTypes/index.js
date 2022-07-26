@@ -70,6 +70,8 @@ saveEditedDataButton.addEventListener("click", function (event) {
         fd.append('startOfProduction', startOfProduction);
         fd.append('endOfProduction', endOfProduction);
 
+
+
     hFetch('https://marci.dev/CarTypeController/update', {
         method: 'POST', body: fd
     })

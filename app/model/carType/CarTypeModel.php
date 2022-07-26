@@ -61,8 +61,7 @@ class CarTypeModel {
 
             $statement = $this->pdo->prepare($query);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
 
         } catch (Exception $exception) {
             die($exception->getMessage());

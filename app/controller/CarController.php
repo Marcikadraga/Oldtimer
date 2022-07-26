@@ -28,7 +28,7 @@ class CarController extends BaseController {
             'userId'         => $auth->getUserId(),
             'carId'          => $car->getId(),
             'cardCondition'  => $car->getCarCondition(),
-            'allCarType' => $carTypeModel->getAllCarTypes()
+            'allCarType'     => $carTypeModel->getAllCarTypes()
 
         ];
 
@@ -93,6 +93,7 @@ class CarController extends BaseController {
                 if (empty($userId)) {
                     throw new Exception($carModel->getErrorsAsString());
                 }
+                $successMsg = 'Az autó hozzáadása sikerült.';
             } catch (Exception $exception) {
                 // nem végleges hibakezelés!!!
                 $errorMsg = $exception->getMessage();
@@ -101,6 +102,7 @@ class CarController extends BaseController {
                     $errorMsg .= '<br>' . implode('<br>', $errors);
                     echo $errorMsg;
                 }
+
             }
         }
 
@@ -110,12 +112,8 @@ class CarController extends BaseController {
         $data['car'] = $car;
         $data['submitted'] = true;
 
-        //        var_dump($data);
-
         $carTypeModel = new CarTypeModel();
-        $data = [
-            'allCarType' => $carTypeModel->getAllCarTypes()
-        ];
+        $data['allCarType'] = $carTypeModel->getAllCarTypes();
 
         $this->render('newCarInsert/index', $data);
 
@@ -185,6 +183,7 @@ class CarController extends BaseController {
             $car->setYearOfManufacture($this->request->getPost('year-of-manufacture', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setTypeOfFuel($this->request->getPost('type-of-fuel', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setCarCondition($this->request->getPost('car-condition', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $car->setUpdatedAt(new DateTime());
 
             //            if (!$car->checkIsValidSave()) {
             //                throw new Exception($car->getErrorsAsString());

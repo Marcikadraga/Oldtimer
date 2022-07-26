@@ -34,6 +34,9 @@ include '../app/view/_header.php';
                             <?php endif ?>
                         </select>
                     </div>
+                    
+                    <?php
+                    ?>
 
                     <div class = "form-group">
                         <label for = "color" class = "input-required">Szín</label>

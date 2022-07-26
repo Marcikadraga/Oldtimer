@@ -13,7 +13,7 @@
         <form action = "/CarTypeController/insert" method = "post">
             <div class = "card">
                 <div class = "card-header">
-                    <h5>Új autó felvétele</h5>
+                    <h5>Új autótípus felvétele</h5>
                 </div>
                 <div class = "card-body">
                     <?php if (!empty($errorMsg)): ?>

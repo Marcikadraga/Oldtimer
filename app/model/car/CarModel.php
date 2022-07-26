@@ -2,19 +2,12 @@
 
 namespace app\model\car;
 
-use app\controller\BaseController;
 use app\core\logger\SystemLog;
-use app\core\pdo\CustomStatementDebug;
-use app\core\pdo\PDOConnect;
-use app\model\carType\CarType;
-use app\model\user\User;
+use app\model\BaseModel;
 use Exception;
 use PDO;
-use app\model\BaseModel;
 
 class CarModel extends BaseModel {
-
-
 
     public function getAllCars(): array {
 
@@ -38,6 +31,7 @@ class CarModel extends BaseModel {
         }
         return $result;
     }
+
 
     public function delete($car_id, $softDelete = true): bool {
 
@@ -65,6 +59,7 @@ class CarModel extends BaseModel {
         return false;
     }
 
+
     public function getCarById($carId) {
 
         try {
@@ -80,6 +75,7 @@ class CarModel extends BaseModel {
             throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
     }
+
 
     public function getById($id): ?Car {
 
@@ -101,6 +97,7 @@ class CarModel extends BaseModel {
         return null;
     }
 
+
     public function update(Car $car): bool {
 
         try {
@@ -111,7 +108,8 @@ class CarModel extends BaseModel {
                 kilometers_traveled=:kilometers_traveled,
                 year_of_manufacture=:year_of_manufacture,
                 type_of_fuel=:type_of_fuel,
-                car_condition=:car_condition
+                car_condition=:car_condition,
+                updated_at=:updated_at
             
             WHERE id=:id';
 
@@ -122,7 +120,8 @@ class CarModel extends BaseModel {
                 'kilometers_traveled' => $car->getKilometersTraveled(),
                 'year_of_manufacture' => $car->getYearOfManufacture(),
                 'type_of_fuel'        => $car->getTypeOfFuel(),
-                'car_condition'       => $car->getCarCondition()
+                'car_condition'       => $car->getCarCondition(),
+                'updated_at'          => $car->getUpdatedAt()
             ];
 
             $statement = $this->pdo->prepare($query);
@@ -132,6 +131,7 @@ class CarModel extends BaseModel {
             die($exception->getMessage());
         }
     }
+
 
     public function insert(Car $car): bool {
 
