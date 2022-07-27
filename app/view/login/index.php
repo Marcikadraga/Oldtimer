@@ -46,7 +46,6 @@ include '../app/view/_header.php';
                            class = "form-control <?= !isset($errors) ? '' : (!empty($errors['username'])); ?>"
                            id = "username"
                            name = "username"
-
                            minlength = "3"
                            required>
                     <div class = "invalid-feedback"><?= $errors['username'] ?? ''; ?></div>

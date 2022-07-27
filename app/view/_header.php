@@ -87,7 +87,7 @@
                 <?php endif; ?>
                 <?php if (!$isLoggedInUser): ?>
                     <li class = "nav-item">
-                        <a class = "nav-link" href = "/registration">Regisztráció</a>
+                        <a class = "nav-link" href = "UserController/insert">Regisztráció</a>
                     </li>
                 <?php endif; ?>
 

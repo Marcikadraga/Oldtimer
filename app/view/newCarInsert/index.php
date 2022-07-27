@@ -1,3 +1,12 @@
+<style>
+    body {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("/images/car7.png");
+        color: red !important;
+        background-position: center;
+    }
+</style>
 <?php
 
 include '../app/view/_header.php';
@@ -5,7 +14,7 @@ include '../app/view/_header.php';
 /** @var array[] $allCarType */
 
 ?>
-<section class = "green">
+
     <div class = "container container col-sm-3 col-sm">
         <form action = "/CarController/insert" method = "post">
             <div class = "card">
@@ -96,15 +105,15 @@ include '../app/view/_header.php';
                         </div>
                     </div>
 
-                    <div class = "card-footer ">
-                        <div class = "row ">
+                    <div class = "card-footer" style="height: 45px;background-color: white">
+                        <div class = "row">
                             <button type = "submit" class = "btn btn-outline-primary ml-auto text-center">Küldés</button>
                         </div>
                     </div>
                 </div>
         </form>
     </div>
-</section>
+
 
 
 <?php include '../app/view/_footer.php'; ?>

@@ -41,7 +41,8 @@ include '../app/view/_header.php';
                 <div class = "form-group">
                     <label for = "username" class = "input-required">Username</label>
                     <input type = "text"
-                           class = "form-control <?= !isset($errors) ? '' : (!empty($errors['username']) ? 'is-invalid' : 'is-valid'); ?>"
+                           class = "form-control <?= !isset($errors) ? '' : (!empty($errors['username'])) ; ?>"
+
                            id = "username"
                            name = "username"
                            value = "<?= !empty($user) ? $user->getUsername() : ''; ?>"
@@ -54,6 +55,7 @@ include '../app/view/_header.php';
                         <label for = "password-1" class = "input-required">Jelszó</label>
                         <input type = "text"
                                class = "form-control <?= !empty($errors['password1']) ? 'is-invalid' : ''; ?>"
+
                                id = "password-1"
                                name = "password1"
                                required>
@@ -72,7 +74,7 @@ include '../app/view/_header.php';
                 <div class = "form-group">
                     <label for = "email" class = "input-required">Email cím</label>
                     <input type = "email"
-                           class = "form-control <?= !empty($errors['email']) ? 'is-invalid' : ''; ?>"
+                           class = "form-control <?= !empty($errors['email']) ?>"
                            id = "email"
                            name = "email"
                            value = "<?= !empty($user) ? $user->getEmail() : ''; ?>"
@@ -83,7 +85,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg">
                         <label for = "first-name" class = "input-required">Keresztnév</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['first_name']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['first_name']) ?>"
                                id = "first-name"
                                name = "first_name"
                                value = "<?= !empty($user) ? $user->getFirstName() : ''; ?>"
@@ -93,7 +95,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg">
                         <label for = "middle-name">Középső név</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['middle_name']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['middle_name'])  ?>"
                                id = "middle-name"
                                name = "middle_name"
                                value = "<?= !empty($user) ? $user->getMiddleName() : ''; ?>">
@@ -102,7 +104,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg">
                         <label for = "last-name" class = "input-required">Vezetéknév</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['last_name']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['last_name'])  ?>"
                                id = "last-name"
                                name = "last_name"
                                value = "<?= !empty($user) ? $user->getLastName() : ''; ?>"
@@ -112,7 +114,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg">
                         <label for = 'phoneNumber' class = "input-required">teló</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['phoneNumber']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['phoneNumber'])  ?>"
                                id = "phoneNumber"
                                name = "phoneNumber"
                                value = "<?= !empty($user) ? $user->getPhoneNumber() : ''; ?>"
@@ -122,7 +124,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg">
                         <label for = "webpage" class = "input-required">weboldal</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['webpage']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['webpage']) ?>"
                                id = "webpage"
                                name = "webpage"
                                value = "<?= !empty($user) ? $user->getWebpage() : ''; ?>"
@@ -132,7 +134,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg">
                         <label for = "birth-date" class = "input-required">Születési idő</label>
                         <input type = "date"
-                               class = "form-control <?= !empty($errors['birth_date']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['birth_date']) ?>"
                                id = "birth-date"
                                name = "birth_date"
                                value = "<?= !empty($user) ? $user->getBirthDate() : ''; ?>"
@@ -144,7 +146,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg-2">
                         <label for = "zip-code" class = "input-required">Irányítószám</label>
                         <input type = "number"
-                               class = "form-control <?= !empty($errors['zip_code']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['zip_code'])  ?>"
                                id = "zip-code"
                                name = "zip_code"
                                min = "1000"
@@ -157,7 +159,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg-auto">
                         <label for = "city" class = "input-required">Város</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['city']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['city']) ?>"
                                id = "city"
                                name = "city"
                                value = "<?= !empty($user) ? $user->getCity() : ''; ?>"
@@ -167,7 +169,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12 col-lg">
                         <label for = "district">Kerület</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['district']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['district']) ?>"
                                id = "district"
                                name = "district"
                                value = "<?= !empty($user) ? $user->getDistrict() : ''; ?>">
@@ -176,7 +178,7 @@ include '../app/view/_header.php';
                     <div class = "col-sm-12">
                         <label for = "more_address">Utca házszám</label>
                         <input type = "text"
-                               class = "form-control <?= !empty($errors['more_address']) ? 'is-invalid' : ''; ?>"
+                               class = "form-control <?= !empty($errors['more_address'])  ?>"
                                id = "more_address"
                                name = "more_address"
                                value = "<?= !empty($user) ? $user->getMoreAddress() : ''; ?>"

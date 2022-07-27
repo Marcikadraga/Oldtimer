@@ -3,9 +3,7 @@
 namespace app\model\carType;
 
 use app\core\logger\SystemLog;
-use app\core\pdo\CustomStatementDebug;
 use app\core\pdo\PDOConnect;
-use app\model\user\User;
 use Exception;
 use PDO;
 
@@ -183,13 +181,32 @@ class CarTypeModel {
     }
 
 
-    public function getAllCarTypes(){
+    public function getAllCarTypes() {
+
         try {
             $query = 'SELECT type FROM cartypes WHERE deleted_at IS NULL';
 
             $statement = $this->pdo->prepare($query);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $exception) {
+            die($exception->getMessage());
+        }
+    }
+
+
+    public function isUniqCarType($type): bool {
+
+        try {
+            $query = 'SELECT type FROM cartypes WHERE type=? AND deleted_at IS NULL';
+            $params=[$type];
+            $statement = $this->pdo->prepare($query);
+            $statement->execute($params);
+            if ($statement->fetchAll(PDO::FETCH_ASSOC) != null) {
+                return false;
+            }
+            return true;
 
         } catch (Exception $exception) {
             die($exception->getMessage());
