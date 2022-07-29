@@ -234,24 +234,21 @@ class CarController extends BaseController {
         echo json_encode("error");
     }
 
-
     public function insertColor() {
 
         $errors = [];
         $errorMsg = '';
         $successMsg = '';
-        $color=new Color();
+        $color = new Color();
         $user = new Authenticator();
 
         if ($this->request->isPostRequest()) {
             try {
 
-
-
                 $name_of_color = $this->request->getPost('name_of_color', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $rgb = $this->request->getPost('rgb', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-                $colorModel= new ColorModel();
+                $colorModel = new ColorModel();
 
                 if (empty($name_of_color)) {
                     $errors['name_of_color'] = 'a szín megadása kötelező!';
@@ -259,15 +256,17 @@ class CarController extends BaseController {
                     $errors['rgb'] = 'az rgb megadása kötelező!';
                 }
 
-
                 $color->setNameOfColor($name_of_color);
                 $color->setRgb($rgb);
-
 
                 if (!empty($errors)) {
                     throw new Exception('Kérjük ellenőrizze az űrlapot!');
                 }
 
+                $this->response->jsonResponse([
+                    "success" => true,
+                    "message" => "Sikeres insert."
+                ]);
 
             } catch (Exception $exception) {
                 // nem végleges hibakezelés!!!
@@ -279,17 +278,41 @@ class CarController extends BaseController {
                 }
 
             }
-
-            $data['errors'] = $errors;
-            $data['errorMsg'] = $errorMsg;
-            $data['successMsg'] = $successMsg;
-            $data['color'] = $color;
-            $data['submitted'] = true;
-
-            $this->render('insertColor/index');
-
         }
+
+        $data['errors'] = $errors;
+        $data['errorMsg'] = $errorMsg;
+        $data['successMsg'] = $successMsg;
+        $data['color'] = $color;
+        $data['submitted'] = true;
+
+        $this->render('insertColor/index');
 
     }
 
+    protected function validate() {
+        return true;
+    }
+
+    protected function insertUser() {
+        return true;
+    }
+
+    protected function clean() {
+        return true;
+    }
+
+    protected function setResponse() {
+        return true;
+    }
+
+    public function ajaxMethod() {
+        $this->validate();
+
+        $this->insertUser();
+
+        $this->clean();
+
+        $this->setResponse();
+    }
 }
