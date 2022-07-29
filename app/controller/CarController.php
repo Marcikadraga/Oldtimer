@@ -6,6 +6,7 @@ use app\core\logger\SystemLog;
 use app\model\car\Car;
 use app\model\car\CarModel;
 use app\model\carType\CarTypeModel;
+use app\model\color\ColorModel;
 use app\model\user\Authenticator;
 use DateTime;
 use Exception;
@@ -200,5 +201,35 @@ class CarController extends BaseController {
             echo json_encode($exception->getMessage(), JSON_UNESCAPED_UNICODE);
         }
         return true;
+    }
+
+
+    public function GetAllColor() {
+
+        $colorModel = new ColorModel();
+
+        $data = [
+            'colors' => $colorModel->getAllColors(),
+        ];
+
+        $this->render('color/index', $data ?? []);
+    }
+
+
+    public function deleteColor() {
+
+        $colorId = $this->request->getPost('colorId', FILTER_SANITIZE_SPECIAL_CHARS);
+        if (empty($colorId)) {
+            throw new Exception('Hiba! A car azonosítója nem elérhető.');
+        }
+
+        $colormodel= new ColorModel();
+        $result=$colormodel->delete($colorId);
+        if ($result) {
+            echo json_encode("success");
+            return;
+        }
+
+        echo json_encode("error");
     }
 }

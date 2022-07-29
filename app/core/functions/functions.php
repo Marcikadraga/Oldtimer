@@ -52,11 +52,10 @@ function sessionStart(): void {
  * @param string $uri
  * @return string Az uri abszolút elérési útja, záró "/" jellel ellátva
  */
-function baseUrl($uri = ''): string {
+function baseUrl(string $uri = ''): string {
 
     $uri = str_starts_with($uri, '/') ? substr($uri, 1) : $uri;
-    $baseUrl = DOMAINNAME . $uri;
-    return !str_ends_with($baseUrl, '/') ? $baseUrl . '/' : $baseUrl;
+    return DOMAINNAME . $uri;
 }
 
 /**
@@ -65,4 +64,15 @@ function baseUrl($uri = ''): string {
  */
 function isDevMode(): bool {
     return defined('CI_ENVIRONMENT') && CI_ENVIRONMENT == 'development';
+}
+
+/**
+ * Javascript include
+ * @param string $path A fájl elérési útja
+ * @param bool filemtime használata
+ * @return string
+ */
+function addReference(string $path, $fmtime = false): string {
+    $url = baseUrl($path) . ($fmtime ? "?v=" . filemtime($path) : null);
+    return "<script src = '$url' type = 'module'></script>";
 }

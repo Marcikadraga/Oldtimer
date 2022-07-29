@@ -16,7 +16,6 @@ class Car {
         1 => 'megkímélt',
         2 => 'felújított'
     ];
-    protected $errors              = [];
     private   $id                  = '';
     private   $type                = '';
     private   $color               = '';

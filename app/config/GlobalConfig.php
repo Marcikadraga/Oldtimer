@@ -75,7 +75,7 @@ const ERROR_REPORTING = [
  * URI_404: "Az oldal nem található" felhasználóbarát hibaoldal
  * URI_500: "Szerverhiba" felhasználóbarát hibaoldal
 */
-const DOMAINNAME = 'https://Marci.dev/';
+const DOMAINNAME = 'https://marci.dev/';
 const URI_HOME = '/';
 const URI_LOGIN = 'login';
 const URI_DASHBOARD = 'Usercontroller/loadAdminPage';

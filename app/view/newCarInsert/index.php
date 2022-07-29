@@ -33,7 +33,7 @@ include '../app/view/_header.php';
                         </div>
                     <?php endif; ?>
                     <div class = "form-group">
-                        <label for = "edit-color" class = "col-form-label input-required">Típus</label>
+                        <label for = "type" class = "col-form-label input-required">Típus</label>
                         <select class = "form-control" name = "type" id = "type">
                             <option value = "null">Válasszon</option>
                             <?php if (!empty($allCarType)): ?>
@@ -85,7 +85,7 @@ include '../app/view/_header.php';
 
 
                     <div class = "form-group">
-                        <label for = "edit-color" class = "col-form-label input-required">Üzemanyag típusa</label>
+                        <label for = "type-of-fuel" class = "col-form-label input-required">Üzemanyag típusa</label>
                         <select class = "form-control" name = "type_of_fuel" id = "type-of-fuel">
                             <option name = "type_of_fuel" value = "null">válasszon</option>
                             <option name = "type_of_fuel" value = "0">benzin</option>

@@ -1,5 +1,6 @@
 import {hFetch} from "../../functions.js";
 
+
 const deleteCarButtons = document.querySelectorAll(".delete-car");
 deleteCarButtons.forEach(function (button) {
     button.addEventListener("click", function (event) {
@@ -8,6 +9,7 @@ deleteCarButtons.forEach(function (button) {
 
         const fd = new FormData();
         fd.append('carId', carId);
+
 
         hFetch('https://marci.dev/CarTypeController/delete', {
             method: 'POST', body: fd
@@ -18,7 +20,9 @@ deleteCarButtons.forEach(function (button) {
                     button.closest("tr").remove();
                 }
             })
-            .then(alert("sikeres törlés"))
+            .then(() => {
+                alert("sikeres törlés")
+            })
             .catch((error) => {
                 console.error('Error:', error);
             });

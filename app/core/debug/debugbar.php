@@ -614,7 +614,7 @@
             })();
         });
         // Phpinfo iframe panel méretezése
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        /*$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             if (e.target.id === 'statusbar-tab-content-globals-php-info-show') {
                 const iframe = document.getElementById('statusbar-tab-content-globals-php-info-iframe');
                 if (iframe) {
@@ -623,7 +623,7 @@
                     iframe.style.border = 'none';
                 }
             }
-        });
+        });*/
 
         // Vágólapra másolás kezelése
         const copyToClipboard = function (e) {
