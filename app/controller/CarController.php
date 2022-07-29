@@ -6,6 +6,7 @@ use app\core\logger\SystemLog;
 use app\model\car\Car;
 use app\model\car\CarModel;
 use app\model\carType\CarTypeModel;
+use app\model\color\Color;
 use app\model\color\ColorModel;
 use app\model\user\Authenticator;
 use DateTime;
@@ -223,8 +224,8 @@ class CarController extends BaseController {
             throw new Exception('Hiba! A car azonosítója nem elérhető.');
         }
 
-        $colormodel= new ColorModel();
-        $result=$colormodel->delete($colorId);
+        $colormodel = new ColorModel();
+        $result = $colormodel->delete($colorId);
         if ($result) {
             echo json_encode("success");
             return;
@@ -232,4 +233,63 @@ class CarController extends BaseController {
 
         echo json_encode("error");
     }
+
+
+    public function insertColor() {
+
+        $errors = [];
+        $errorMsg = '';
+        $successMsg = '';
+        $color=new Color();
+        $user = new Authenticator();
+
+        if ($this->request->isPostRequest()) {
+            try {
+
+
+
+                $name_of_color = $this->request->getPost('name_of_color', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $rgb = $this->request->getPost('rgb', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                $colorModel= new ColorModel();
+
+                if (empty($name_of_color)) {
+                    $errors['name_of_color'] = 'a szín megadása kötelező!';
+                } elseif (empty($rgb)) {
+                    $errors['rgb'] = 'az rgb megadása kötelező!';
+                }
+
+
+                $color->setNameOfColor($name_of_color);
+                $color->setRgb($rgb);
+
+
+                if (!empty($errors)) {
+                    throw new Exception('Kérjük ellenőrizze az űrlapot!');
+                }
+
+
+            } catch (Exception $exception) {
+                // nem végleges hibakezelés!!!
+                $errorMsg = $exception->getMessage();
+
+                if (!empty($errors)) {
+                    $errorMsg .= '<br>' . implode('<br>', $errors);
+                    echo $errorMsg;
+                }
+
+            }
+
+            $data['errors'] = $errors;
+            $data['errorMsg'] = $errorMsg;
+            $data['successMsg'] = $successMsg;
+            $data['color'] = $color;
+            $data['submitted'] = true;
+
+            $this->render('insertColor/index');
+
+        }
+
+    }
+
 }

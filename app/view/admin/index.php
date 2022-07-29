@@ -53,6 +53,7 @@
         <div class = "btn-group mr-2 right-buttons" role = "group" aria-label = "Second group" id = "admin-right">
 
             <button class = "admin-button" style="margin-right: 5px"><a href="../../carTypeController/insert">Új autótípus</a></button>
+            <button class = "admin-button" style="margin-right: 5px"><a href="../../carController/insertColor">Új szín</a></button>
             <button class = "admin-button" style="margin-right: 5px"><a href="../../userController">Új gyártó</a></button>
         </div>
     </div>
