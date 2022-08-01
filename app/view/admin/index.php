@@ -28,11 +28,11 @@
     }
 
     #admin-left {
-        margin-right: 200px;
+        margin-right: 20px;
     }
 
     #admin-right {
-        margin-left: 200px;
+        margin-left: 20px;
     !important;
 
     }

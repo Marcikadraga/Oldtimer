@@ -2,6 +2,7 @@
 
 namespace app\model\color;
 
+use app\core\logger\SystemLog;
 use app\model\BaseModel;
 use Exception;
 use PDO;
@@ -34,6 +35,7 @@ class ColorModel extends BaseModel {
         }
     }
 
+
     public function delete($color_id, $softDelete = true): bool {
 
         try {
@@ -58,6 +60,33 @@ class ColorModel extends BaseModel {
         }
 
         return false;
+    }
+
+
+    public function insertColor(Color $color): bool {
+
+        try {
+            $query = '
+            INSERT INTO color(name_of_color, rgb, created_at, updated_at, deleted_at)
+            VALUES(:name_of_color,:rgb,:created_at,:updated_at,:deleted_at)';
+
+            $params = [
+                'name_of_color' => $color->getNameOfColor(),
+                'rgb'           => $color->getRgb(),
+                'created_at'    => $color->getCreatedAt(),
+                'updated_at'    => $color->getUpdatedAt(),
+                'deleted_at'    => $color->getDeletedAt()
+            ];
+
+            $statement = $this->pdo->prepare($query);
+            $statement->execute($params);
+            return $this->pdo->lastInsertId();
+
+        } catch (Exception $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
+        }
     }
 
 }

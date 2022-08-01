@@ -240,7 +240,6 @@ class CarController extends BaseController {
         $errorMsg = '';
         $successMsg = '';
         $color = new Color();
-        $user = new Authenticator();
 
         if ($this->request->isPostRequest()) {
             try {
@@ -263,10 +262,14 @@ class CarController extends BaseController {
                     throw new Exception('Kérjük ellenőrizze az űrlapot!');
                 }
 
+                $colorModel->insertColor($color);
+
                 $this->response->jsonResponse([
                     "success" => true,
                     "message" => "Sikeres insert."
                 ]);
+
+
 
             } catch (Exception $exception) {
                 // nem végleges hibakezelés!!!
@@ -283,8 +286,8 @@ class CarController extends BaseController {
         $data['errors'] = $errors;
         $data['errorMsg'] = $errorMsg;
         $data['successMsg'] = $successMsg;
-        $data['color'] = $color;
         $data['submitted'] = true;
+
 
         $this->render('insertColor/index');
 
