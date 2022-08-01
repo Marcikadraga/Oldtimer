@@ -69,3 +69,7 @@ include '../app/view/_header.php';
 <?= addReference("assets/js/pages/colors/index.js", true) ?>
 
 <!--<script src = "/assets/js/pages/colors/index.js" type = "module"></script>-->
+
+<?php
+include '../app/view/_footer.php';
+?>

@@ -31,18 +31,19 @@ include '../app/view/_header.php';
                            id = "name_of_color"
                            name = "name_of_color"
                            value = "<?= !empty($color) ? $color->getNameOfColor() : ''; ?>"
+                           >
                     >
                     <label for = "Range0" class = "form-label">RED</label>
                     <br>
-                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range0" onclick = "showColor()" style = "width: 300px">
+                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range0"  style = "width: 300px">
                     <br>
                     <label for = "Range1" class = "form-label">GREEN</label>
                     <br>
-                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range1" onclick = "showColor()" style = "width: 300px">
+                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range1"  style = "width: 300px">
                     <br>
                     <label for = "Range2" class = "form-label">BLUE</label>
                     <br>
-                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range2" onclick = "showColor()" style = "width: 300px">
+                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range2"  style = "width: 300px">
 
 
                     <div id = "resultColor" style = "width: 100px; height: 100px;background-color: grey;border: 3px solid black">
@@ -54,22 +55,22 @@ include '../app/view/_header.php';
                     <p id = "result"></p>
 
 
-                    <script>
-
-
-                        let range0 = document.getElementById("Range0");
-                        let range1 = document.getElementById("Range1");
-                        let range2 = document.getElementById("Range2");
-                        let colorResult = document.getElementById("resultColor");
-
-
-                        function showColor() {
-                            document.getElementById("rgb").value = colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";
-                            colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";
-                        }
-
-
-                    </script>
+<!--                    <script>-->
+<!---->
+<!---->
+<!--                        let range0 = document.getElementById("Range0");-->
+<!--                        let range1 = document.getElementById("Range1");-->
+<!--                        let range2 = document.getElementById("Range2");-->
+<!--                        let colorResult = document.getElementById("resultColor");-->
+<!---->
+<!---->
+<!--                        function showColor() {-->
+<!--                            document.getElementById("rgb").value = colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";-->
+<!--                            colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";-->
+<!--                        }-->
+<!---->
+<!---->
+<!--                    </script>-->
 
                     <label for = "rgb" class = "input-required">RGB</label>
                     <input type = "text"
@@ -89,8 +90,10 @@ include '../app/view/_header.php';
         </div>
     </form>
 </div>
-
+<?= addReference("assets/js/pages/colors/insertColor.js", true) ?>
 
 <?php
 include '../app/view/_footer.php';
 ?>
+
+

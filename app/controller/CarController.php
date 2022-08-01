@@ -249,25 +249,28 @@ class CarController extends BaseController {
 
                 $colorModel = new ColorModel();
 
+
+
                 if (empty($name_of_color)) {
                     $errors['name_of_color'] = 'a szín megadása kötelező!';
                 } elseif (empty($rgb)) {
                     $errors['rgb'] = 'az rgb megadása kötelező!';
                 }
-
-                $color->setNameOfColor($name_of_color);
-                $color->setRgb($rgb);
-
                 if (!empty($errors)) {
                     throw new Exception('Kérjük ellenőrizze az űrlapot!');
                 }
 
+                $color->setNameOfColor($name_of_color);
+                $color->setRgb($rgb);
+
+
+
                 $colorModel->insertColor($color);
 
-                $this->response->jsonResponse([
-                    "success" => true,
-                    "message" => "Sikeres insert."
-                ]);
+//                $this->response->jsonResponse([
+//                    "success" => true,
+//                    "message" => "Sikeres insert."
+//                ]);
 
 
 
@@ -289,7 +292,7 @@ class CarController extends BaseController {
         $data['submitted'] = true;
 
 
-        $this->render('insertColor/index');
+        $this->render('insertColor/index', $data);
 
     }
 

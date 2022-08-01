@@ -1,9 +1,9 @@
 import {hFetch} from "../../functions.js";
 
-const deleteColorButtons=document.querySelectorAll(".delete-color");
-deleteColorButtons.forEach(function(button){
-    button.addEventListener("click", function (event){
-        const colorId=button.dataset.id;
+const deleteColorButtons = document.querySelectorAll(".delete-color");
+deleteColorButtons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+        const colorId = button.dataset.id;
 
         const fd = new FormData();
         fd.append('colorId', colorId)
@@ -27,5 +27,10 @@ deleteColorButtons.forEach(function(button){
     });
 
 });
+
+
+
+
+
 
 

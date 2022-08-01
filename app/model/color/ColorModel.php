@@ -88,5 +88,4 @@ class ColorModel extends BaseModel {
             throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
     }
-
 }

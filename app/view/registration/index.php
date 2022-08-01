@@ -42,7 +42,6 @@ include '../app/view/_header.php';
                     <label for = "username" class = "input-required">Username</label>
                     <input type = "text"
                            class = "form-control <?= !isset($errors) ? '' : (!empty($errors['username'])) ; ?>"
-
                            id = "username"
                            name = "username"
                            value = "<?= !empty($user) ? $user->getUsername() : ''; ?>"
