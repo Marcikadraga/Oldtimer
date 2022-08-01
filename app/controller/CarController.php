@@ -266,7 +266,7 @@ class CarController extends BaseController {
 
 
                 $colorModel->insertColor($color);
-
+                $successMsg = 'Az szín hozzáadása sikerült.';
 //                $this->response->jsonResponse([
 //                    "success" => true,
 //                    "message" => "Sikeres insert."
@@ -294,6 +294,21 @@ class CarController extends BaseController {
 
         $this->render('insertColor/index', $data);
 
+    }
+
+    public function getColor() {
+
+        $this->checkPermission('admin');
+
+        $colorModel = new ColorModel();
+
+        $result = $colorModel->getColorById($this->request->getPost('colorId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        if ($result) {
+            echo json_encode($result);
+            return;
+        }
+
+        echo json_encode("error");
     }
 
     protected function validate() {

@@ -31,7 +31,7 @@ include '../app/view/_header.php';
                            id = "name_of_color"
                            name = "name_of_color"
                            value = "<?= !empty($color) ? $color->getNameOfColor() : ''; ?>"
-                           >
+
                     >
                     <label for = "Range0" class = "form-label">RED</label>
                     <br>
@@ -54,23 +54,6 @@ include '../app/view/_header.php';
                     <label for = result""></label>
                     <p id = "result"></p>
 
-
-<!--                    <script>-->
-<!---->
-<!---->
-<!--                        let range0 = document.getElementById("Range0");-->
-<!--                        let range1 = document.getElementById("Range1");-->
-<!--                        let range2 = document.getElementById("Range2");-->
-<!--                        let colorResult = document.getElementById("resultColor");-->
-<!---->
-<!---->
-<!--                        function showColor() {-->
-<!--                            document.getElementById("rgb").value = colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";-->
-<!--                            colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";-->
-<!--                        }-->
-<!---->
-<!---->
-<!--                    </script>-->
 
                     <label for = "rgb" class = "input-required">RGB</label>
                     <input type = "text"

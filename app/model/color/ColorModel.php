@@ -88,4 +88,20 @@ class ColorModel extends BaseModel {
             throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
     }
+
+    public function getColorById($colorId) {
+
+        try {
+
+            $query = 'SELECT * FROM color WHERE id=? AND deleted_at IS NULL LIMIT 1';
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$colorId]);
+            return $statement->fetch(PDO::FETCH_ASSOC);
+
+        } catch (Exception $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
+        }
+    }
 }
