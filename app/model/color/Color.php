@@ -2,6 +2,8 @@
 
 namespace app\model\color;
 
+use DateTime;
+
 class Color {
 
     private $id            = '';
@@ -66,9 +68,6 @@ class Color {
     }
 
 
-
-
-
     /**
      * @return null
      */
@@ -79,11 +78,15 @@ class Color {
 
 
     /**
-     * @param null $created_at
+     * @param DateTime|null $created_at
      */
     public function setCreatedAt($created_at): void {
 
-        $this->created_at = $created_at;
+        if ($created_at instanceof DateTime) {
+            $this->created_at = $created_at->format('Y-m-d H:i:s');
+        } else {
+            $this->created_at = null;
+        }
     }
 
 
@@ -97,11 +100,15 @@ class Color {
 
 
     /**
-     * @param null $updated_at
+     * @param DateTime|null $updated_at
      */
     public function setUpdatedAt($updated_at): void {
 
-        $this->updated_at = $updated_at;
+        if ($updated_at instanceof DateTime) {
+            $this->updated_at = $updated_at->format('Y-m-d H:i:s');
+        } else {
+            $this->updated_at = null;
+        }
     }
 
 

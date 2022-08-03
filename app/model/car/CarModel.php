@@ -85,10 +85,10 @@ class CarModel extends BaseModel {
 
             $statement = $this->pdo->prepare($query);
             $statement->execute($params);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (!empty($result)) {
-                return new Car($result[0]);
+                return new Car($result);
             }
         } catch (Exception $exception) {
             die($exception->getMessage());

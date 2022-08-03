@@ -15,7 +15,7 @@ class ColorModel extends BaseModel {
     public function getAllColors(): array {
 
         try {
-            $query = 'SELECT * FROM color WHERE deleted_at IS NULL';
+            $query = 'SELECT * FROM colors WHERE deleted_at IS NULL';
 
             $colors = [];
 
@@ -42,13 +42,13 @@ class ColorModel extends BaseModel {
 
             if ($softDelete === true) {
                 //TODO ,soft micsoda?
-                $query = 'UPDATE color SET deleted_at=:deleted_at WHERE id=:id';
+                $query = 'UPDATE colors SET deleted_at=:deleted_at WHERE id=:id';
                 $params = [
                     'id'         => $color_id,
                     'deleted_at' => date('Y-m-d H:i:s'),
                 ];
             } else {
-                $query = 'DELETE FROM color WHERE id=?';
+                $query = 'DELETE FROM colors WHERE id=?';
                 $params = [$color_id];
             }
 
@@ -67,7 +67,7 @@ class ColorModel extends BaseModel {
 
         try {
             $query = '
-            INSERT INTO color(name_of_color, rgb, created_at, updated_at, deleted_at)
+            INSERT INTO colors(name_of_color, rgb, created_at, updated_at, deleted_at)
             VALUES(:name_of_color,:rgb,:created_at,:updated_at,:deleted_at)';
 
             $params = [
@@ -89,11 +89,11 @@ class ColorModel extends BaseModel {
         }
     }
 
+
     public function getColorById($colorId) {
 
         try {
-
-            $query = 'SELECT * FROM color WHERE id=? AND deleted_at IS NULL LIMIT 1';
+            $query = 'SELECT * FROM colors WHERE id=? AND deleted_at IS NULL LIMIT 1';
             $statement = $this->pdo->prepare($query);
             $statement->execute([$colorId]);
             return $statement->fetch(PDO::FETCH_ASSOC);
@@ -104,4 +104,61 @@ class ColorModel extends BaseModel {
             throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
     }
+
+
+    public function getById($colorId): ?Color {
+
+        try {
+
+            $query = 'SELECT * FROM colors WHERE id=? AND deleted_at IS NULL LIMIT 1';
+
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$colorId]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (!empty($result)) {
+                return new Color($result);
+            }
+
+        } catch (Exception $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
+        }
+        return null;
+    }
+
+
+    public function update(Color $color): bool {
+
+        try {
+            $query = '
+            UPDATE colors
+            SET name_of_color=:name_of_color,
+                rgb=:rgb,
+                created_at=:created_at,
+                updated_at=:updated_at,
+                deleted_at=:deleted_at
+
+            
+            WHERE id=:id';
+
+            $params = [
+                'id'            => $color->getId(),
+                'name_of_color' => $color->getNameOfColor(),
+                'rgb'           => $color->getRgb(),
+                'created_at'    => $color->getCreatedAt(),
+                'updated_at'    => $color->getUpdatedAt(),
+                'deleted_at'    => $color->getDeletedAt()
+
+            ];
+
+            $statement = $this->pdo->prepare($query);
+            return $statement->execute($params);
+
+        } catch (Exception $exception) {
+            die($exception->getMessage());
+        }
+    }
+
 }

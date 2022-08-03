@@ -168,10 +168,10 @@ class CarTypeModel {
 
             $statement = $this->pdo->prepare($query);
             $statement->execute($params);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (!empty($result)) {
-                return new CarType($result[0]);
+                return new CarType($result);
             }
         } catch (Exception $exception) {
             die($exception->getMessage());

@@ -5,7 +5,7 @@ let colorResult = document.getElementById("resultColor");
 
 
 function showColor() {
-    document.getElementById("rgb").value = colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";
+    document.getElementById("edit-rgb").value = colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";
     colorResult.style.backgroundColor = "rgb(" + range0.value + "," + range1.value + "," + range2.value + ")";
 }
 
