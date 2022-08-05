@@ -1,6 +1,7 @@
 <?php
 
 use app\model\car\Car;
+use app\model\color\Color;
 use app\model\user\Authenticator;
 
 include '../app/view/_header.php';
@@ -10,6 +11,7 @@ include '../app/view/_header.php';
 /** @var bool $isLoggedInUser True, ha van belépett user */
 /** @var Authenticator $userId */
 /** @var array[] $allCarType */
+/** @var Color[] $colors */
 
 ?>
 
@@ -52,8 +54,8 @@ include '../app/view/_header.php';
                         <td class = "text-wrap align-middle" data-id = "<?= $car->getType() ?>">
                             <?= $car->getType() ?>
                         </td>
-                        <td class = "text-wrap align-middle">
-                            <?= $car->getColor() ?>
+                        <td class = "text-wrap align-middle" style="background-color: <?= $car->getColor() ?>">
+
                         </td>
                         <td class = "text-wrap align-middle">
                             <?= $car->getKilometersTraveled() ?>
@@ -95,8 +97,7 @@ include '../app/view/_header.php';
                                 <?= $car->getUpdatedAt() ?>
                             </td>
                             <td style = "text-align: center">
-                                <button type = "button" data-id = "<?= $car->getId() ?>" class = "btn btn-info get-car-modal edit-car" data-toggle = "modal" data-target = "#exampleModal"><a class = "nav-link"><i class = "fa fa-edit "
-                                                                                                                                                                                                                    style = "color:white"></i></a>
+                                <button type = "button" data-id = "<?= $car->getId() ?>" class = "btn btn-info get-car-modal edit-car"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
                                 </button>
                                 <button type = "button" class = "btn btn-danger delete-car"><a class = "nav-link" href = "/"><i class = "fa fa-trash " style = "color:white"></i></a></button>
                             </td>
@@ -137,12 +138,25 @@ include '../app/view/_header.php';
                                     </div>
 
 
-                                    <label for = "edit-color" class = "col-form-label">Szín</label><br>
-                                    <input
-                                            type = "text"
-                                            class = "form-control"
-                                            id = "edit-color"
-                                    >
+                                    <div class = "form-group">
+                                        <label for = "form-control" class = "input-required">Szín</label>
+                                        <br>
+                                        <select id = "edit-color" name = "edit-color"  style="width: 100px;
+">
+                                            <?php
+                                            for ($i = 0; $i < count($colors); $i++) {
+                                                ?>
+                                                <option  name = "color" class = "color" style = "background-color: <?= $colors[$i]->getRgb() ?>; color: black;" value = "<?= $colors[$i]->getRgb() ?>"></option>
+
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+
+
+
                                     <label for = "edit-color" class = "col-form-label">Megtett KM</label><br>
                                     <input
                                             type = "text"
@@ -183,6 +197,15 @@ include '../app/view/_header.php';
         </tbody>
     </table>
 </div>
+
+<script>
+
+    let colorSelecter = document.getElementById("edit-color");
+    colorSelecter.addEventListener("input", function (e) {
+        e.target.style.backgroundColor = colorSelecter.value;
+    })
+
+</script>
 
 <script src = "/public/assets/js/pages/cars/index.js" type = "module"></script>
 <?php include '../app/view/_footer.php'; ?>

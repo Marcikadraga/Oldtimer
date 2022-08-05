@@ -43,8 +43,7 @@ include '../app/view/_header.php';
                     <?= $color->getUpdatedAt() ?>
                 </td>
                 <td>
-                    <button type = "button" data-id = "<?= $color->getId() ?>" class = "btn btn-info get-car-modal edit-color"><a class = "nav-link"><i class = "fa fa-edit "
-                                                                                                                                                        style = "color:white"></i></a>
+                    <button type = "button" data-id = "<?= $color->getId() ?>" class = "btn btn-info get-car-modal edit-color"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
                     </button>
                     <button type = "button" data-id = "<?= $color->getId() ?>" class = "btn btn-danger delete-color"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a></button>
                 </td>
@@ -91,8 +90,6 @@ include '../app/view/_header.php';
                     </div>
 
 
-
-
                     <label for = "Range0" class = "form-label">RED</label>
                     <br>
                     <input type = "range" class = "form-range" min = "0" max = "255" id = "Range0" style = "width: 300px">
@@ -103,20 +100,19 @@ include '../app/view/_header.php';
                     <br>
                     <label for = "Range2" class = "form-label">BLUE</label>
                     <br>
-                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range2"  style = "width: 300px">
+                    <input type = "range" class = "form-range" min = "0" max = "255" id = "Range2" style = "width: 300px">
 
                     <div id = "resultColor" style = "width: 100px; height: 100px;border: 3px solid black">
 
                     </div>
 
                     <script>
-                        let range0=document.getElementById("Range0").value;
-                        let range1=document.getElementById("Range1").value;
-                        let range2=document.getElementById("Range2").value;
-                        document.getElementById("resultColor").style.backgroundColor="rgb("+range0+","+range1+","+range2+")";
+                        let range0 = document.getElementById("Range0").value;
+                        let range1 = document.getElementById("Range1").value;
+                        let range2 = document.getElementById("Range2").value;
+                        document.getElementById("resultColor").style.backgroundColor = "rgb(" + range0 + "," + range1 + "," + range2 + ")";
 
                     </script>
-
 
 
                 </form>

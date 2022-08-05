@@ -1,4 +1,13 @@
-<?php include '../app/view/_header.php' ?>
+<?php use app\model\carType\CarType;
+
+include '../app/view/_header.php' ?>
+
+<?php
+/** @var Cartype[] $cartypes */
+
+?>
+
+
 
     <table class = "table">
         <thead class = "thead-dark">
@@ -6,6 +15,7 @@
             <th>ID</th>
             <th>Gyártó</th>
             <th>Típus</th>
+            <th>Státusz</th>
             <th>Gyártás kezdete</th>
             <th>Gyártás vége</th>
             <th>Feltöltve</th>
@@ -14,35 +24,52 @@
         </tr>
         </thead>
         <tbody>
-        <?php
-        if (!empty($carType)) {
-            foreach ($carType as $car) {
-                ?>
-                <tr class = "trValues">
-                    <?php
-                    $id = $car['id'];
-                    foreach ($car as $key => $value) {
-                        if ($key == "deleted_at") continue;
-                        ?>
-                        <td><?php echo $value; ?></td>
-                        <?php
-                    }
-                    ?>
-                    <th style = "text-align: center">
-                        <button type = "button" data-id = "<?php echo $car['id']; ?>" class = "btn btn-info get-car-modal edit-car" data-toggle = "modal" data-target = "#exampleModal"><a class = "nav-link" ><i class="fa fa-edit "style="color:white"></i></a></button>
-                        <button type = "button" data-id = "<?php echo $id ?>" class = "btn btn-danger delete-car"><a class = "nav-link" href = "/"><i class="fa fa-trash " style="color:white"></i></a></button>
-                    </th>
-                </tr>
-                <?php
-            }
-        } else {
-            ?>
+        <?php if (empty($cartypes)): ?>
             <tr>
-                <td colspan = "5">Nincs adat</td>
+                <td colspan = "11">Nincs adat</td>
             </tr>
-            <?php
-        }
-        ?>
+        <?php else: ?>
+            <?php foreach ($cartypes as $cartype): ?>
+                <tr>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getId() ?>
+                    </td>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getManufacturer() ?>
+                    </td>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getType() ?>
+                    </td>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getIsActive() ?>
+                    </td>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getStartOfProductionTime() ?>
+                    </td>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getEndOfProductionTime() ?>
+                    </td>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getCreatedAt() ?>
+                    </td>
+                    <td class = "text-wrap align-middle">
+                        <?= $cartype->getUpdatedAt() ?>
+                    </td>
+                    <td>
+
+                        <button type = "button"
+                                data-id = "<?= $cartype->getId() ?>"
+
+                                class = "btn btn-info get-car-modal edit-carType ">
+                            <a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
+                        </button>
+                        <button type = "button" data-id = "<?= $cartype->getId() ?>" class = "btn btn-danger delete-carType">
+                            <a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a>
+                        </button>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        <?php endif ?>
         </tbody>
     </table>
 
@@ -81,6 +108,15 @@
                                     class = "form-control"
                                     id = "edit-type"
                             >
+                        </div>
+                        <div class = "form-group">
+                            <label for = "edit-type" class = "col-form-label">Státusz</label><br>
+                            <div class="container mt-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+                                        <label class="form-check-label" for="mySwitch">Dark Mode</label>
+                                    </div>
+                            </div>
                         </div>
                         <div class = "form-group">
                             <label for = "edit-startOfProduction" class = "col-form-label">Gyártás kezdete</label><br>

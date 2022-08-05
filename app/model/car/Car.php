@@ -28,14 +28,33 @@ class Car {
     private   $updated_at          = null;
     private   $deleted_at          = null;
 
-    //    public function checkIsValidSave(): bool {
-    //
-    //        if (empty($this->id)) {
-    //            return $this->checkIsValidInsert();
-    //        } else {
-    //            return $this->checkIsValidUpdate();
-    //        }
-    //    }
+    public function checkIsValidInsert(): bool {
+
+        return true;
+    }
+
+
+    public function checkIsValidUpdate(): bool {
+
+        $this->errors = [];
+
+        $this->checkIsValidInsert();
+        if (empty($this->id)) {
+            $this->errors['id'] = 'Hiba! Az entitás id-ja üres.';
+        }
+
+        return empty($this->errors);
+    }
+
+
+    public function checkIsValidSave(): bool {
+
+        if (empty($this->id)) {
+            return $this->checkIsValidInsert();
+        } else {
+            return $this->checkIsValidUpdate();
+        }
+    }
 
     public function __construct(?array $data = null) {
 

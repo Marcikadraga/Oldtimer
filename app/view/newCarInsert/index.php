@@ -51,14 +51,13 @@ include '../app/view/_header.php';
 
                 <div class = "form-group">
                     <label for = "form-control" class = "input-required">Szín</label>
-                    <select class = "color" name="color" id="color">
+                    <br>
+                    <select id = "color" name = "color"  style="width: 100px;
+">
                         <?php
                         for ($i = 0; $i < count($colors); $i++) {
                             ?>
-                            <option name="color" id="color" value = "<?= $colors[$i]->getRgb() ?>"><?php echo $colors[$i]->getNameOfColor()    ?>   </option>
-
-
-
+                            <option  name = "color" class = "color" style = "background-color: <?= $colors[$i]->getRgb() ?>; color: black;" value = "<?= $colors[$i]->getRgb() ?>"></option>
 
                             <?php
                         }
@@ -120,7 +119,19 @@ include '../app/view/_header.php';
                 </div>
             </div>
     </form>
+
+
 </div>
 
+<script>
 
+    let colorSelecter = document.getElementById("color");
+    colorSelecter.addEventListener("input", function (e) {
+        e.target.style.backgroundColor = colorSelecter.value;
+    })
+
+</script>
+
+
+<?= addReference("assets/js/pages/cars/index.js", true) ?>
 <?php include '../app/view/_footer.php'; ?>

@@ -12,6 +12,7 @@ class CarType {
     private $startOfProductionTime = '';
     private $endOfProductionTime   = '';
     private $created_at            = '';
+    private $is_active             = '';
     private $updated_at            = null;
     private $deleted_at            = null;
 
@@ -305,5 +306,23 @@ class CarType {
     public function setId(string $id): void {
 
         $this->id = $id;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIsActive(): string {
+
+        return $this->is_active;
+    }
+
+
+    /**
+     * @param string $is_active
+     */
+    public function setIsActive(string $is_active): void {
+
+        $this->is_active = $is_active;
     }
 }

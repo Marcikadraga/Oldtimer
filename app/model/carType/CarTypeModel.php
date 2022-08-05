@@ -4,6 +4,7 @@ namespace app\model\carType;
 
 use app\core\logger\SystemLog;
 use app\core\pdo\PDOConnect;
+use app\model\car\Car;
 use Exception;
 use PDO;
 
@@ -35,7 +36,7 @@ class CarTypeModel {
     }
 
 
-    public function existManufacturer($manufacturer): bool {
+    public function existManufacturer($manufacturer): array {
 
         try {
             $query = 'SELECT * FROM carTypes WHERE manufacturer=? AND deleted_at IS NULL LIMIT 1';
@@ -57,9 +58,19 @@ class CarTypeModel {
         try {
             $query = 'SELECT * FROM carTypes WHERE deleted_at IS NULL';
 
+            $cartypes=[];
+
             $statement = $this->pdo->prepare($query);
             $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+           if(!empty($result)){
+               foreach ($result as $item){
+                   $cartypes[]= new CarType($item);
+               }
+           }
+           return $cartypes;
 
         } catch (Exception $exception) {
             die($exception->getMessage());
@@ -196,21 +207,50 @@ class CarTypeModel {
     }
 
 
-    public function isUniqCarType($type): bool {
+    public function isUniqCarType($typeId): bool {
 
         try {
-            $query = 'SELECT type FROM cartypes WHERE type=? AND deleted_at IS NULL';
-            $params=[$type];
+
+            $query = 'SELECT is_active FROM cartypes WHERE id=? AND deleted_at IS NULL LIMIT 1';
+
             $statement = $this->pdo->prepare($query);
-            $statement->execute($params);
-            if ($statement->fetchAll(PDO::FETCH_ASSOC) != null) {
-                return false;
+            $statement->execute([$typeId]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($result == 0) {
+                return true;
             }
-            return true;
+            return false;
 
         } catch (Exception $exception) {
-            die($exception->getMessage());
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
     }
+
+
+    public function getStatus() {
+
+        try {
+
+            $query = 'SELECT * FROM cartypes WHERE id=? AND deleted_at IS NULL LIMIT 1';
+
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$colorId]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (!empty($result)) {
+                return new Color($result);
+            }
+
+        } catch (Exception $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
+        }
+        return null;
+    }
+
 }
 

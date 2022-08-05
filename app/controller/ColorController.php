@@ -58,9 +58,10 @@ class ColorController extends BaseController {
 
             if (empty($name_of_color)) {
                 $errors['name_of_color'] = 'a szín megadása kötelező!';
-            } elseif (empty($rgb)) {
-                $errors['rgb'] = 'az rgb megadása kötelező!';
             }
+//            elseif (empty($rgb)) {
+//                $errors['rgb'] = 'az rgb megadása kötelező!';
+//            }
             if (!empty($errors)) {
                 throw new Exception('Kérjük ellenőrizze az űrlapot!');
             }

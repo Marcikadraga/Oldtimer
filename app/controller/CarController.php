@@ -6,7 +6,6 @@ use app\core\logger\SystemLog;
 use app\model\car\Car;
 use app\model\car\CarModel;
 use app\model\carType\CarTypeModel;
-use app\model\color\Color;
 use app\model\color\ColorModel;
 use app\model\user\Authenticator;
 use DateTime;
@@ -21,6 +20,7 @@ class CarController extends BaseController {
         $carModel = new CarModel();
         $car = new Car();
         $carTypeModel = new CarTypeModel();
+        $colormodel = new ColorModel();
 
         $data = [
             'cars'           => $carModel->getAllCars(),
@@ -30,7 +30,8 @@ class CarController extends BaseController {
             'userId'         => $auth->getUserId(),
             'carId'          => $car->getId(),
             'cardCondition'  => $car->getCarCondition(),
-            'allCarType'     => $carTypeModel->getAllCarTypes()
+            'allCarType'     => $carTypeModel->getAllCarTypes(),
+            'colors'         => $colormodel->getAllColors(),
 
         ];
 
@@ -62,9 +63,9 @@ class CarController extends BaseController {
                 if (empty($type)) {
                     $errors['type'] = 'a típus megadása kötelező!';
                 }
-//                elseif (empty($color)) {
-//                    $errors['color'] = 'a szín megadása kötelező!';
-//                }
+                //                elseif (empty($color)) {
+                //                    $errors['color'] = 'a szín megadása kötelező!';
+                //                }
                 elseif (empty($kilometers_traveled)) {
                     $errors['kilometers_traveled'] = 'a megtett KM megadása kötelező!';
                 } elseif (empty($year_of_manufacture)) {
@@ -116,8 +117,8 @@ class CarController extends BaseController {
         $data['car'] = $car;
         $data['submitted'] = true;
 
-        $colormodel=new ColorModel();
-        $data['colors']=$colormodel->getAllColors();
+        $colormodel = new ColorModel();
+        $data['colors'] = $colormodel->getAllColors();
 
         $carTypeModel = new CarTypeModel();
         $data['allCarType'] = $carTypeModel->getAllCarTypes();

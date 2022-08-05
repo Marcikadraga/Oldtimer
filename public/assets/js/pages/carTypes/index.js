@@ -1,7 +1,7 @@
 import {hFetch} from "../../functions.js";
 
 
-const deleteCarButtons = document.querySelectorAll(".delete-car");
+const deleteCarButtons = document.querySelectorAll(".delete-carType");
 deleteCarButtons.forEach(function (button) {
     button.addEventListener("click", function (event) {
         event.preventDefault(); // prevent the default action of the button
@@ -32,7 +32,7 @@ deleteCarButtons.forEach(function (button) {
 });
 
 
-const updateCarButtons = document.querySelectorAll(".edit-car");
+const updateCarButtons = document.querySelectorAll(".edit-carType");
 updateCarButtons.forEach(function (button) {
     button.addEventListener("click", function (event) {
         const carId = button.dataset.id;
@@ -50,6 +50,7 @@ updateCarButtons.forEach(function (button) {
                 document.querySelector("#edit-type").value = data.type;
                 document.querySelector("#edit-startOfProduction").value = data.startOfProductionTime;
                 document.querySelector("#edit-endOfProduction").value = data.endOfProductionTime;
+                $('#exampleModal').modal();
             })
             .catch((error) => {
                 console.error('Error:', error);

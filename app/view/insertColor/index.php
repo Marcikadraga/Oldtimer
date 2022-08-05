@@ -50,26 +50,25 @@ include '../app/view/_header.php';
 
                     </div>
 
-<!--                    <script>-->
-<!--                        let range0=document.getElementById("Range0").value;-->
-<!--                        let range1=document.getElementById("Range1").value;-->
-<!--                        let range2=document.getElementById("Range2").value;-->
-<!--                        document.getElementById("resultColor").style.backgroundColor="rgb("+range0+","+range1+","+range2+")";-->
-<!---->
-<!--                    </script>-->
+                    <script>
+                        let range0=document.getElementById("Range0").value;
+                        let range1=document.getElementById("Range1").value;
+                        let range2=document.getElementById("Range2").value;
+                        document.getElementById("resultColor").style.backgroundColor="rgb("+range0+","+range1+","+range2+")";
+
+                    </script>
 
 
                     <label for = result""></label>
                     <p id = "result"></p>
 
 
-                    <label style="display: none" for = "rgb" class = "input-required">RGB</label>
-                    <input style="display: none" type = "text"
+                    <label for = "rgb" class = "input-required">RGB</label>
+                    <input  type = "text"
                            class = "form-control <?= !isset($errors) ? '' : (!empty($errors['rgb']) ? 'is-invalid' : 'is-valid'); ?>"
                            id = "rgb"
                            name = "rgb"
                            value = "<?= !empty($color) ? $color->getRgb() : ''; ?>"
-
                     >
                     <?php
                     ?>

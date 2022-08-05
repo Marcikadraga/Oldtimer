@@ -28,12 +28,11 @@ class CarTypeController extends BaseController {
     public function index() {
 
         $this->checkPermission('admin');
-
-        $cars = $this->carModel->getAllCars();
+        $cartypeModel= new CarTypeModel();
 
         $data = [
-            'carType' => $cars,
-        ];
+            'cartypes' =>$cartypeModel->getAllCars(),
+            ];
 
         $this->render('carType/index', $data);
     }
@@ -123,7 +122,6 @@ class CarTypeController extends BaseController {
         $errorMsg = '';
         $successMsg = '';
         $car = new CarType();
-        
 
         if ($this->request->isPostRequest()) {
             try {
@@ -136,11 +134,10 @@ class CarTypeController extends BaseController {
 
                 $carModel = new CarTypeModel();
 
-                
-                if(!$carModel->isUniqCarType($type)){
-                    $errors['type']='Ezzel a névvel már létezik típus!';
+                if (!$carModel->isUniqCarType($type)) {
+                    $errors['type'] = 'Ezzel a névvel már létezik típus!';
                 }
-                
+
                 if (empty($manufacturer)) {
                     $errors['manufacturer'] = 'A gyártó megadása kötelező!';
                 }
