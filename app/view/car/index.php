@@ -48,7 +48,7 @@ include '../app/view/_header.php';
             <?php else: ?>
                 <?php foreach ($cars as $car): ?>
                     <tr>
-                        <td class = "text-wrap align-middle" data-id = "<?= $car->getId() ?>">
+                        <td style="display: none" class = "text-wrap align-middle" data-id = "<?= $car->getId() ?>">
                             <?= $car->getId() ?>
                         </td>
                         <td class = "text-wrap align-middle" data-id = "<?= $car->getType() ?>">

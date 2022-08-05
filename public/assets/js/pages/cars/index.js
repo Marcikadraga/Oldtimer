@@ -45,6 +45,7 @@ updateCarButtons.forEach(function (button) {
                 document.querySelector("#edit-year-of-manufacture").value = data.year_of_manufacture;
                 document.querySelector("#edit-car-condition").value = data.car_condition;
                 document.querySelector("#edit-type-of-fuel").value = data.type_of_fuel;
+                $('#exampleModal').modal();
             })
             .catch((error) => {
                 console.error('Error:', error);

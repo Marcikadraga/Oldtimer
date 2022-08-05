@@ -4,7 +4,6 @@ namespace app\model\carType;
 
 use app\core\logger\SystemLog;
 use app\core\pdo\PDOConnect;
-use app\model\car\Car;
 use Exception;
 use PDO;
 
@@ -58,19 +57,19 @@ class CarTypeModel {
         try {
             $query = 'SELECT * FROM carTypes WHERE deleted_at IS NULL';
 
-            $cartypes=[];
+            $cartypes = [];
 
             $statement = $this->pdo->prepare($query);
             $statement->execute();
 
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-           if(!empty($result)){
-               foreach ($result as $item){
-                   $cartypes[]= new CarType($item);
-               }
-           }
-           return $cartypes;
+            if (!empty($result)) {
+                foreach ($result as $item) {
+                    $cartypes[] = new CarType($item);
+                }
+            }
+            return $cartypes;
 
         } catch (Exception $exception) {
             die($exception->getMessage());
@@ -128,6 +127,7 @@ class CarTypeModel {
                 type=:type,
                 startOfProductionTime=:startOfProductionTime,
                 endOfProductionTime=:endOfProductionTime,
+                is_active=:is_active,
                 created_at=:created_at,
                 updated_at=:updated_at,
                 deleted_at=:deleted_at
@@ -140,6 +140,7 @@ class CarTypeModel {
                 'type'                  => $carType->getType(),
                 'startOfProductionTime' => $carType->getStartOfProductionTime(),
                 'endOfProductionTime'   => $carType->getEndOfProductionTime(),
+                'is_active'             => $carType->getIsActive(),
                 'created_at'            => $carType->getCreatedAt(),
                 'updated_at'            => $carType->getUpdatedAt(),
                 'deleted_at'            => $carType->getDeletedAt()

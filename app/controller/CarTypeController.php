@@ -74,12 +74,12 @@ class CarTypeController extends BaseController {
             if (empty($car)) {
                 throw new Exception('Nem létezik ilyen autó');
             }
-
             $car->setManufacturer($this->request->getPost('manufacturer', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setType($this->request->getPost('type', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setStartOfProductionTime($this->request->getPost('startOfProduction', FILTER_SANITIZE_SPECIAL_CHARS));
             $car->setEndOfProductionTime($this->request->getPost('endOfProduction', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setUpdatedAt(new DateTime());
+            $car->setIsActive($this->request->getPost('is_active', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
             if (!$car->checkIsValidSave()) {
                 throw new Exception($car->getErrorsAsString());

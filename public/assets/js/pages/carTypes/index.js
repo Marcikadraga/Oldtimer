@@ -50,6 +50,7 @@ updateCarButtons.forEach(function (button) {
                 document.querySelector("#edit-type").value = data.type;
                 document.querySelector("#edit-startOfProduction").value = data.startOfProductionTime;
                 document.querySelector("#edit-endOfProduction").value = data.endOfProductionTime;
+                document.querySelector("#edit-is-active").value = data.is_active;
                 $('#exampleModal').modal();
             })
             .catch((error) => {
@@ -59,22 +60,33 @@ updateCarButtons.forEach(function (button) {
     });
 });
 
-const saveEditedDataButton= document.querySelector("#save-edited-data");
+const saveEditedDataButton = document.querySelector("#save-edited-data");
 saveEditedDataButton.addEventListener("click", function (event) {
 
-        const carId = document.querySelector("#edit-car-id").value; //a carID alapján fogok szűrni backenden a kocsikat, és az egyező id-jű kocsi adatait frissíteni.
-        const manufacturer = document.querySelector("#edit-manufacturer").value;
-        const type = document.querySelector("#edit-type").value;
-        const startOfProduction = document.querySelector("#edit-startOfProduction").value;
-        const endOfProduction = document.querySelector("#edit-endOfProduction").value;
+    const carId = document.querySelector("#edit-car-id").value; //a carID alapján fogok szűrni backenden a kocsikat, és az egyező id-jű kocsi adatait frissíteni.
+    const manufacturer = document.querySelector("#edit-manufacturer").value;
+    const type = document.querySelector("#edit-type").value;
+    const startOfProduction = document.querySelector("#edit-startOfProduction").value;
+    const endOfProduction = document.querySelector("#edit-endOfProduction").value;
+    let is_active;
+    if(document.getElementById("edit-is-active").checked===true){
+         is_active = document.querySelector("#edit-is-active").value=1;
+    }
+    if(document.getElementById("edit-is-active").checked===false){
+         is_active = document.querySelector("#edit-is-active").value=0;
+    }
 
-        const fd = new FormData();
-        fd.append('carId', carId);
-        fd.append('manufacturer', manufacturer);
-        fd.append('type', type);
-        fd.append('startOfProduction', startOfProduction);
-        fd.append('endOfProduction', endOfProduction);
 
+
+    // let is_active = document.querySelector("#edit-is-active").value;
+
+    const fd = new FormData();
+    fd.append('carId', carId);
+    fd.append('manufacturer', manufacturer);
+    fd.append('type', type);
+    fd.append('startOfProduction', startOfProduction);
+    fd.append('endOfProduction', endOfProduction);
+    fd.append('is_active', is_active);
 
 
     hFetch('https://marci.dev/CarTypeController/update', {
