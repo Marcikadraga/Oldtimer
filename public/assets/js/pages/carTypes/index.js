@@ -51,6 +51,15 @@ updateCarButtons.forEach(function (button) {
                 document.querySelector("#edit-startOfProduction").value = data.startOfProductionTime;
                 document.querySelector("#edit-endOfProduction").value = data.endOfProductionTime;
                 document.querySelector("#edit-is-active").value = data.is_active;
+
+                if (data.is_active === 0) {
+                    document.querySelector("#edit-is-active").checked = false;
+                }
+                if (data.is_active === 1) {
+                    document.querySelector("#edit-is-active").checked = true;
+                }
+
+
                 $('#exampleModal').modal();
             })
             .catch((error) => {
@@ -69,13 +78,12 @@ saveEditedDataButton.addEventListener("click", function (event) {
     const startOfProduction = document.querySelector("#edit-startOfProduction").value;
     const endOfProduction = document.querySelector("#edit-endOfProduction").value;
     let is_active;
-    if(document.getElementById("edit-is-active").checked===true){
-         is_active = document.querySelector("#edit-is-active").value=1;
+    if (document.getElementById("edit-is-active").checked === true) {
+        is_active = document.querySelector("#edit-is-active").value = 1;
     }
-    if(document.getElementById("edit-is-active").checked===false){
-         is_active = document.querySelector("#edit-is-active").value=0;
+    if (document.getElementById("edit-is-active").checked === false) {
+        is_active = document.querySelector("#edit-is-active").value = 0;
     }
-
 
 
     // let is_active = document.querySelector("#edit-is-active").value;

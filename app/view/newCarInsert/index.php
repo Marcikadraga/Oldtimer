@@ -50,9 +50,13 @@ include '../app/view/_header.php';
 
 
                 <div class = "form-group">
-                    <label for = "form-control" class = "input-required">Szín</label>
+                    <label for = "form-control"  class = "input-required">Szín</label>
                     <br>
-                    <select id = "color" name = "color"  style="width: 100px;
+                    <select
+                            id = "color"
+                            name = "color"
+                            style="width: 100px;
+                            value = "<?= !empty($car) ? $car->getColor() : ''; ?>"
 ">
                         <?php
                         for ($i = 0; $i < count($colors); $i++) {

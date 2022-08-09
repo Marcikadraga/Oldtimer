@@ -6,3 +6,11 @@ export const hFetch = (url, opts) => {
     };
     return fetch(url, options);
 }
+
+export const qs = (selector, parent = document) => {
+    return parent.querySelector(selector);
+}
+
+export const qsa = (selector, parent = document) => {
+    return [...parent.querySelectorAll(selector)];
+}

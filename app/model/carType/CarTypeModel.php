@@ -231,18 +231,18 @@ class CarTypeModel {
     }
 
 
-    public function getStatus() {
+    public function getStatus($typeId) {
 
         try {
 
             $query = 'SELECT * FROM cartypes WHERE id=? AND deleted_at IS NULL LIMIT 1';
 
             $statement = $this->pdo->prepare($query);
-            $statement->execute([$colorId]);
+            $statement->execute([$typeId]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (!empty($result)) {
-                return new Color($result);
+                return new CarType($result);
             }
 
         } catch (Exception $exception) {
@@ -252,6 +252,5 @@ class CarTypeModel {
         }
         return null;
     }
-
 }
 

@@ -325,7 +325,6 @@ class UserController extends BaseController {
             $successMsg = 'Sikerült a regisztráció, kérjük kattintson a login menüre.';
 
         } catch (Exception $exception) {
-            // nem végleges hibakezelés!!!
             $errorMsg = $exception->getMessage();
 
             if (!empty($errors)) {

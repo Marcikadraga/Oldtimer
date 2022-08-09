@@ -3,7 +3,7 @@
 include '../app/view/_header.php' ?>
 
 <?php
-/** @var Cartype[] $cartypes */
+/** @var Cartype[] $cartype */
 
 ?>
 
@@ -85,7 +85,7 @@ include '../app/view/_header.php' ?>
     <div class = "modal-dialog">
         <div class = "modal-content">
             <div class = "modal-header">
-                <h5 class = "modal-title" id = "exampleModalLabel">New message</h5>
+                <h5 class = "modal-title" id = "exampleModalLabel">Típus beállítása</h5>
                 <button type = "button" class = "close" data-dismiss = "modal" aria-label = "Close">
                     <span aria-hidden = "true">&times;</span>
                 </button>
@@ -116,7 +116,7 @@ include '../app/view/_header.php' ?>
                                 id = "edit-type"
                         >
                     </div>
-                    <p style="padding: 0;margin-bottom: 10px">Státusz</p>
+                    <p style = "padding: 0;margin-bottom: 10px">Státusz</p>
                     <div class = "custom-control custom-switch">
                         <input
                                 type = "checkbox"
@@ -131,6 +131,7 @@ include '../app/view/_header.php' ?>
                                 type = "text"
                                 class = "form-control"
                                 id = "edit-startOfProduction"
+
                         >
                     </div>
                     <div class = "form-group">

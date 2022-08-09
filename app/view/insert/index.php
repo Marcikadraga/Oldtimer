@@ -33,7 +33,6 @@
                                id = "manufacturer"
                                name = "manufacturer"
                                value = "<?= !empty($car) ? $car->getManufacturer() : ''; ?>"
-                               minlength = "3"
                                >
                         <div class = "invalid-feedback"><?= $errors['manufacturer'] ?? ''; ?></div>
                     </div>

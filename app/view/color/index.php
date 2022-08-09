@@ -7,7 +7,7 @@ use app\model\color\Color;
 include '../app/view/_header.php';
 ?>
 
-<table class = "table table-striped table-bordered text-center">
+<table class = "table">
     <thead class = "thead-dark">
     <tr>
         <th>ID</th>
@@ -57,14 +57,14 @@ include '../app/view/_header.php';
     <div class = "modal-dialog">
         <div class = "modal-content">
             <div class = "modal-header">
-                <h5 class = "modal-title" id = "exampleModalLabel">New message</h5>
+                <h5 class = "modal-title" id = "exampleModalLabel">Szín beállítása</h5>
                 <button type = "button" class = "close" data-dismiss = "modal" aria-label = "Close">
                     <span aria-hidden = "true">&times;</span>
                 </button>
             </div>
             <div class = "modal-body">
                 <form method = "POST">
-                    <div class = "form-group">
+                    <div style="display: none" class = "form-group">
                         <label for = "edit-color-id" class = "col-form-label">ID</label><br>
                         <input
                                 type = "text"

@@ -32,7 +32,7 @@ class CarController extends BaseController {
             'cardCondition'  => $car->getCarCondition(),
             'allCarType'     => $carTypeModel->getAllCarTypes(),
             'colors'         => $colormodel->getAllColors(),
-
+            'getAllCars'     => $carTypeModel->getAllCars(),
         ];
 
         $this->render('Car/index', $data ?? []);
@@ -49,6 +49,8 @@ class CarController extends BaseController {
         $car = new Car();
         $user = new Authenticator();
 
+        $this->checkPermission('admin');
+
         if ($this->request->isPostRequest()) {
             try {
                 $typeOfFuelValue = $this->request->getPost('type_of_fuel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -62,11 +64,9 @@ class CarController extends BaseController {
 
                 if (empty($type)) {
                     $errors['type'] = 'a típus megadása kötelező!';
-                }
-                //                elseif (empty($color)) {
-                //                    $errors['color'] = 'a szín megadása kötelező!';
-                //                }
-                elseif (empty($kilometers_traveled)) {
+                } elseif (empty($color)) {
+                    $errors['color'] = 'a szín megadása kötelező!';
+                } elseif (empty($kilometers_traveled)) {
                     $errors['kilometers_traveled'] = 'a megtett KM megadása kötelező!';
                 } elseif (empty($year_of_manufacture)) {
                     $errors['year_of_manufacture'] = 'a gyártás éve megadása kötelező!';
@@ -85,10 +85,12 @@ class CarController extends BaseController {
                 $car->setCreatedAt(new DateTime());
                 $car->setIdOfOwner($user->getUserId());
 
-                //TODO validálást meg kell csinálni majd még.
-                //            if (!$car->checkIsValidInsert() || !empty($errors)) {
-                //                $errors = array_merge($user->getErrors(), $errors);
-                //            }
+                if (!$car->checkIsValidInsert() || !empty($errors)) {
+                    $errors = array_merge($car->getErrors(), $errors);
+                }
+                if (!empty($errors)) {
+                    throw new Exception('Kérjük ellenőrizze az űrlapot!');
+                }
 
                 if (!empty($errors)) {
                     throw new Exception('Kérjük ellenőrizze az űrlapot!');

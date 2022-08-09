@@ -142,20 +142,14 @@ class CarType {
     public function checkIsValidSave(): bool {
 
         if (empty($this->id)) {
-            return $this->checkIsValidInsert();
+            return $this->checkISValidInsert();
         } else {
             return $this->checkIsValidUpdate();
         }
     }
 
 
-    public function getErrors(): array {
-
-        return $this->errors;
-    }
-
-
-    public function getErrorsAsString($separator = '<br>'): string {
+    public function getErrorAsString($separator = '<br>'): string {
 
         return implode($separator, $this->errors);
     }

@@ -61,9 +61,6 @@ class CarTypeController extends BaseController {
         $this->checkPermission('admin');
 
         try {
-
-
-            // $this->request = $this->request;
             $id = $this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if (empty($id)) {
                 throw new Exception('Nincs id');
@@ -109,7 +106,6 @@ class CarTypeController extends BaseController {
             echo json_encode($result);
             return;
         }
-
         echo json_encode("error");
     }
 
@@ -137,7 +133,6 @@ class CarTypeController extends BaseController {
                 if (!$carModel->isUniqCarType($type)) {
                     $errors['type'] = 'Ezzel a névvel már létezik típus!';
                 }
-
                 if (empty($manufacturer)) {
                     $errors['manufacturer'] = 'A gyártó megadása kötelező!';
                 }
@@ -157,19 +152,15 @@ class CarTypeController extends BaseController {
                 $car->setEndOfProductionTime($endOfProductionTime);
                 $car->setCreatedAt((new DateTime('now'))->format("Y-m-d H:i:s"));
 
-                if (!$car->checkIsValidInsert() || !empty($errors)) {
-                    $errors = array_merge($car->getErrors(), $errors);
-                }
                 if (!empty($errors)) {
                     throw new Exception('Kérjük ellenőrizze az űrlapot!');
                 }
                 $carID = $carModel->insert($car);
                 if (empty($carID)) {
-                    throw new Exception($carModel->getErrorAsString());
+                    throw new Exception($car->getErrorAsString());
                 }
                 $successMsg = 'Az autótípus hozzáadása sikerült.';
             } catch (Exception $exception) {
-                // nem végleges hibakezelés!!!
                 $errorMsg = $exception->getMessage();
 
                 if (!empty($errors)) {
@@ -183,8 +174,6 @@ class CarTypeController extends BaseController {
         $data['successMsg'] = $successMsg;
         $data['user'] = $car;
         $data['submitted'] = true;
-
-        //       var_dump($data);
 
         $this->render('insert/index', $data);
     }

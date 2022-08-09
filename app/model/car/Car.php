@@ -16,45 +16,21 @@ class Car {
         1 => 'megkímélt',
         2 => 'felújított'
     ];
-    private   $id                  = '';
-    private   $type                = '';
-    private   $color               = '';
-    private   $kilometers_traveled = '';
-    private   $year_of_manufacture = '';
-    private   $car_condition       = '';
-    private   $type_of_fuel        = '';
-    private   $id_of_owner         = '';
-    private   $created_at          = null;
-    private   $updated_at          = null;
-    private   $deleted_at          = null;
+    private $id                  = '';
+    private $type                = '';
+    private $color               = '';
+    private $kilometers_traveled = '';
+    private $year_of_manufacture = '';
+    private $car_condition       = '';
+    private $type_of_fuel        = '';
+    private $id_of_owner         = '';
+    private $created_at          = null;
+    private $updated_at          = null;
+    private $deleted_at          = null;
 
-    public function checkIsValidInsert(): bool {
+    private const MIN_YEAR_OF_MANUFACTURE_YEAR = 1950;
 
-        return true;
-    }
-
-
-    public function checkIsValidUpdate(): bool {
-
-        $this->errors = [];
-
-        $this->checkIsValidInsert();
-        if (empty($this->id)) {
-            $this->errors['id'] = 'Hiba! Az entitás id-ja üres.';
-        }
-
-        return empty($this->errors);
-    }
-
-
-    public function checkIsValidSave(): bool {
-
-        if (empty($this->id)) {
-            return $this->checkIsValidInsert();
-        } else {
-            return $this->checkIsValidUpdate();
-        }
-    }
+    protected $errors = [];
 
     public function __construct(?array $data = null) {
 
@@ -74,20 +50,76 @@ class Car {
     }
 
 
+    public function isValidManufactureYear($manufacturerYear) {
+
+        $this->errors = [];
+
+        $charactersLength = mb_strlen($manufacturerYear);
+        if ($charactersLength < self::MIN_YEAR_OF_MANUFACTURE_YEAR) {
+            $this->errors['min_manufacture_length'] = 'Az legkorábbi megadható év: ' . self::MIN_YEAR_OF_MANUFACTURE_YEAR;
+        }
+        return empty($this->errors);
+    }
+
+
+    public function checkIsValidInsert(): bool {
+
+        $this->errors = [];
+
+        if (empty($this->color)) {
+            $this->errors['color']='A szín megadása kötelező';
+        }
+        if (empty($this->year_of_manufacture)) {
+            $this->errors['year_of_manufacture'] = 'A gyártási év megadása kötelező!';
+        }
+        if (mb_strlen($this->year_of_manufacture > self::MIN_YEAR_OF_MANUFACTURE_YEAR)) {
+            $this->error['min_length'] = 'Legalább' . self::MIN_YEAR_OF_MANUFACTURE_YEAR . ' -nál később kellett elkészülnie.';
+        }
+
+        return empty($this->errors);
+
+    }
+
+
+    public function checkIsValidUpdate(): bool {
+
+        $this->errors = [];
+
+        if (empty($this->id)) {
+            $this->errors['id'] = 'Hiba! Az entitás id-ja üres.';
+        }
+
+        return empty($this->errors);
+    }
+
+
+    public function checkIsValidSave(): bool {
+
+        if (empty($this->id)) {
+            return $this->checkISValidInsert();
+        } else {
+            return $this->checkIsValidUpdate();
+        }
+    }
+
+
+    public function getErrorsAsString($separator = '<br>'): string {
+
+        return implode($separator, $this->errors);
+    }
+
+
+    public function getErrors(): array {
+
+        return $this->errors;
+    }
+
+
     public function getNameOfOwnerById() {
 
         $userModel = new UserModel();
 
         return $userModel->getById($this->getIdOfOwner())?->getUsername();
-
-        //        $userModel = new UserModel();
-        //
-        //        $user = $userModel->getById($this->getIdOfOwner());
-        //
-        //        if (empty($user)) {
-        //            return '';
-        //        }
-        //        return $user->getUsername();
 
     }
 
