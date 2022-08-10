@@ -56,7 +56,6 @@ class CarTypeModel {
 
         try {
             $query = 'SELECT * FROM carTypes WHERE deleted_at IS NULL';
-
             $cartypes = [];
 
             $statement = $this->pdo->prepare($query);

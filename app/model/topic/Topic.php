@@ -11,6 +11,9 @@ class Topic {
     private $created_at = '';
     private $updated_at = '';
     private $deleted_at = '';
+    private $img='';
+    private $small_content='';
+
 
 
     public function __construct(?array $data = null) {
@@ -109,7 +112,7 @@ class Topic {
 
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getTitle(): string {
 
@@ -145,9 +148,9 @@ class Topic {
 
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOwner(): string {
+    public function getOwner(): ?string {
 
         return $this->owner;
     }
@@ -213,5 +216,41 @@ class Topic {
     public function setDeletedAt(string $deleted_at): void {
 
         $this->deleted_at = $deleted_at;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getImg(): string {
+
+        return $this->img;
+    }
+
+
+    /**
+     * @param string $img
+     */
+    public function setImg(string $img): void {
+
+        $this->img = $img;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSmallContent(): string {
+
+        return $this->small_content;
+    }
+
+
+    /**
+     * @param string $small_content
+     */
+    public function setSmallContent(string $small_content): void {
+
+        $this->small_content = $small_content;
     }
 }

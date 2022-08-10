@@ -8,7 +8,7 @@ use PDO;
 
 class TopicModel extends BaseModel{
 
-    function GetAllTopics(){
+    function GetAllTopics():array {
 
         try {
 
