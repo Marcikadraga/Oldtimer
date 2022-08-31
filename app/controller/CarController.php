@@ -162,6 +162,7 @@ class CarController extends BaseController {
             return;
         }
 
+
         echo json_encode("error");
     }
 
@@ -185,6 +186,7 @@ class CarController extends BaseController {
             if (empty($car)) {
                 throw new Exception('Nem létezik ilyen autó');
             }
+
 
             $car->setType($this->request->getPost('type', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setColor($this->request->getPost('color', FILTER_SANITIZE_FULL_SPECIAL_CHARS));

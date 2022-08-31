@@ -60,12 +60,22 @@ class CarTypeController extends BaseController {
         $this->checkAjax();
         $this->checkPermission('admin');
 
+        $errors = [];
+        $errorMsg = '';
+        $successMsg = '';
+        $car = new CarType();
+
+
         try {
             $id = $this->request->getPost('carId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if (empty($id)) {
                 throw new Exception('Nincs id');
             }
 
+            $type = $this->request->getPost('type', FILTER_SANITIZE_SPECIAL_CHARS);
+            if (empty($type)) {
+                $errors['type'] = 'A típus megadása kötelező!';
+            }
             $carmodel = new CarTypeModel();
             $car = $carmodel->getById($id);
             if (empty($car)) {
@@ -77,6 +87,7 @@ class CarTypeController extends BaseController {
             $car->setEndOfProductionTime($this->request->getPost('endOfProduction', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
             $car->setUpdatedAt(new DateTime());
             $car->setIsActive($this->request->getPost('is_active', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
 
             if (!$car->checkIsValidSave()) {
                 throw new Exception($car->getErrorsAsString());
@@ -111,7 +122,7 @@ class CarTypeController extends BaseController {
 
 
     public function insert() {
-
+        //$this->checkAjax();
         $this->checkPermission('admin');
 
         $errors = [];

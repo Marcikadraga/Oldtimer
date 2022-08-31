@@ -6,23 +6,23 @@ use app\model\BaseModel;
 use Exception;
 use PDO;
 
-class TopicModel extends BaseModel{
+class TopicModel extends BaseModel {
 
-    function GetAllTopics():array {
+    function GetAllTopics(): array {
 
         try {
 
-            $query='SELECT * FROM topics WHERE deleted_at IS NULL';
-            $topics=[];
+            $query = 'SELECT * FROM topics WHERE deleted_at IS NULL';
+            $topics = [];
 
-            $statement=$this->pdo->prepare($query);
+            $statement = $this->pdo->prepare($query);
             $statement->execute();
 
-            $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            if(!empty($result)){
-                foreach ($result as $item){
-                    $topics[]=new Topic($item);
+            if (!empty($result)) {
+                foreach ($result as $item) {
+                    $topics[] = new Topic($item);
                 }
             }
             return $topics;
@@ -31,8 +31,5 @@ class TopicModel extends BaseModel{
             die($exception->getMessage());
         }
     }
-
-
-
 
 }

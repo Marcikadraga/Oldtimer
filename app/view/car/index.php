@@ -51,7 +51,7 @@ include '../app/view/_header.php';
         <?php else: ?>
             <?php foreach ($cars as $car): ?>
                 <tr>
-                    <td class = "text-wrap align-middle" data-id = "<?= $car->getId() ?>">
+                    <td class = "text-wrap align-middle" data-id = "<?= $car->getId() ?>" id = "<?= $car->getId() ?>">
                         <?= $car->getId() ?>
                     </td>
                     <td class = "text-wrap align-middle" data-id = "<?= $car->getType() ?>">
@@ -121,83 +121,84 @@ include '../app/view/_header.php';
                     <div
                     " class = "modal-body">
                     <form method = "POST">
-                        <div style = "display:none;  class = "form-group">
-                            <label  for = " edit-car-id" class = "col-form-label">ID</label><br>
-                            <input
-                                    type = "text"
-                                    class = "form-control"
-                                    id = "edit-car-id"
-                            >
-                        </div>
-                        <div class = "form-group">
-                            <label for = "edit-color" class = "col-form-label input-required">Típus</label>
-                            <select class = "form-control" id = "edit-type">
-                                <option value = "null">Válasszon</option>
-                                <?php if (!empty($getAllCars)): ?>
-                                    <?php for ($i = 0; $i < count($getAllCars); $i++): ?>
-                                        <?php if (empty($getAllCars[$i]->getIsActive() != 1)): ?>
-                                            <option><?php echo $getAllCars[$i]->getType() ?></option>
-                                        <?php endif ?>
-                                    <?php endfor; ?>
+                        <div style = "display:none;  class = " form-group
+                        ">
+                        <label for = " edit-car-id" class = "col-form-label">ID</label><br>
+                        <input
+                                type = "text"
+                                class = "form-control"
+                                id = "edit-car-id"
+                        >
+                </div>
+                <div class = "form-group">
+                    <label for = "edit-color" class = "col-form-label input-required">Típus</label>
+                    <select class = "form-control" id = "edit-type">
+                        <option>Válasszon</option>
+                        <?php if (!empty($getAllCars)): ?>
+                            <?php for ($i = 0; $i < count($getAllCars); $i++): ?>
+                                <?php if (empty($getAllCars[$i]->getIsActive() != 1 )): ?>
+                                    <option><?php echo $getAllCars[$i]->getType() ?></option>
                                 <?php endif ?>
-                            </select>
-                        </div>
-
-
-                        <div class = "form-group">
-                            <label for = "form-control" class = "input-required">Szín</label>
-                            <br>
-                            <select id = "edit-color" name = "edit-color" style = "width: 100px;"
-                            ">
-                            <?php
-                            $countedColors = count($colors);
-
-                            for ($i = 0; $i < $countedColors; $i++) {
-                                ?>
-                                <option name = "color" class = "color" style = "background-color: <?= $colors[$i]->getRgb() ?>; color: black;" value = "<?= $colors[$i]->getRgb() ?>"></option>
-
-
-                                <?php
-                            }
-                            ?>
-                            </select>
-                        </div>
-
-
-                        <label for = "edit-color" class = "col-form-label">Megtett KM</label><br>
-                        <input
-                                type = "text"
-                                class = "form-control"
-                                id = "edit-kilometers-traveled"
-                        >
-                        <label for = "edit-color" class = "col-form-label">Gyártás éve</label><br>
-                        <input
-                                type = "text"
-                                class = "form-control"
-                                id = "edit-year-of-manufacture"
-
-                        >
-                        <label for = "edit-color" class = "col-form-label">Üzemanyag típusa</label><br>
-                        <select class = "form-control" name = "cars" id = "edit-type-of-fuel">
-                            <option value = "0">benzin</option>
-                            <option value = "1">dízel</option>
-                        </select>
-
-                        <label for = "edit-color" class = "col-form-label">Állapot</label><br>
-                        <select class = "form-control" name = "cars" id = "edit-car-condition">
-                            <option value = "0">leharcolt</option>
-                            <option value = "1">megkímélt</option>
-                            <option value = "2">felújított</option>
-                        </select>
-
-                    </form>
+                            <?php endfor; ?>
+                        <?php endif ?>
+                    </select>
                 </div>
-                <div class = "modal-footer">
-                    <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
-                    <button type = "button" class = "btn btn-primary" id = "save-edited-data2">Mentés</button>
+
+
+                <div class = "form-group">
+                    <label for = "form-control" class = "input-required">Szín</label>
+                    <br>
+                    <select id = "edit-color" name = "edit-color" style = "width: 100px;"
+                    ">
+                    <?php
+                    $countedColors = count($colors);
+
+                    for ($i = 0; $i < $countedColors; $i++) {
+                        ?>
+                        <option name = "color" class = "color" style = "background-color: <?= $colors[$i]->getRgb() ?>; color: black;" value = "<?= $colors[$i]->getRgb() ?>"></option>
+
+
+                        <?php
+                    }
+                    ?>
+                    </select>
                 </div>
+
+
+                <label for = "edit-color" class = "col-form-label">Megtett KM</label><br>
+                <input
+                        type = "text"
+                        class = "form-control"
+                        id = "edit-kilometers-traveled"
+                >
+                <label for = "edit-color" class = "col-form-label">Gyártás éve</label><br>
+                <input
+                        type = "text"
+                        class = "form-control"
+                        id = "edit-year-of-manufacture"
+
+                >
+                <label for = "edit-color" class = "col-form-label">Üzemanyag típusa</label><br>
+                <select class = "form-control" name = "cars" id = "edit-type-of-fuel">
+                    <option value = "0">benzin</option>
+                    <option value = "1">dízel</option>
+                </select>
+
+                <label for = "edit-color" class = "col-form-label">Állapot</label><br>
+                <select class = "form-control" name = "cars" id = "edit-car-condition">
+                    <option value = "0">leharcolt</option>
+                    <option value = "1">megkímélt</option>
+                    <option value = "2">felújított</option>
+                </select>
+
+                </form>
+            </div>
+            <div class = "modal-footer">
+                <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
+                <button type = "button" class = "btn btn-primary" id = "save-edited-data2">Mentés</button>
             </div>
         </div>
+</div>
 </div>
 
 

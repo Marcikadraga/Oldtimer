@@ -1,4 +1,4 @@
-import {hFetch, qs, qsa} from "../../functions.js";
+import {hFetch} from "../../functions.js";
 
 const deleteUserButtons = document.querySelectorAll(".delete-car");
 deleteUserButtons.forEach(function (button) {
@@ -30,6 +30,7 @@ updateCarButtons.forEach(function (button) {
     button.addEventListener("click", function (event) {
         const carId = button.dataset.id;
 
+
         const fd = new FormData();
         fd.append('carId', carId);
 
@@ -38,6 +39,7 @@ updateCarButtons.forEach(function (button) {
         })
             .then(response => response.json())
             .then(data => {
+
                 document.querySelector("#edit-car-id").value = data.id;
                 document.querySelector("#edit-type").value = data.type;
                 document.querySelector("#edit-color").value = data.color;
@@ -49,7 +51,6 @@ updateCarButtons.forEach(function (button) {
                 const colorElement = document.querySelector("#edit-color");
                 colorElement.value = data.color;
                 colorElement.style.backgroundColor = colorElement.value;
-
                 $('#exampleModal').modal();
             })
             .catch((error) => {

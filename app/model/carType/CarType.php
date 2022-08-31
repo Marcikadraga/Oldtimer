@@ -55,6 +55,12 @@ class CarType {
     }
 
 
+    public function getErrorsAsString($separator = '<br>'): string {
+
+        return implode($separator, $this->errors);
+    }
+
+
     public function isValidType($type): bool {
 
         $this->error = [];

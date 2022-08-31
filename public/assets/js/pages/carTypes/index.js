@@ -26,9 +26,7 @@ deleteCarButtons.forEach(function (button) {
             .catch((error) => {
                 console.error('Error:', error);
             });
-
     });
-
 });
 
 

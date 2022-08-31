@@ -49,8 +49,19 @@ class Router {
         // Példányosítjuk a kontrollert
         $controller = new $namespace;
 
+        $params = [];
+        $paramIdx = 3;
+        while(!empty($request->getGet("param$paramIdx", FILTER_SANITIZE_SPECIAL_CHARS))) {
+            $params[] = $request->getGet("param$paramIdx", FILTER_SANITIZE_SPECIAL_CHARS);
+            $paramIdx++;
+        }
+
+        extract($params, EXTR_OVERWRITE);
+
+        call_user_func_array([$controller, $functionName], $params);
+
         // Futtatjuk a kontrollerfunkciót
-        $controller->$functionName();
+//        $controller->$functionName();
 
         // Nincs tovább, a kontrollerfunkció vagy válaszol a kérésre (pl. ajax request)
         // Vagy renderel egy html oldalt és elküldi a böngészőnek

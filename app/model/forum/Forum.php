@@ -1,15 +1,14 @@
 <?php
 
-namespace app\model\topic;
+namespace app\model\forum;
 
 use app\model\GeneralEntity;
 
-class Topic implements GeneralEntity {
-
+class Forum implements GeneralEntity {
     private $id         = 0;
     private $title      = '';
     private $content    = '';
-    private $owner      = '';
+    private $userId      = '';
     private $created_at = '';
     private $updated_at = '';
     private $deleted_at = '';
@@ -33,65 +32,6 @@ class Topic implements GeneralEntity {
         }
     }
 
-    public function checkIsValidInsert(): bool {
-
-        $this->errors = [];
-
-        if (mb_strlen($this->title) < 3) {
-            $this->errors['title'] = 'A cím hossza legalább 3 karakter hosszúnak kell lennie!';
-        }
-        if (empty($this->title)) {
-            $this->errors['title'] = 'A cím megadása kötelező';
-        }
-        if (mb_strlen($this->content) < 3) {
-            $this->errors['content'] = 'A tartalom hossza legalább 3 karakter hosszúnak kell lennie!';
-        }
-        if (empty($this->title)) {
-            $this->errors['content'] = 'A tartalom megadása kötelező';
-        }
-        if (empty($this->owner)) {
-            $this->errors['owner'] = 'A tulajdonos megadása kötelező';
-        }
-        return (empty($this->errors));
-    }
-
-
-    public function checkIsValidUpdate(): bool {
-
-        $this->errors = [];
-
-        $this->checkIsValidInsert();
-
-        if (empty($this->id)) {
-            $this->errors['id'] = 'Hiba! Az entitás id-ja üres.';
-        }
-
-        return empty($this->errors);
-    }
-
-
-    public function checkIsValidSave(): bool {
-
-        if (empty($this->id)) {
-            return $this->checkIsValidInsert();
-        } else {
-            return $this->checkIsValidUpdate();
-        }
-    }
-
-
-    public function getErrors(): array {
-
-        return $this->errors;
-    }
-
-
-    public function getErrorsAsString($separator = '<br>'): string {
-
-        return implode($separator, $this->errors);
-    }
-
-
     /**
      * @return int
      */
@@ -111,7 +51,7 @@ class Topic implements GeneralEntity {
 
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getTitle(): string {
 
@@ -143,24 +83,6 @@ class Topic implements GeneralEntity {
     public function setContent(string $content): void {
 
         $this->content = $content;
-    }
-
-
-    /**
-     * @return string|null
-     */
-    public function getOwner(): ?string {
-
-        return $this->owner;
-    }
-
-
-    /**
-     * @param string $owner
-     */
-    public function setOwner(string $owner): void {
-
-        $this->owner = $owner;
     }
 
 
@@ -252,4 +174,24 @@ class Topic implements GeneralEntity {
 
         $this->small_content = $small_content;
     }
+
+
+    /**
+     * @return string
+     */
+    public function getUserId(): string {
+
+        return $this->userId;
+    }
+
+
+    public function setUserId(string $userId): void {
+
+        $this->userId = $userId;
+    }
+
+
+    /**
+     * @param string $userId
+     */
 }

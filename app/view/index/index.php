@@ -18,8 +18,12 @@
     }
 
 </style>
-<?php include '../app/view/_header.php';
-/** @var array[] $allTopics */
+<?php
+
+use app\model\topic\Topic;
+
+include '../app/view/_header.php';
+/** @var Topic[] $allTopics */
 ?>
 
 
@@ -30,16 +34,19 @@
     <p>
 <?php else: ?>
 
-<?php //var_dump($allTopics); ?>
+
 
     <?php foreach ($allTopics as $topic): ?>
         <div class = "card" style = "background-image: url('<?= $topic->getImg() ?>'">
             <h1><?= $topic->getTitle(); ?></h1>
+            <button  type="button" class="read-more" data-topic-id="<?= $topic->getId(); ?>" style="background-color: darkgrey">
+                <a href="../forumController/showView/<?= $topic->getId(); ?>" style="color: blue;">read more</a>
+            </button>
         </div>
         <br>
     <?php endforeach ?>
 <?php endif; ?>
 
-<?php include '../app/view/_footer.php' ?>
+
 
 

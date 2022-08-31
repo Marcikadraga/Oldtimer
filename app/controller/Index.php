@@ -2,9 +2,8 @@
 
 namespace app\controller;
 
-use app\core\request\Request;
-use app\core\response\Response;
-use app\model\user\Authenticator;
+use app\model\topic\Topic;
+use app\model\topic\TopicModel;
 use PDO;
 
 class Index extends BaseController {
@@ -14,9 +13,16 @@ class Index extends BaseController {
      */
     public function index() {
 
-        $data = [];
+        $topicModel = new TopicModel();
+        $topic= new Topic();
 
-        $this->render('index/index', $data);
+        $data = [
+
+            'allTopics' => $topicModel->GetAllTopics(),
+            'getId'=> $topic->getId()
+        ];
+
+        $this->render('index/index', $data ?? []);
     }
 
 
@@ -451,6 +457,7 @@ class Index extends BaseController {
 
     // marci.dev/file/lockTest2/edge
     public function lockTest2() {
+
         $param3 = $this->request->getGet('param3', FILTER_SANITIZE_SPECIAL_CHARS);
 
         $filename = './uploads/tmp/lockTest.txt';
