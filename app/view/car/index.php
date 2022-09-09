@@ -179,7 +179,7 @@ include '../app/view/_header.php';
 
                 >
                 <label for = "edit-color" class = "col-form-label">Üzemanyag típusa</label><br>
-                <select class = "form-control" name = "cars" id = "edit-type-of-fuel">
+                <select class = "form-control" name = "cars" id = "edit-type-of-fuel">0
                     <option value = "0">benzin</option>
                     <option value = "1">dízel</option>
                 </select>

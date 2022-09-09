@@ -166,6 +166,7 @@ class CarTypeController extends BaseController {
                 if (!empty($errors)) {
                     throw new Exception('Kérjük ellenőrizze az űrlapot!');
                 }
+                //TODO itt nem kellene az köv 2 sort felcserélni?
                 $carID = $carModel->insert($car);
                 if (empty($carID)) {
                     throw new Exception($car->getErrorAsString());

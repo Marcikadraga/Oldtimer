@@ -96,4 +96,4 @@ const URI_500 = 'error/internalServerError';
  * Ennyi idő múlva automatikusan kilépteti a rendszer a bejelentkezett usert
 */
 const SESSION_SAVE_PATH = '../writable/session/';
-const SESSION_VALIDITY_TIME = 600; // secundum
+const SESSION_VALIDITY_TIME = 21600; // secundum

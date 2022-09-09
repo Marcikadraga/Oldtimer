@@ -2,15 +2,21 @@
 
 namespace app\model\comment;
 
+use DateTime;
+
 class Comment {
 
     private $id      = '';
     private $topic_id = '';
     private $user_id='';
+    private $real_name='';
     private $message='';
     private $created_at = '';
-    private $updated_at = '';
-    private $deleted_at = '';
+    private $updated_at = null;
+    private $deleted_at = null;
+
+
+
 
     public function fill(?array $data = null): void {
 
@@ -77,18 +83,24 @@ class Comment {
 
 
     /**
-     * @param string $created_at
+     * @param DateTime|null $created_at
      */
-    public function setCreatedAt(string $created_at): void {
+    public function setCreatedAt($created_at): void {
 
-        $this->created_at = $created_at;
+        if ($created_at instanceof DateTime) {
+            $this->created_at = $created_at->format('Y-m-d H:i:s');
+        } else {
+            $this->created_at = null;
+        }
     }
 
 
+
+
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUpdatedAt(): string {
+    public function getUpdatedAt(): ?string {
 
         return $this->updated_at;
     }
@@ -104,9 +116,9 @@ class Comment {
 
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDeletedAt(): string {
+    public function getDeletedAt(): ?string {
 
         return $this->deleted_at;
     }
@@ -160,7 +172,22 @@ class Comment {
     }
 
 
+    /**
+     * @return string
+     */
+    public function getRealName(): string {
 
+        return $this->real_name;
+    }
+
+
+    /**
+     * @param string $real_name
+     */
+    public function setRealName(string $real_name): void {
+
+        $this->real_name = $real_name;
+    }
 
 
 }
