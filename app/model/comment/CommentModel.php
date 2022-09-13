@@ -9,68 +9,19 @@ use PDO;
 
 class CommentModel extends BaseModel {
 
-//    function getAllComments(): array {
-//
-//        try {
-//            $query = 'SELECT * FROM comments WHERE deleted_at IS NULL';
-//
-//            $comments = [];
-//
-//            $statemenet = $this->pdo->prepare($query);
-//            $statemenet->execute();
-//
-//            $result = $statemenet->fetchAll(PDO::FETCH_ASSOC);
-//
-//            if (!empty($result)) {
-//                foreach ($result as $item) {
-//                    $comments[] = new Comment($item);
-//                }
-//            }
-//            return $comments;
-//
-//        } catch (Exception $exception) {
-//            die($exception->getMessage());
-//        }
-//    }
-//
-//
-//    function getCommentsById($id): array {
-//
-//        try {
-//            $query = 'SELECT * FROM comments WHERE topic_id =? AND deleted_at IS NULL';
-//            $params = [$id];
-//            $comments = [];
-//
-//            $statement = $this->pdo->prepare($query);
-//            $statement->execute($params);
-//
-//            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//            if (!empty($result)) {
-//                foreach ($result as $item) {
-//                    $comments[] = new Comment($item);
-//                }
-//            }
-//            return $comments;
-//
-//        } catch (Exception $exception) {
-//            die($exception->getMessage());
-//        }
-//    }
-
-
-    function getComments(): array {
+    function getComments($id): array {
 
         try {
             $query = "
                 SELECT c.*,
                 CONCAT(u.first_name, ' ', u.middle_name, ' ', u.last_name) AS real_name
                 FROM comments c
-                LEFT JOIN users u ON c.user_id = u.id;";
-
+                LEFT JOIN users u ON c.user_id = u.id
+                WHERE topic_id=?;";
+            $params=[$id];
             $statement = $this->pdo->prepare($query);
-            $statement->execute();
-
+            $statement->execute($params);
+            $comments = [];
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             if (!empty($result)) {
@@ -112,6 +63,22 @@ class CommentModel extends BaseModel {
             $log->exceptionLog($exception);
             throw new Exception('Adatbázishiba.' . $exception->getMessage());
         }
+    }
+
+
+    function getNumberOfComments($id) {
+
+        $query = "
+        SELECT COUNT(message) AS count
+        FROM comments 
+        WHERE topic_id=?;
+        ";
+        $params=[$id];
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($params);
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return !empty($result) ? $result['count'] : 0;
     }
 
 }

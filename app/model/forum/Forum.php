@@ -3,6 +3,7 @@
 namespace app\model\forum;
 
 use app\model\GeneralEntity;
+use DateTime;
 
 class Forum implements GeneralEntity {
     private $id         = 0;
@@ -96,11 +97,15 @@ class Forum implements GeneralEntity {
 
 
     /**
-     * @param string $created_at
+     * @param DateTime|null $created_at
      */
-    public function setCreatedAt(string $created_at): void {
+    public function setCreatedAt($created_at): void {
 
-        $this->created_at = $created_at;
+        if ($created_at instanceof DateTime) {
+            $this->created_at = $created_at->format('Y-m-d H:i:s');
+        } else {
+            $this->created_at = null;
+        }
     }
 
 

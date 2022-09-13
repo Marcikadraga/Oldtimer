@@ -14,6 +14,30 @@
         color: blue;
         margin-bottom: 0;
     }
+
+    .card-body {
+        padding: 0 !important;
+    }
+
+    .date {
+        color: gray;
+    }
+
+    .name-time-container {
+        width: 30%
+    }
+
+    .comment-container {
+        display: flex;
+        width: 100%;
+
+    }
+
+    .option-container {
+        width: 70%;
+        display: flex;
+        justify-content: flex-end;
+    }
 </style>
 
 
@@ -28,6 +52,7 @@ include '../app/view/_header.php';
 /** @var Comment[] $allComment */
 /** @var Forum $forum */
 /** @var Comment[] $comments */
+/** @var $numberOfComments */
 
 $userModel = new UserModel();
 $user = new Authenticator();
@@ -38,26 +63,24 @@ $user = new Authenticator();
     <form action = "/ForumController/insert" method = "post">
 
 
-        <h1><?= $topic->getTitle() ?></h1>
-        <p><?= $topic->getSmallContent()?></p>
-        <img src="<?php echo $topic->getImg() ?>" alt="Girl in a jacket" width="700px" height="400px">
-        <p><?=$topic->getContent() ?></p>
-
-
-        <?php
-        foreach ($comments as $item) {
-            ?>
-            <div class = "name-time-container">
-                <p class = "user"><?= $item->getRealName() ?></p>
-                <p class = "time"><?= $item->getCreatedAt() ?></p>
+        <div style = "display: flex;margin-bottom: 10px ">
+            <div>
+                <h1 style = "margin-bottom:0px"><?= $topic->getTitle() ?></h1>
             </div>
 
-            <p><?= $item->getMessage() ?></p>
+            <div style = "display: flex ;justify-content: flex-start; width: 80%;align-items: flex-end;margin-left: 10px">
+                <p style = "margin-bottom:2px" class = "date"> <?= $topic->getCreatedAt() ?></p>
+            </div>
 
-            <?php
-        }
+        </div>
 
-        ?>
+
+        <h4 style = "text-decoration: underline"><?= $topic->getSmallContent() ?></h4>
+        <img src = "<?php echo $topic->getImg() ?>" alt = "Girl in a jacket" width = "100%" height = "550px">
+        <hr>
+        <h6><?= $topic->getContent() ?></h6>
+        <hr>
+
         <div class = "card-body">
             <?php if (!empty($errorMsg)): ?>
                 <div class = "alert alert-danger">
@@ -90,6 +113,7 @@ $user = new Authenticator();
                 >
                 <div class = "invalid-feedback"><?= $errors['message'] ?? ''; ?></div>
             </div>
+            <p><?= $numberOfComments ?> hozzászólás</p>
             <div class = "form-group">
                 <label style = "display: none" for = "topic-id" class = "input-required">Message</label>
                 <input type = "text"
@@ -109,6 +133,30 @@ $user = new Authenticator();
                 </div>
             </div>
 
+
+            <?php
+            foreach ($comments as $item) {
+                ?>
+                <div class = "comment-container">
+                    <div class = "name-time-container">
+                        <p class = "user"><?= $item->getRealName() ?></p>
+                        <p class = "time"><?= $item->getCreatedAt() ?></p>
+                    </div>
+
+                    <div class = "option-container">
+                        <button type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-color"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
+                        </button>
+                        <button type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-danger delete-color"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a></button>
+                    </div>
+                </div>
+
+
+                <p><?= $item->getMessage() ?></p>
+                <hr>
+
+                <?php
+            }
+            ?>
     </form>
 </div>
 

@@ -20,15 +20,15 @@ class ForumController extends BaseController {
         $commentModel = new CommentModel();
         $forum = new Forum();
         $topic = $forumModel->getTopic($id);
-//        $allComment = $commentModel->getCommentsById($id);
-        $comments = $commentModel->getComments();
+        $comments = $commentModel->getComments($id);
+        $numberOfComments= $commentModel->getNumberOfComments($id);
 
         $data = [
             'topic'      => $topic,
-//            'allComment' => $allComment,
             'pageId'     => $id,
             'forum'      => $forum,
             'comments'   => $comments,
+            'numberOfComments' => $numberOfComments,
         ];
 
         $this->render('forum/index', $data);
