@@ -1,10 +1,83 @@
-// import {hFetch} from "../../functions.js";
-//
-// const saveCommentButton = document.querySelector("#save-data");
-// saveCommentButton.addEventListener("click", function (event) {
-//     const userId = document.querySelector("#user-id").value;
-//     const topicId = document.querySelector("#topic-id").value;
-//     const message = document.querySelector("#message").value;
-//
-//
-// });
+import {hFetch} from "../../functions.js";
+
+
+const deleteComment = document.querySelectorAll(".delete-comment");
+deleteComment.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+        event.preventDefault(); // prevent the default action of the button
+        const commentId = button.dataset.id;
+
+        const fd = new FormData();
+        fd.append('commentId', commentId);
+
+
+        hFetch('https://marci.dev/ForumController/delete', {
+            method: 'POST', body: fd
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data === "success") {
+                    let comment = document.getElementById(commentId);
+                    comment.remove();
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+});
+
+const editCommentButtons = document.querySelectorAll(".edit-comment");
+editCommentButtons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+        const commentId = button.dataset.id;
+
+
+        const fd = new FormData();
+        fd.append('commentId', commentId);
+
+
+        hFetch('https://marci.dev/ForumController/getComment', {
+            method: 'POST', body: fd
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                document.querySelector("#edit-comment-id").value = data.id;
+                document.querySelector("#edit-uid").value = data.user_id;
+                document.querySelector("#edit-message").value = data.message;
+
+                $('#exampleModal').modal();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    });
+});
+
+const saveEditedDataButton = document.querySelector("#save-edited-data");
+saveEditedDataButton.addEventListener("click", function (event) {
+
+    const commentId = document.querySelector("#edit-comment-id").value;
+    const comment = document.querySelector("#edit-message").value;
+    const uId = document.querySelector("#edit-uid").value;
+
+    const fd = new FormData();
+    fd.append('id', commentId);
+    fd.append('message', comment);
+    fd.append('user_id',uId);
+
+    hFetch('https://marci.dev/ForumController/update', {
+        method: 'POST', body: fd
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data === "success") {
+                location.reload();
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+});

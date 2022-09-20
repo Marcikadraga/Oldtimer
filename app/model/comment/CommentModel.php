@@ -9,6 +9,40 @@ use PDO;
 
 class CommentModel extends BaseModel {
 
+    function getCommentById($commentId) {
+
+        try {
+            $query = 'SELECT * FROM comments WHERE id=? AND deleted_at IS NULL LIMIT 1';
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$commentId]);
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
+        }
+    }
+
+    function getById($commentId): ?Comment {
+
+        try {
+            $query = 'SELECT * FROM comments WHERE id=? AND deleted_at IS NULL LIMIT 1';
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$commentId]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (!empty($result)) {
+                return new Comment($result);
+            }
+
+        } catch (Exception $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            throw new Exception('Adatbázishiba.' . $exception->getMessage());
+        }
+        return null;
+    }
+
     function getComments($id): array {
 
         try {
@@ -17,8 +51,10 @@ class CommentModel extends BaseModel {
                 CONCAT(u.first_name, ' ', u.middle_name, ' ', u.last_name) AS real_name
                 FROM comments c
                 LEFT JOIN users u ON c.user_id = u.id
-                WHERE topic_id=?;";
-            $params=[$id];
+                WHERE topic_id=?
+                ORDER BY id DESC;";
+
+            $params = [$id];
             $statement = $this->pdo->prepare($query);
             $statement->execute($params);
             $comments = [];
@@ -35,7 +71,6 @@ class CommentModel extends BaseModel {
             die($exception->getMessage());
         }
     }
-
 
     function insert(Comment $comment) {
 
@@ -65,15 +100,14 @@ class CommentModel extends BaseModel {
         }
     }
 
-
     function getNumberOfComments($id) {
 
         $query = "
         SELECT COUNT(message) AS count
         FROM comments 
-        WHERE topic_id=?;
+        WHERE topic_id=? AND deleted_at IS NULL ;
         ";
-        $params=[$id];
+        $params = [$id];
         $statement = $this->pdo->prepare($query);
         $statement->execute($params);
 
@@ -81,4 +115,46 @@ class CommentModel extends BaseModel {
         return !empty($result) ? $result['count'] : 0;
     }
 
+    function delete($comment_id, $softDelete = true): bool {
+
+        try {
+            if ($softDelete === true) {
+                $query = 'UPDATE comments SET deleted_at=:deleted_at WHERE id=:id';
+                $params = [
+                    'id'         => $comment_id,
+                    'deleted_at' => date('Y-m-d H:i:s'),
+                ];
+            } else {
+                $query = 'DELETE FROM cars WHERE id=?';
+                $params = [$comment_id];
+            }
+            $statement = $this->pdo->prepare($query);
+            return $statement->execute($params);
+
+        } catch (Exception $exception) {
+            $this->errorHandling($exception, 'delete');
+        }
+        return false;
+    }
+
+    function update(Comment $comment): bool {
+
+        try {
+            $query = '
+            UPDATE comments
+            SET message=:message
+            WHERE id=:id';
+
+            $params = [
+                'id'=> $comment->getId(),
+                'message' => $comment->getMessage()
+            ];
+
+            $statement = $this->pdo->prepare($query);
+            return $statement->execute($params);
+
+        } catch (Exception $exception) {
+            die($exception->getMessage());
+        }
+    }
 }

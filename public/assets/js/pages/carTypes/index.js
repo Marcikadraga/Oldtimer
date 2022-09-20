@@ -49,6 +49,7 @@ updateCarButtons.forEach(function (button) {
                 document.querySelector("#edit-startOfProduction").value = data.startOfProductionTime;
                 document.querySelector("#edit-endOfProduction").value = data.endOfProductionTime;
                 document.querySelector("#edit-is-active").value = data.is_active;
+                console.log(data.id+"asd");
 
                 if (data.is_active === 0) {
                     document.querySelector("#edit-is-active").checked = false;

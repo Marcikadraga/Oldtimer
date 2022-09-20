@@ -175,10 +175,8 @@ class CarTypeModel {
 
         try {
             $query = 'SELECT * FROM carTypes WHERE id=? AND deleted_at IS NULL LIMIT 1';
-            $params = [$id];
-
             $statement = $this->pdo->prepare($query);
-            $statement->execute($params);
+            $statement->execute([$id]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (!empty($result)) {

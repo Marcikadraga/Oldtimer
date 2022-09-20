@@ -11,6 +11,8 @@ use app\model\user\Authenticator;
 use DateTime;
 use Exception;
 use Throwable;
+use app\model\BaseModel;
+use PDO;
 
 class ForumController extends BaseController {
 
@@ -21,13 +23,13 @@ class ForumController extends BaseController {
         $forum = new Forum();
         $topic = $forumModel->getTopic($id);
         $comments = $commentModel->getComments($id);
-        $numberOfComments= $commentModel->getNumberOfComments($id);
+        $numberOfComments = $commentModel->getNumberOfComments($id);
 
         $data = [
-            'topic'      => $topic,
-            'pageId'     => $id,
-            'forum'      => $forum,
-            'comments'   => $comments,
+            'topic'            => $topic,
+            'pageId'           => $id,
+            'forum'            => $forum,
+            'comments'         => $comments,
             'numberOfComments' => $numberOfComments,
         ];
 
@@ -88,4 +90,83 @@ class ForumController extends BaseController {
 
         $this->response->redirect("/forumController/showView/$topicId", 200);
     }
+
+
+    public function delete() {
+
+        $commentId = $this->request->getPost('commentId', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if (empty($commentId)) {
+            throw new Exception('Hiba! A comment azonosítója nem elérhető.');
+        }
+
+        $commentModel = new CommentModel();
+        $result = $commentModel->delete($commentId);
+
+        if ($result) {
+            echo json_encode("success");
+            return;
+        }
+        echo json_encode("error");
+    }
+
+
+    public function getComment() {
+
+        $this->checkPermission('admin');
+
+        $commentModel = new CommentModel();
+
+        $result = $commentModel->getCommentById($this->request->getPost('commentId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
+
+
+
+        if ($result) {
+            echo json_encode($result);
+            return;
+        }
+
+        echo json_encode("error");
+    }
+
+
+    public function update(){
+
+        $this->checkAjax();
+        $this->checkPermission('admin');
+
+        try{
+
+            $id=$this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
+            if(empty($id)){
+                throw new Exception('Nincs id');
+            }
+            $commentModel= new CommentModel();
+            $comment=$commentModel->getById($id);
+
+            if(empty($comment)){
+                throw new Exception('Nem létezik ilyen comment');
+            }
+
+            $comment->setMessage($this->request->getPost('message', FILTER_SANITIZE_SPECIAL_CHARS));
+
+
+            if(!$commentModel->update($comment)){
+                throw new Exception('Hiba a mentés során');
+            }
+
+            echo json_encode('success');
+
+        } catch (Throwable $exception) {
+            $log = new SystemLog();
+            $log->exceptionLog($exception);
+            echo json_encode($exception->getMessage(), JSON_UNESCAPED_UNICODE);
+        }
+        return true;
+    }
+
+
+
+
 }

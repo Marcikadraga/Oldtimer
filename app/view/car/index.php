@@ -118,8 +118,7 @@ include '../app/view/_header.php';
                             <span aria-hidden = "true">&times;</span>
                         </button>
                     </div>
-                    <div
-                    " class = "modal-body">
+                    <div class = "modal-body">
                     <form method = "POST">
                         <div style = "display:none;  class = " form-group
                         ">

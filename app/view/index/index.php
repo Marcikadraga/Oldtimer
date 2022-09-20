@@ -10,11 +10,17 @@
     }
 
     .card {
-        width:400px;
+        width: 400px;
         height: 200px;
 
         background-repeat: no-repeat;
         background-size: cover;
+    }
+    .button-container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
     }
 
 </style>
@@ -34,14 +40,17 @@ include '../app/view/_header.php';
     <p>
 <?php else: ?>
 
-
-
     <?php foreach ($allTopics as $topic): ?>
         <div class = "card" style = "background-image: url('<?= $topic->getImg() ?>'">
-            <h1><?= $topic->getTitle(); ?></h1>
-            <button  type="button" class="read-more" data-topic-id="<?= $topic->getId(); ?>" style="background-color: darkgrey">
-                <a href="../forumController/showView/<?= $topic->getId(); ?>" style="color: blue;">read more</a>
-            </button>
+            <div class="topic-container">
+                <h1><?= $topic->getTitle(); ?></h1>
+            </div>
+            <div class="button-container">
+                <button type = "button" class = "read-more" data-topic-id = "<?= $topic->getId(); ?>" style = "background-color:rgba(0, 0, 0, 0.5);;width: 100%">
+                    <a href = "../forumController/showView/<?= $topic->getId(); ?>" style = "color:white;">read more</a>
+                </button>
+            </div>
+
         </div>
         <br>
     <?php endforeach ?>

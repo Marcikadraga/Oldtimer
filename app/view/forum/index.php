@@ -38,6 +38,18 @@
         display: flex;
         justify-content: flex-end;
     }
+
+    .card-footer {
+        margin-bottom: 20px;
+    }
+    .img-content-container{
+        display: flex;
+    }
+    .content{
+        margin-left: 10px;
+        padding: 5px;
+        font-family: "Lucida Console", "Courier New", monospace;
+    }
 </style>
 
 
@@ -59,7 +71,7 @@ $user = new Authenticator();
 
 ?>
 
-<div class = "container container col-sm-6 col-sm">
+<div class = "container container col-sm-9 col-sm">
     <form action = "/ForumController/insert" method = "post">
 
 
@@ -76,12 +88,23 @@ $user = new Authenticator();
 
 
         <h4 style = "text-decoration: underline"><?= $topic->getSmallContent() ?></h4>
-        <img src = "<?php echo $topic->getImg() ?>" alt = "Girl in a jacket" width = "100%" height = "550px">
-        <hr>
-        <h6><?= $topic->getContent() ?></h6>
+
         <hr>
 
-        <div class = "card-body">
+        <div class="img-content-container">
+            <div>
+                <img src = "<?php echo $topic->getImg() ?>" alt = "Girl in a jacket" width = "500px" height = "300px"style="margin-top: 5px">
+            </div>
+            <div class="content">
+                <h6><?= $topic->getContent() ?></h6>
+            </div>
+        </div>
+
+
+
+        <hr>
+
+        <div class = "card-body col-sm-12">
             <?php if (!empty($errorMsg)): ?>
                 <div class = "alert alert-danger">
                     <p class = "m-0"><?= $errorMsg ?></p>
@@ -103,16 +126,21 @@ $user = new Authenticator();
                 >
                 <div class = "invalid-feedback"><?= $errors['manufacturer'] ?? ''; ?></div>
             </div>
-            <div style = "display: none" class = "form-group">
-                <label for = "topic-id" class = "input-required">Topic</label>
-                <input type = "text"
-                       class = "form-control <?= !isset($errors) ? '' : (!empty($errors['topic-id']) ? 'is-invalid' : 'is-valid'); ?>"
-                       id = "topic-id"
-                       name = "topic-id"
-                       value = "<?= $topic->getId() ?>"
-                >
-                <div class = "invalid-feedback"><?= $errors['message'] ?? ''; ?></div>
+            <div>
+                <div style = "display: none" class = "form-group">
+                    <label for = "topic-id" class = "input-required">Topic</label>
+                    <input type = "text"
+                           class = "form-control <?= !isset($errors) ? '' : (!empty($errors['topic-id']) ? 'is-invalid' : 'is-valid'); ?>"
+                           id = "topic-id"
+                           name = "topic-id"
+                           value = "<?= $topic->getId() ?>"
+                    >
+                </div>
+
             </div>
+
+
+
             <p><?= $numberOfComments ?> hozzászólás</p>
             <div class = "form-group">
                 <label style = "display: none" for = "topic-id" class = "input-required">Message</label>
@@ -137,28 +165,74 @@ $user = new Authenticator();
             <?php
             foreach ($comments as $item) {
                 ?>
-                <div class = "comment-container">
-                    <div class = "name-time-container">
-                        <p class = "user"><?= $item->getRealName() ?></p>
-                        <p class = "time"><?= $item->getCreatedAt() ?></p>
+                <?php if ($item->getDeletedAt() === null): ?>
+
+                    <div id = "<?= $item->getId() ?>">
+
+                        <div class = "comment-container">
+                            <div class = "name-time-container">
+                                <p class = "user"><?= $item->getRealName() ?></p>
+                                <p class = "time"><?= $item->getCreatedAt() ?></p>
+                            </div>
+
+                            <div class = "option-container">
+                                <button type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-comment"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
+                                </button>
+                                <button type = "button" data-id = "<?= $item->getId() ?>" id = "edit-comment" class = "btn btn-danger delete-comment"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a></button>
+                            </div>
+                        </div>
+                        <p><?= $item->getMessage() ?></p>
+                        <hr>
                     </div>
 
-                    <div class = "option-container">
-                        <button type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-color"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
-                        </button>
-                        <button type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-danger delete-color"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a></button>
-                    </div>
-                </div>
-
-
-                <p><?= $item->getMessage() ?></p>
-                <hr>
-
+                <?php endif; ?>
                 <?php
             }
             ?>
     </form>
-</div>
 
-<?= addReference("assets/js/pages/comments/index.js", true) ?>
-<?php include '../app/view/_footer.php' ?>
+    <div class = "modal fade" id = "exampleModal" tabindex = "-1" aria-labelledby = "exampleModalLabel" aria-hidden = "true">
+        <div class = "modal-dialog">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                    <h5 class = "modal-title" id = "exampleModalLabel">Autó beállítása</h5>
+                    <button type = "button" class = "close" data-dismiss = "modal" aria-label = "Close">
+                        <span aria-hidden = "true">&times;</span>
+                    </button>
+                </div>
+                <div class = "modal-body">
+                    <form method = "POST">
+                        <div>
+                            <label for = " edit-comment-id" class = "col-form-label">ID</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-comment-id"
+                            >
+
+                            <div>
+                            <label for = " edit-name" class = "col-form-label">Name</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-uid"
+                            >
+
+                            <div>
+                            <label for = "edit-message" class = "col-form-label">Comment</label><br>
+                            <input
+                                    type = "text"
+                                    class = "form-control"
+                                    id = "edit-message"
+                            >
+                    </form>
+                </div>
+                <div class = "modal-footer">
+                    <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
+                    <button type = "button" class = "btn btn-primary" id = "save-edited-data">Mentés</button>
+                </div>
+            </div>
+        </div>
+
+        <?= addReference("assets/js/pages/comments/index.js", true) ?>
+        <?php include '../app/view/_footer.php' ?>
