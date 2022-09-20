@@ -42,19 +42,35 @@
     .card-footer {
         margin-bottom: 20px;
     }
-    .img-content-container{
+
+    .img-content-container {
         display: flex;
     }
-    .content{
+
+    .content {
         margin-left: 10px;
         padding: 5px;
         font-family: "Lucida Console", "Courier New", monospace;
+    }
+
+    button {
+        margin-right: 3px !important;
+    }
+
+    .action-container {
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+    }
+    .action-container button{
+        border: none;
     }
 </style>
 
 
 <?php use app\model\comment\Comment;
 use app\model\forum\Forum;
+use app\model\msgLike\MsgLikeModel;
 use app\model\user\Authenticator;
 use app\model\user\UserModel;
 
@@ -65,12 +81,13 @@ include '../app/view/_header.php';
 /** @var Forum $forum */
 /** @var Comment[] $comments */
 /** @var $numberOfComments */
+/** @var $user */
+/** @var MsgLikeModel $msgLikeModel */
 
 $userModel = new UserModel();
 $user = new Authenticator();
 
 ?>
-
 <div class = "container container col-sm-9 col-sm">
     <form action = "/ForumController/insert" method = "post">
 
@@ -91,15 +108,14 @@ $user = new Authenticator();
 
         <hr>
 
-        <div class="img-content-container">
+        <div class = "img-content-container">
             <div>
-                <img src = "<?php echo $topic->getImg() ?>" alt = "Girl in a jacket" width = "500px" height = "300px"style="margin-top: 5px">
+                <img src = "<?php echo $topic->getImg() ?>" alt = "Girl in a jacket" width = "500px" height = "300px" style = "margin-top: 5px">
             </div>
-            <div class="content">
+            <div class = "content">
                 <h6><?= $topic->getContent() ?></h6>
             </div>
         </div>
-
 
 
         <hr>
@@ -140,7 +156,6 @@ $user = new Authenticator();
             </div>
 
 
-
             <p><?= $numberOfComments ?> hozzászólás</p>
             <div class = "form-group">
                 <label style = "display: none" for = "topic-id" class = "input-required">Message</label>
@@ -175,13 +190,35 @@ $user = new Authenticator();
                                 <p class = "time"><?= $item->getCreatedAt() ?></p>
                             </div>
 
+
                             <div class = "option-container">
-                                <button type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-comment"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
-                                </button>
-                                <button type = "button" data-id = "<?= $item->getId() ?>" id = "edit-comment" class = "btn btn-danger delete-comment"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a></button>
+
+                                <?php if ($item->getUserId() == $user->getUserId()): ?>
+                                    <button
+                                            type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-comment"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
+                                    </button>
+                                    <button
+                                            type = "button" data-id = "<?= $item->getId() ?>" id = "edit-comment" class = "btn btn-danger delete-comment"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a>
+                                    </button>
+                                <?php endif; ?>
                             </div>
+
+
                         </div>
                         <p><?= $item->getMessage() ?></p>
+
+                        <div class = "action-container">
+                            <?php if(!$item->isLikedByCurrentUser()): ?>
+                                <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class="fa fa-thumbs-o-up" style = "color:black"></i></a></button>
+                            <?php endif; ?>
+                            <?php if($item->isLikedByCurrentUser()): ?>
+                                <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class="fa fa-thumbs-up" style = "color:black"></i></a></button>
+                            <?php endif; ?>
+                            <button data-id = "<?= $item->getId() ?>"><a  class = "nav-link"><i class = "fa fa-reply" style = "color:black"></i></a></button>
+
+                            <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-o-down" style = "color:black"></i></a></button>
+
+                        </div>
                         <hr>
                     </div>
 
@@ -195,7 +232,7 @@ $user = new Authenticator();
         <div class = "modal-dialog">
             <div class = "modal-content">
                 <div class = "modal-header">
-                    <h5 class = "modal-title" id = "exampleModalLabel">Autó beállítása</h5>
+                    <h5 class = "modal-title" id = "exampleModalLabel">Hozzászólás szerkesztése</h5>
                     <button type = "button" class = "close" data-dismiss = "modal" aria-label = "Close">
                         <span aria-hidden = "true">&times;</span>
                     </button>
@@ -203,30 +240,34 @@ $user = new Authenticator();
                 <div class = "modal-body">
                     <form method = "POST">
                         <div>
-                            <label for = " edit-comment-id" class = "col-form-label">ID</label><br>
-                            <input
-                                    type = "text"
-                                    class = "form-control"
-                                    id = "edit-comment-id"
-                            >
+                            <div style = "display: none">
+                                <label for = " edit-comment-id" class = "col-form-label">ID</label><br>
+                                <input
+                                        type = "text"
+                                        class = "form-control"
+                                        id = "edit-comment-id"
+                                >
+                            </div>
+
+                            <div style = "display: none">
+                                <label for = " edit-name" class = "col-form-label">Name</label><br>
+                                <input
+                                        type = "text"
+                                        class = "form-control"
+                                        id = "edit-uid"
+                                >
+                            </div>
 
                             <div>
-                            <label for = " edit-name" class = "col-form-label">Name</label><br>
-                            <input
-                                    type = "text"
-                                    class = "form-control"
-                                    id = "edit-uid"
-                            >
-
-                            <div>
-                            <label for = "edit-message" class = "col-form-label">Comment</label><br>
-                            <input
-                                    type = "text"
-                                    class = "form-control"
-                                    id = "edit-message"
-                            >
+                                <label for = "edit-message" class = "col-form-label">Comment</label><br>
+                                <input
+                                        type = "text"
+                                        class = "form-control"
+                                        id = "edit-message"
+                                ></div>
                     </form>
                 </div>
+
                 <div class = "modal-footer">
                     <button type = "button" class = "btn btn-secondary" data-dismiss = "modal">Mégse</button>
                     <button type = "button" class = "btn btn-primary" id = "save-edited-data">Mentés</button>

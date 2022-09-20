@@ -72,6 +72,47 @@ class CommentModel extends BaseModel {
         }
     }
 
+
+    /**
+     * @param $topicId
+     * @param $userId
+     * @return Comment[] ami ki van egészítve az isLiked
+     */
+    function getCommentsUserLike($topicId, $userId): array {
+
+        try {
+            $query = "
+            SELECT c.*,
+                   CONCAT(u.first_name, ' ', u.middle_name, ' ', u.last_name) AS real_name,
+                   if(ml.id IS NULL, 0, 1) as is_liked
+            FROM comments c
+                     LEFT JOIN users u ON c.user_id = u.id
+                     LEFT JOIN msg_likes ml ON c.id = ml.comment_id and ml.user_id=:user_id
+            WHERE topic_id=:topic_id
+            ORDER BY id DESC";
+
+            $params = [
+                'topic_id'=>$topicId,
+                'user_id'=>$userId,
+            ];
+
+            $statement = $this->pdo->prepare($query);
+            $statement->execute($params);
+            $comments = [];
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($result)) {
+                foreach ($result as $item) {
+                    $comments[] = new Comment($item);
+                }
+            }
+            return $comments;
+
+        } catch (Exception $exception) {
+            die($exception->getMessage());
+        }
+    }
+
     function insert(Comment $comment) {
 
         try {

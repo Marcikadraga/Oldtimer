@@ -15,6 +15,12 @@ class Comment {
     private $updated_at = null;
     private $deleted_at = null;
 
+    private $is_liked = 0; // a belépet user likeolta-e a kommentet, több táblás lekérdezés
+
+    public function isLikedByCurrentUser():bool{
+        return $this->is_liked == 1;
+    }
+
 
 
 

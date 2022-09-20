@@ -7,23 +7,24 @@ use app\model\comment\Comment;
 use app\model\comment\CommentModel;
 use app\model\forum\Forum;
 use app\model\forum\ForumModel;
+use app\model\msgLike\MsgLikeModel;
 use app\model\user\Authenticator;
 use DateTime;
 use Exception;
 use Throwable;
-use app\model\BaseModel;
-use PDO;
 
 class ForumController extends BaseController {
 
     public function showView($id) {
 
+        $user = new Authenticator();
         $forumModel = new ForumModel();
         $commentModel = new CommentModel();
         $forum = new Forum();
         $topic = $forumModel->getTopic($id);
-        $comments = $commentModel->getComments($id);
+        $comments = $commentModel->getCommentsUserLike($id, $user->getUserId());
         $numberOfComments = $commentModel->getNumberOfComments($id);
+        $msgLikeModel = new MsgLikeModel();
 
         $data = [
             'topic'            => $topic,
@@ -31,6 +32,8 @@ class ForumController extends BaseController {
             'forum'            => $forum,
             'comments'         => $comments,
             'numberOfComments' => $numberOfComments,
+            'user'             => $user,
+            'msgLikeModel'     => $msgLikeModel,
         ];
 
         $this->render('forum/index', $data);
@@ -119,9 +122,6 @@ class ForumController extends BaseController {
 
         $result = $commentModel->getCommentById($this->request->getPost('commentId', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
-
-
-
         if ($result) {
             echo json_encode($result);
             return;
@@ -131,28 +131,27 @@ class ForumController extends BaseController {
     }
 
 
-    public function update(){
+    public function update() {
 
         $this->checkAjax();
         $this->checkPermission('admin');
 
-        try{
+        try {
 
-            $id=$this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
-            if(empty($id)){
+            $id = $this->request->getPost('id', FILTER_SANITIZE_SPECIAL_CHARS);
+            if (empty($id)) {
                 throw new Exception('Nincs id');
             }
-            $commentModel= new CommentModel();
-            $comment=$commentModel->getById($id);
+            $commentModel = new CommentModel();
+            $comment = $commentModel->getById($id);
 
-            if(empty($comment)){
+            if (empty($comment)) {
                 throw new Exception('Nem létezik ilyen comment');
             }
 
             $comment->setMessage($this->request->getPost('message', FILTER_SANITIZE_SPECIAL_CHARS));
 
-
-            if(!$commentModel->update($comment)){
+            if (!$commentModel->update($comment)) {
                 throw new Exception('Hiba a mentés során');
             }
 
@@ -165,8 +164,5 @@ class ForumController extends BaseController {
         }
         return true;
     }
-
-
-
 
 }
