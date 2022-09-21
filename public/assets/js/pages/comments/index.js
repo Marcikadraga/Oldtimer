@@ -66,7 +66,7 @@ saveEditedDataButton.addEventListener("click", function (event) {
     const fd = new FormData();
     fd.append('id', commentId);
     fd.append('message', comment);
-    fd.append('user_id',uId);
+    fd.append('user_id', uId);
 
     hFetch('https://marci.dev/ForumController/update', {
         method: 'POST', body: fd
@@ -81,3 +81,45 @@ saveEditedDataButton.addEventListener("click", function (event) {
             console.error('Error:', error);
         });
 });
+
+const addComment = document.querySelectorAll(".add-comment");
+addComment.forEach(comment => {
+    comment.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const element = event.target;
+
+
+        //input
+        let input = document.createElement('input');
+        input.type="text";
+        input.className="form-control";
+        input.placeholder="Megjegyzés..";
+        
+        //button
+        let sendBtn=document.createElement("button");
+        sendBtn.innerHTML="Küldés";
+        sendBtn.className="btn btn-outline-primary ml-auto text-center";
+        sendBtn.style.marginTop="10px";
+
+        //inputContainer
+        let inputContainer = document.createElement('div');
+        inputContainer.className = "form-group";
+        inputContainer.appendChild(input);
+        inputContainer.appendChild(sendBtn);
+
+        //id-t elérjük
+        const closestId = element.closest(".comment-row").id;
+        console.log(closestId)
+
+        //disable reply btn
+        let reply=document.getElementById("reply"+closestId)
+        reply.disabled="true";
+        reply.style.backgroundColor="lightblue";
+
+        //elemet hozzátesszük
+        document.getElementById(closestId).appendChild(inputContainer);
+
+    })
+})
+

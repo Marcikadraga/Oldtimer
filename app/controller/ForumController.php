@@ -22,7 +22,7 @@ class ForumController extends BaseController {
         $commentModel = new CommentModel();
         $forum = new Forum();
         $topic = $forumModel->getTopic($id);
-        $comments = $commentModel->getCommentsUserLike($id, $user->getUserId());
+        $comments = $commentModel->getComment($id, $user->getUserId());
         $numberOfComments = $commentModel->getNumberOfComments($id);
         $msgLikeModel = new MsgLikeModel();
 

@@ -62,7 +62,8 @@
         display: flex;
         flex-direction: row;
     }
-    .action-container button{
+
+    .action-container button {
         border: none;
     }
 </style>
@@ -182,49 +183,50 @@ $user = new Authenticator();
                 ?>
                 <?php if ($item->getDeletedAt() === null): ?>
 
-                    <div id = "<?= $item->getId() ?>">
+                <div id = "<?= $item->getId() ?>" class="comment-row">
 
-                        <div class = "comment-container">
-                            <div class = "name-time-container">
-                                <p class = "user"><?= $item->getRealName() ?></p>
-                                <p class = "time"><?= $item->getCreatedAt() ?></p>
-                            </div>
-
-
-                            <div class = "option-container">
-
-                                <?php if ($item->getUserId() == $user->getUserId()): ?>
-                                    <button
-                                            type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-comment"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
-                                    </button>
-                                    <button
-                                            type = "button" data-id = "<?= $item->getId() ?>" id = "edit-comment" class = "btn btn-danger delete-comment"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a>
-                                    </button>
-                                <?php endif; ?>
-                            </div>
-
-
+                    <div class = "comment-container">
+                        <div class = "name-time-container">
+                            <p class = "user"><?= $item->getRealName() ?></p>
+                            <p class = "time"><?= $item->getCreatedAt() ?></p>
                         </div>
-                        <p><?= $item->getMessage() ?></p>
 
-                        <div class = "action-container">
-                            <?php if(!$item->isLikedByCurrentUser()): ?>
-                                <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class="fa fa-thumbs-o-up" style = "color:black"></i></a></button>
-                            <?php endif; ?>
-                            <?php if($item->isLikedByCurrentUser()): ?>
-                                <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class="fa fa-thumbs-up" style = "color:black"></i></a></button>
-                            <?php endif; ?>
-                            <button data-id = "<?= $item->getId() ?>"><a  class = "nav-link"><i class = "fa fa-reply" style = "color:black"></i></a></button>
 
-                            <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-o-down" style = "color:black"></i></a></button>
+                        <div class = "option-container">
+
+                            <?php if ($item->getUserId() == $user->getUserId()): ?>
+                                <button
+                                        type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-comment"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
+                                </button>
+                                <button
+                                        type = "button" data-id = "<?= $item->getId() ?>" id = "edit-comment" class = "btn btn-danger delete-comment"><a class = "nav-link"><i class = "fa fa-trash " style = "color:white"></i></a>
+                                </button>
+                            <?php endif; ?>
+                        </div>
+
+
+                    </div>
+                    <p><?= $item->getMessage() ?></p>
+
+                    <div class = "action-container">
+                    <?php if (!$item->isLikedByCurrentUser()): ?>
+                        <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-o-up" style = "color:black"></i></a></button>
+                    <?php endif; ?>
+                    <?php if ($item->isLikedByCurrentUser()): ?>
+                        <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-up" style = "color:black"></i></a></button>
+                    <?php endif; ?>
+
+                        <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-o-down" style = "color:black"></i></a></button>
+
+                        <button class="add-comment" id='reply<?= $item->getId() ?>' data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-reply " style = "color:black"></i></a></button>
 
                         </div>
                         <hr>
-                    </div>
+                        </div>
 
-                <?php endif; ?>
-                <?php
-            }
+                    <?php endif; ?>
+                    <?php
+                }
             ?>
     </form>
 

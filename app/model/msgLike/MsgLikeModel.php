@@ -15,12 +15,6 @@ class MsgLikeModel extends BaseModel {
             $query = 'SELECT * FROM msg_likes WHERE comment_id=? AND user_id=?';
             $params = [$comment_id, $user_id];
 
-//            $query = 'SELECT * FROM msg_likes WHERE comment_id=:comment_id AND user_id=:user_id';
-//            $params = [
-//                'comment_id' => $comment_id,
-//                'user_id'    => $user_id,
-//            ];
-
             $statement = $this->pdo->prepare($query);
             $statement->execute($params);
             return $statement->rowCount();

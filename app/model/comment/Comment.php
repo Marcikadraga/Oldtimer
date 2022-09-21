@@ -16,9 +16,14 @@ class Comment {
     private $deleted_at = null;
 
     private $is_liked = 0; // a belépet user likeolta-e a kommentet, több táblás lekérdezés
+    private $is_disliked=0;// a belépet user dislikeolta-e a kommentet, több táblás lekérdezés
 
     public function isLikedByCurrentUser():bool{
         return $this->is_liked == 1;
+    }
+
+    public function isDislikedCurrentUser():bool{
+        return $this->is_disliked==1;
     }
 
 
