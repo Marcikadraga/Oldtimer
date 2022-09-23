@@ -2,6 +2,7 @@
 
 namespace app\model\comment;
 
+use app\model\reply\ReplyModel;
 use DateTime;
 
 class Comment {
@@ -198,6 +199,13 @@ class Comment {
     public function setRealName(string $real_name): void {
 
         $this->real_name = $real_name;
+    }
+
+    public function getlengthOfReply(){
+
+        $replyModel = new ReplyModel();
+        return $replyModel->getReplysLength($this->getId());
+
     }
 
 

@@ -2,8 +2,11 @@
 
 namespace app\model\user;
 
+use app\core\logger\SystemLog;
 use app\core\request\Request;
 use Cassandra\Date;
+use Exception;
+use PDO;
 
 /**
  * A bejelentkezett user validátora
@@ -202,4 +205,5 @@ class Authenticator {
 
         return implode($separator, $this->errors);
     }
+
 }

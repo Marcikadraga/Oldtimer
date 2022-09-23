@@ -89,13 +89,12 @@ addComment.forEach(comment => {
 
         const element = event.target;
 
-
         //input
         let input = document.createElement('input');
         input.type="text";
         input.className="form-control";
         input.placeholder="Megjegyzés..";
-        
+
         //button
         let sendBtn=document.createElement("button");
         sendBtn.innerHTML="Küldés";
@@ -122,4 +121,49 @@ addComment.forEach(comment => {
 
     })
 })
+
+// const addreply = document.querySelectorAll(".add-reply");
+// addreply.forEach(comment => {
+//     comment.addEventListener("click", function (event) {
+//         event.preventDefault();
+//
+//         const element = event.target;
+//
+//         //input
+//         let input = document.createElement('input');
+//         input.type="text";
+//         input.className="form-control";
+//         input.placeholder="Megjegyzés..";
+//
+//
+//         //button
+//         let sendBtn=document.createElement("button");
+//         sendBtn.innerHTML="Küldés";
+//         sendBtn.className="btn btn-outline-primary ml-auto text-center";
+//         sendBtn.style.marginTop="10px";
+//
+//         //inputContainer
+//         let inputContainer = document.createElement('div');
+//         document.getElementById("sub-reply-message-container").appendChild(inputContainer);
+//         inputContainer.className = "sub-reply-container";
+//         inputContainer.appendChild(input);
+//         inputContainer.appendChild(sendBtn);
+//         inputContainer.style.marginTop='10px';
+//
+//
+//
+//         //id-t elérjük
+//         const closestId = element.closest(".reply-reply").id;
+//         console.log(closestId);
+//
+//         document.getElementById(closestId).disabled=true;
+//
+//
+//
+//     })
+// })
+
+
+
+
 

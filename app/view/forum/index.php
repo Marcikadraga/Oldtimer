@@ -66,12 +66,17 @@
     .action-container button {
         border: none;
     }
+
+    .reply button {
+        border: none
+    }
 </style>
 
 
 <?php use app\model\comment\Comment;
 use app\model\forum\Forum;
 use app\model\msgLike\MsgLikeModel;
+use app\model\reply\Reply;
 use app\model\user\Authenticator;
 use app\model\user\UserModel;
 
@@ -82,11 +87,15 @@ include '../app/view/_header.php';
 /** @var Forum $forum */
 /** @var Comment[] $comments */
 /** @var $numberOfComments */
-/** @var $user */
+/** @var UserModel $userModel */
+/** @var $auth */
+
 /** @var MsgLikeModel $msgLikeModel */
+/** @var Reply[] $allReply */
+/** @var $countOfReply */
 
 $userModel = new UserModel();
-$user = new Authenticator();
+$auth = new Authenticator();
 
 ?>
 <div class = "container container col-sm-9 col-sm">
@@ -138,7 +147,7 @@ $user = new Authenticator();
                        class = "form-control <?= !isset($errors) ? '' : (!empty($errors['user-id']) ? 'is-invalid' : 'is-valid'); ?>"
                        id = "user-id"
                        name = "user-id"
-                       value = "<?= $user->getUserId() ?>"
+                       value = "<?= $auth->getUserId() ?>"
 
                 >
                 <div class = "invalid-feedback"><?= $errors['manufacturer'] ?? ''; ?></div>
@@ -183,7 +192,7 @@ $user = new Authenticator();
                 ?>
                 <?php if ($item->getDeletedAt() === null): ?>
 
-                <div id = "<?= $item->getId() ?>" class="comment-row">
+                    <div id = "<?= $item->getId() ?>" class = "comment-row">
 
                     <div class = "comment-container">
                         <div class = "name-time-container">
@@ -194,7 +203,7 @@ $user = new Authenticator();
 
                         <div class = "option-container">
 
-                            <?php if ($item->getUserId() == $user->getUserId()): ?>
+                            <?php if ($item->getUserId() == $auth->getUserId()): ?>
                                 <button
                                         type = "button" data-id = "<?= $item->getId() ?>" class = "btn btn-info get-car-modal edit-comment"><a class = "nav-link"><i class = "fa fa-edit " style = "color:white"></i></a>
                                 </button>
@@ -209,25 +218,72 @@ $user = new Authenticator();
                     <p><?= $item->getMessage() ?></p>
 
                     <div class = "action-container">
-                    <?php if (!$item->isLikedByCurrentUser()): ?>
-                        <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-o-up" style = "color:black"></i></a></button>
-                    <?php endif; ?>
-                    <?php if ($item->isLikedByCurrentUser()): ?>
-                        <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-up" style = "color:black"></i></a></button>
-                    <?php endif; ?>
+                        <?php if (!$item->isLikedByCurrentUser()): ?>
+                            <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-o-up" style = "color:black"></i></a></button>
+                        <?php endif; ?>
+                        <?php if ($item->isLikedByCurrentUser()): ?>
+                            <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-up" style = "color:black"></i></a></button>
+                        <?php endif; ?>
 
                         <button data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-thumbs-o-down" style = "color:black"></i></a></button>
 
-                        <button class="add-comment" id='reply<?= $item->getId() ?>' data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-reply " style = "color:black"></i></a></button>
+                        <button class = "add-comment" id = 'reply<?= $item->getId() ?>' data-id = "<?= $item->getId() ?>"><a class = "nav-link"><i class = "fa fa-reply " style = "color:black"></i></a></button>
 
+                    </div>
+
+                    <?php if ($item->getlengthOfReply() > 0): ?>
+
+                        <div style = "margin-top: 10px;display: flex;align-items:center">
+                            <button id = "<?= $item->getId() ?>" style = "margin:0;padding:0; border: none;background-color: white">
+                                <a class = "nav-link" style = "font-weight: bold;color: black ;padding:0;margin-left: 5px">
+                                    <i class = "fa fa-arrow-down" style = "  color:black"></i> <?= $item->getlengthOfReply() ?>
+                                    válasz</a>
+                            </button>
                         </div>
-                        <hr>
+
+
+                        <div>
+                            <?php foreach ($allReply as $reply): ?>
+                                <?php if ($reply->getCommentId() == $item->getId()): ?>
+                                    <div class = "reply">
+                                        <div style = "display: flex; flex-direction: column; margin-top: 20px; margin-left: 50px">
+                                            <div style = "display: flex">
+                                                <p class = "user"><?= $reply->getUserName() ?> </p>
+                                                <p class = "time"><?= $reply->getCreatedAt() ?></p>
+                                            </div>
+                                            <div>
+                                                <p><?= $reply->getreply() ?></p>
+                                            </div>
+                                            <div>
+                                                <button data-id = 'reply<?= $reply->getId() ?>'><a class = "nav-link"><i class = "fa fa-thumbs-o-up" style = "color:black"></i></a></button>
+
+                                                <button data-id = 'reply<?= $reply->getId() ?>'><a class = "nav-link"><i class = "fa fa-thumbs-o-down" style = "color:black"></i></a></button>
+
+                                                <button class = "add-reply reply-reply" id = 'sub-reply<?= $reply->getId() ?>' data-id = "<?= $reply->getId() ?>"><a class = "nav-link"><i class = "fa fa-reply " style = "color:black"></i></a>
+                                                </button
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <div id = "sub-reply-message-container">
+
+                            </div>
+
+
                         </div>
 
                     <?php endif; ?>
-                    <?php
-                }
+                <?php endif; ?>
+                <hr>
+                </div>
+                <?php
+            }
             ?>
+            <div>
+
+            </div>
+
     </form>
 
     <div class = "modal fade" id = "exampleModal" tabindex = "-1" aria-labelledby = "exampleModalLabel" aria-hidden = "true">

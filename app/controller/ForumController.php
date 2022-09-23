@@ -8,7 +8,10 @@ use app\model\comment\CommentModel;
 use app\model\forum\Forum;
 use app\model\forum\ForumModel;
 use app\model\msgLike\MsgLikeModel;
+use app\model\reply\Reply;
+use app\model\reply\ReplyModel;
 use app\model\user\Authenticator;
+use app\model\user\UserModel;
 use DateTime;
 use Exception;
 use Throwable;
@@ -17,14 +20,21 @@ class ForumController extends BaseController {
 
     public function showView($id) {
 
-        $user = new Authenticator();
+        $auth = new Authenticator();
         $forumModel = new ForumModel();
         $commentModel = new CommentModel();
         $forum = new Forum();
         $topic = $forumModel->getTopic($id);
-        $comments = $commentModel->getComment($id, $user->getUserId());
+        $comments = $commentModel->getComment($id, $auth->getUserId());
         $numberOfComments = $commentModel->getNumberOfComments($id);
         $msgLikeModel = new MsgLikeModel();
+        $replyModel = new ReplyModel();
+        $allReply = $replyModel->getAllreply($id);
+        $userModel = new UserModel();
+
+
+
+
 
         $data = [
             'topic'            => $topic,
@@ -32,8 +42,11 @@ class ForumController extends BaseController {
             'forum'            => $forum,
             'comments'         => $comments,
             'numberOfComments' => $numberOfComments,
-            'user'             => $user,
+            'auth'             => $auth,
             'msgLikeModel'     => $msgLikeModel,
+            'allReply'         => $allReply,
+            'userModel'        => $userModel,
+
         ];
 
         $this->render('forum/index', $data);
